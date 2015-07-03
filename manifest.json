@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Chrome Plugin for Yammer",
   "icons": {
-    "128": "icon128.png"
+    "128": "yammerlogo.png"
   },
   "manifest_version":2,
   "browser_action": {
