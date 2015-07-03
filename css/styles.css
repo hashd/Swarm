@@ -173,3 +173,7 @@ body.openmenu {
   color: #fff;
   background: #2c2c2c;
 }
+
+#loadingIcon{
+  display: none;
+}

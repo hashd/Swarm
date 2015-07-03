@@ -23,11 +23,14 @@ limitations under the License.
   <link rel="stylesheet" type="text/css" href="css/fa/css/font-awesome.min.css">
   <script type="text/javascript" src="libs/js/jquery-2.1.1.js"></script>
   <script type="text/javascript" src="libs/js/hamburger-menu.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script type="text/javascript" src="libs/js/uvcharts.min.js"></script>
   <script src="oauth2/oauth2.js"></script>
   <script src="js/main.js"></script>
   <script src="js/feeds.js"></script>
   <script src="js/messages.js"></script>
   <script src="js/analytics.js"></script>
+  <script src="js/utils.js"></script>
   <script src="popup.js"></script>
   <style>
     #success { display: none; }
@@ -47,7 +50,10 @@ limitations under the License.
           </ul>
         </div>
       </div>
-      <div class="overlay"></div>
+      <div id="loadingIcon" class="overlay">
+          <img src="css/loading-blue.gif"/>
+
+      </div>
     </header>
 
     <div id="content">
