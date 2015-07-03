@@ -15,11 +15,14 @@ Analytics.prototype = {
 			success : function(data){
 				
 
-				$("#content").html('<div id="donut_chart" style="width:300px;height:200px"></div>')
-				self.drawChart(data);
-				//self.generateGroupChart(data);
+				$("#content").html('<div id="donut_chart" style="width:350px;height:250px"></div>');
+				var groupData = self.generateGroupData(data) 
+				self.drawChart(groupData);
 				utils.hideLoadingIcon();
-
+				$('div.uv-chart-div').off('click');
+				$('div.uv-chart-div').on('click', 'g.uv-arc-groups', function(e){
+					//alert(groupData[$(this).index()].id);
+				});
 			},
 			error : function(){
 				alert("error");
@@ -27,17 +30,50 @@ Analytics.prototype = {
 		});
 	},
 
-	generateGroupChart : function(data){
-		$.each(data.group_memberships, function(i, val){
-
-
+	generateGroupData: function(data){
+		var result = [];
+		$.each(data.group_memberships, function(i,val){
+			if(i<10){
+				result.push({name: val.full_name, value: (21 - (i*2)), id: val.id});
+			}
 		});
+		return result;	
+	},
+	generateGroupChart : function(data, result){
+			var self = this;
+			var index = 0;
+			var group_messages = {};
+			var appendResult = function(group_data){
+				group_messages[data.group_memberships[index].id] = group_data;
+				index++;
+				if(index < data.group_memberships.length){
+					self.constructGroupData(data, index, appendResult);
+				}
+				else{
+					result(group_messages);
+				}
+			}
+			self.constructGroupData(data, index, appendResult);
 	},
 
-	constructGroupData: function(groupObj){
-		var groupId = groupObj.id;
-		var groupName = groupObj.full_name;
-
+	constructGroupData: function(data, index, cb){
+		
+		var groupId = data.group_memberships[index].id;
+		var groupName = data.group_memberships[index].full_name;
+		jQuery.ajax({
+			type :"GET",
+			url : "https://www.yammer.com/api/v1/messages/in_group/"+groupId+".json?access_token="+yammer.getAccessToken(),
+			dataType: 'json',
+			xhrFields: {
+				withCredentials: false
+			},
+			success : function(data){
+				cb(data);				
+			},
+			error : function(){
+				alert("error");
+			}
+		});
 	},
 
 	drawChart: function(data){
@@ -49,8 +85,8 @@ Analytics.prototype = {
 		},
 
 		dimension : {
-			width : 250,
-			height : 150
+			width : 200,
+			height : 200
 		},
 
 		meta : {
@@ -65,8 +101,8 @@ Analytics.prototype = {
 		margin : {
 			top : 20,
 			bottom : 20,
-			left : -10,
-			right : 60
+			left : -1,
+			right : 100
 		},
 
 		caption : {
@@ -96,20 +132,9 @@ Analytics.prototype = {
 	 };
 
 	var github_lang_data = {
-	 	categories : ['language'],
+	 	categories : ['groups'],
 		dataset : {
-			'language' : [
-				{name: 'Ruby', value: 12 },
-				{name: 'javascript', value: 21 },
-				{name: 'Java', value: 8 },
-				{name: 'Shell', value: 8 },
-				{name: 'Python', value: 8 },
-				{name: 'PHP', value: 7 },
-				{name: 'C', value: 6 },
-				{name: 'C++', value: 5 },
-				{name: 'Perl', value: 4 },
-				{name: 'CoffeeScript', value: 3 }
-			]
+			'groups' : data
 		}
 	 };
 

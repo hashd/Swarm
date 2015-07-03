@@ -20,7 +20,8 @@
   ],
   "permissions": [
     "https://www.yammer.com/oauth2/*","https://www.yammer.com/api/*",
-    "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"
+    "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js",
+    "storage"
   ],
   "web_accessible_resources" : [
     "oauth2/oauth2.html"
