@@ -1,0 +1,27 @@
+{
+  "name": "Yammer OAuth 2.0",
+  "version": "1.0",
+  "description": "Adds a Google task. OAuth 2.0 Extension Demo",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "manifest_version":2,
+  "browser_action": {
+    "default_title": "OAuth 2.0",
+    "default_icon": "icon128.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.yammer.com/robots.txt*"],
+      "js": ["oauth2/oauth2_inject.js"],
+        "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "https://www.yammer.com/oauth2/*","https://www.yammer.com/api/*"
+  ],
+  "web_accessible_resources" : [
+    "oauth2/oauth2.html"
+  ]
+}
