@@ -1,13 +1,13 @@
 {
-  "name": "Yammer OAuth 2.0",
+  "name": "Yammer Plugin",
   "version": "1.0",
-  "description": "Adds a Google task. OAuth 2.0 Extension Demo",
+  "description": "Chrome Plugin for Yammer",
   "icons": {
     "128": "icon128.png"
   },
   "manifest_version":2,
   "browser_action": {
-    "default_title": "OAuth 2.0",
+    "default_title": "Yammer Plugin",
     "default_icon": "icon128.png",
     "default_popup": "popup.html"
   },
