@@ -18,13 +18,42 @@ limitations under the License.
 
 <head>
   <title>OAuth 2.0 Popup</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <script type="text/javascript" src="libs/js/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="libs/js/hamburger-menu.js"></script>
   <script src="oauth2/oauth2.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/feeds.js"></script>
+  <script src="js/messages.js"></script>
+  <script src="js/analytics.js"></script>
   <script src="popup.js"></script>
   <style>
     #success { display: none; }
   </style>
 </head>
+<body>
+  <div id="pgcontainer">
+    <header>
+      <div id="navbar">
+        <a href="#" class="menubtn">menu</a>
+        <!-- use captain icon for toggle menu -->
+        <div id="hamburgermenu">
+          <ul>
+            <li><a class="listAnc" data-jsval="feeds" href="#">Your Feed</a></li>
+            <li><a class="listAnc" data-jsval="messages" href="#">Messages</a></li>
+            <li><a class="listAnc" data-jsval="analytics" href="#">Analytics</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="overlay"></div>
+    </header>
+
+    <div id="content">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tempus massa vestibulum nisl pretium, dapibus dignissim orci ultricies. Duis eleifend sem vitae laoreet interdum. Praesent diam elit, consequat quis velit nec, fringilla auctor neque. Nullam nisi justo, cursus tincidunt metus a, imperdiet dictum lacus.
+
+      Cras sed faucibus ipsum. Curabitur rutrum mauris eu urna aliquam, vel luctus tortor posuere. Donec elit turpis, mollis non diam consequat, laoreet mattis velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at nulla bibendum, ornare nunc accumsan, vestibulum libero. Cras luctus mauris quis diam cursus tristique.
+    </div>
+  </div><!-- @end #pgcontainer -->
 
 <form id="form">
   <input id="input" placeholder="New task name..."></input>
@@ -33,3 +62,6 @@ limitations under the License.
 <div id="success">
   Successfully created new task with ID <span id="taskid"></span>.
 </div>
+
+</body>
+</html>

@@ -70,13 +70,12 @@ yammer.authorize(function() {
 		},
 		success : function(data){
 			alert(data.full_name);
-					
+
 		},
 		error : function(){
 			alert("error");
 		}
-	});  
+	});
   }
 
 });
-
