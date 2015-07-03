@@ -20,7 +20,7 @@ Feeds.prototype = {
   		},
   		success : function(data){
         self.buildFeedInfo(data);
-  			console.log(data);
+  			//console.log(data);
   		},
   		error : function(){
   			alert("error");

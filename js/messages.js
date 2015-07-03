@@ -19,8 +19,8 @@ Messages.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-        self.buildFeedInfo(data);
-  			console.log(data);
+        	self.buildFeedInfo(data);
+  			//console.log(data);
   		},
   		error : function(){
   			alert("error");
