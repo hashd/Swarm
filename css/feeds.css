@@ -1,13 +1,41 @@
 .msg_main{
-  padding: 5px;
   border: 1px solid #DADADA;
+  margin: 5px 0px;
+  font-size: 1.2em;
+  color: #343A41;
+  display: table;
+  width: 100%;
 }
 .msg_head{
   overflow: auto;
+  padding: 1em 0.5em;
+}
+.msg_sender_pic{
+  display: table-cell;
+  width: 15%;
+  vertical-align: middle;
+}
+.msg_sender_pic img{
+  border-radius: 25px;
+  border: 2px solid #DADADA;
+}
+.msg_details_main{
+  display: table-cell;
+  width: 85%;
 }
 .msg_sender_name{
-  float:left;
+  float: left;
+  color: #386cbb;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 .msg_date_time{
-  float:right;
+  float: right;
+  color: #68717f;
+  font-size: 1.0em;
+}
+.msg_body{
+  padding: 1em 0.5em;
+  font-size: 1.0em;
+  line-height: 1.2em;
 }
