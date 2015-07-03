@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 
 function init(){
-  $(document).find("div#hamburgermenu a.listAnc").click(function(isFirst){
+  $(document).find("div#hamburgermenu a.listAnc").click(function(event, isFirst){
     var target = $(this),
         jsVal = target.data("jsval"),
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
