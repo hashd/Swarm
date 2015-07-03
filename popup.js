@@ -36,31 +36,6 @@ yammer.authorize(function() {
   function createTodo(task) {
     // Make an XHR that creates the task
     var xhr = new XMLHttpRequest();
-    /*xhr.onreadystatechange = function(event) {
-      if (xhr.readyState == 4) {
-        if(xhr.status == 200) {
-          // Great success: parse response with JSON
-          var task = JSON.parse(xhr.responseText);
-          document.getElementById('taskid').innerHTML = task.id;
-          form.style.display = 'none';
-          success.style.display = 'block';
-	  cosole.log(task.full_name);
-        } else {
-          // Request failure: something bad happened
-        }
-      }
-    };
-
-    var message = JSON.stringify({
-      title: task
-    });
-
-    xhr.open('POST', TASK_CREATE_URL, true);
-
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + yammer.getAccessToken());
-    console.log(yammer.getAccessToken());
-    xhr.send(message);*/
     jQuery.ajax({
 		type :"GET",
 		url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken(),

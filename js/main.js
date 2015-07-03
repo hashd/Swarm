@@ -5,14 +5,17 @@ $(document).ready(function() {
 });
 
 function init(){
-  $(document).find("div#hamburgermenu a.listAnc").click(function(){
+  $(document).find("div#hamburgermenu a.listAnc").click(function(isFirst){
     var target = $(this),
         jsVal = target.data("jsval"),
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
         jsObj = loadJSObj(jsValCap);
         jsObj.init();
-        $("a.menubtn").trigger("click");
+        if(!isFirst){
+            $("a.menubtn").trigger("click");
+        }
     });
+  $($("a.listAnc").get(0)).trigger("click", [true]);
 };
 function loadJSObj(jsVal){
   var jsObj = "";
