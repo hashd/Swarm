@@ -13,7 +13,7 @@
 .msg_sender_pic{
   display: table-cell;
   width: 15%;
-  vertical-align: middle;
+  vertical-align: top;
 }
 .msg_sender_pic img{
   border-radius: 25px;
