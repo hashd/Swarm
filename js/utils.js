@@ -53,7 +53,7 @@ var utils = {
         	str.push("</div>");
     	});
     	container.find('div.feed_main').empty().append(str.join(''));
-  
+
     	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
 				var target = $(this),
 						userId = target.data("userid"),
@@ -67,22 +67,32 @@ var utils = {
     container = $("#content"),
     profile = data,
     profilePic = data.mugshot_url_template.replace("{width}x{height}","100x100"),
+		emailData =
     str = [];
     console.log(data);
-    str.push('<div class="profile_pic"><img src="'+profilePic+'"/></div>');
-    str.push('<div class="full_name">Name '+data.full_name+'</div>');
-    str.push('<div class="birth_date">Birth Date '+data.birth_date+'</div>')
-    str.push('<div class="job_title">Job Title '+data.job_title+'</div>');
-    str.push('<div class="department">Department '+data.department+'</div>');
-    str.push('<div class="email">Email '+data.email+'</div>');
-    str.push('<div class="phone">Phone </div>');
-    str.push('<div class="active_since">Active Since '+self.getDaysBetween(new Date(data.activated_at.toString()))+'Days </div>');
-    str.push('<div class="stats">');
-    str.push('<div class="following">Following '+data.stats.followers+'</div>');
-    str.push('<div class="followers">Followers '+data.stats.following+'</div>');
-    str.push('<div class="updates"> Updates '+data.stats.updates+'</div>');
+		str.push('<div class="profileInfo_main">');
+		str.push('<div class="profile_cell_div">');
+    str.push('<div class="profileDataDiv profile_pic"><img src="'+profilePic+'"/></div>');
+    str.push('<div class="profileDataDiv full_name">'+data.full_name+'</div>');
+		str.push('<div class="profileDataDiv job_title">'+data.job_title+'</div>');
+		str.push('<div class="stats">');
+		str.push('<table width="100%">');
+		str.push('<tr>');
+		str.push('<td width="33%"><div class="following"><img src="../css/followers.png"><span class="statsVal"> '+data.stats.followers+'</span></div></td>');
+		str.push('<td width="33%"><div class="followers"><img src="../css/following.png"> <span class="statsVal"> '+data.stats.following+'</span></div></td>');
+		str.push('<td width="33%"><div class="updates"> <img src="../css/updates.png"><span class="statsVal"> '+data.stats.updates+'</span></div></td>');
+		str.push('</tr>');
+		str.push('</table>');
     str.push('</div>');
-
+		str.push('</div>');
+		str.push('<div class="profile_cell_div">');
+		str.push('<div class="profileDataDiv infoTitle">Info :</div>')
+		str.push('<div class="profileDataDiv department"><div class="profileLabeldiv">Department </div><div class="profileValuediv">'+data.department+'</div></div>');
+    str.push('<div class="profileDataDiv birth_date"><div class="profileLabeldiv">Birthday </div><div class="profileValuediv">'+data.birth_date+'</div></div>')
+    str.push('<div class="profileDataDiv email"><div class="profileLabeldiv">Email </div><div class="profileValuediv">'+data.email+'</div></div>');
+    str.push('<div class="profileDataDiv phone"><div class="profileLabeldiv">Phone </div><div class="profileValuediv"></div></div>');
+    str.push('<div class="profileDataDiv active_since"><div class="profileLabeldiv">Active Since </div><div class="profileValuediv">'+self.getDaysBetween(new Date(data.activated_at.toString()))+'Days </div></div>');
+		str.push('</div>');
     container.empty().html(str.join(''));
   },
 

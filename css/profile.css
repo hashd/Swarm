@@ -1,0 +1,68 @@
+.profileInfo_main .profile_pic{
+  text-align: center;
+}
+.profileInfo_main .profile_pic img{
+  border-radius: 50px;
+  border: 2px solid #5186a8;
+}
+.profileInfo_main .full_name{
+  font-size: 1.5em;
+  text-align: center;
+  color: #6C6C6C;
+  font-weight: bold;
+  margin: 0.2em 0;
+}
+.profileInfo_main .job_title{
+  text-align: center;
+  font-size: 1.2em;
+  color: #9E9D9D;
+  font-weight: bold;
+  margin: 0.2em 0;
+}
+.profileInfo_main .profileDataDiv{
+  margin: 0.6em 0;
+  display: table;
+  width: 100%;
+}
+.profileInfo_main .profileInfo_main{
+  display: table;
+  width: 100%;
+}
+.profileInfo_main .profile_cell_div{
+  display: table-cell;
+  vertical-align: middle;
+  width: 50%;
+}
+.profileInfo_main .infoTitle{
+  text-decoration: underline;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #6C6C6C;
+}
+.profileLabeldiv{
+  margin: 0 0.5em 0 0;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #6C6C6C;
+  display: table-cell;
+  width: 50%;
+}
+.profileValuediv{
+  margin: 0 0 0 0.5em;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #969595;
+  display: table-cell;
+  width: 50%;
+}
+.stats{
+  text-align:center;
+}
+.statsVal{
+  position: relative;
+  top: -3px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #6C6C6C;
+  margin-left: 2px;
+}
