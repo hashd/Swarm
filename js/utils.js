@@ -36,10 +36,10 @@ var utils = {
           	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
         	}
         	str.push("<div class='msg_main'>");
-        	str.push("<div class='msg_sender_pic'><img src='"+senderPicURL+"'/></div>");
+        	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' href='javascript:{}'><img src='"+senderPicURL+"'/></a></div>");
         	str.push("<div class='msg_details_main'>");
         	str.push("<div class='msg_head'>");
-        	str.push("<div class='msg_sender_name'>"+senderName+"</div>");
+        	str.push("<div class='msg_sender_name'><a class='senderLinkAnc' href='javascript:{}'>"+senderName+"</a></div>");
         	str.push("<div class='msg_date_time'>"+msgCreatedDate+"</div>");
         	str.push("</div>");
         	str.push("<div class='msg_body'>");
@@ -50,6 +50,10 @@ var utils = {
     	});
     	str.push("</div>");
     	container.empty().html(str.join(''));
+    	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
+        var profileObj = new Profile();
+        profileObj.init();
+    });
   },
 
 }
