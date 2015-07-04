@@ -57,6 +57,7 @@ var utils = {
 				var target = $(this),
 						userId = target.data("userid"),
         		profileObj = new Profile();
+				$(window).off("scroll");
         profileObj.init(userId);
     });
   },
@@ -76,9 +77,9 @@ var utils = {
 		str.push('<div class="stats">');
 		str.push('<table width="100%">');
 		str.push('<tr>');
-		str.push('<td width="33%"><div class="following"><img src="../css/followers.png"><span class="statsVal"> '+data.stats.followers+'</span></div></td>');
-		str.push('<td width="33%"><div class="followers"><img src="../css/following.png"> <span class="statsVal"> '+data.stats.following+'</span></div></td>');
-		str.push('<td width="33%"><div class="updates"> <img src="../css/updates.png"><span class="statsVal"> '+data.stats.updates+'</span></div></td>');
+		str.push('<td width="33%"><div class="following"><img title="followers" src="../css/followers.png"><span class="statsVal"> '+data.stats.followers+'</span></div></td>');
+		str.push('<td width="33%"><div class="followers"><img title="following" src="../css/following.png"> <span class="statsVal"> '+data.stats.following+'</span></div></td>');
+		str.push('<td width="33%"><div class="updates"> <img title="updates" src="../css/updates.png"><span class="statsVal"> '+data.stats.updates+'</span></div></td>');
 		str.push('</tr>');
 		str.push('</table>');
     str.push('</div>');
