@@ -4,10 +4,6 @@ function Messages(){
 Messages.prototype = {
   init: function(){
   	var self = this;
-  	chrome.alarms.create('checkNewTasks', {
-          when: 1000,
-          periodInMinutes: 1
-    });
   	self.getReceivedMessages();
     self.attachWindowScrollEvent();
   },
@@ -18,9 +14,9 @@ Messages.prototype = {
       jQuery.ajax({
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
-        data:{
-          "limit":7
-        },
+        	data:{
+          		"limit":7
+        	},
     		dataType: 'json',
     		xhrFields: {
     			withCredentials: false
