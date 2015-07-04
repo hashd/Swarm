@@ -8,13 +8,29 @@ $(function(){
   var negwidth   = "-"+menuwidth+"px";
   var poswidth   = menuwidth+"px";
   
-  $('.menubtn').on('click',function(e){
+  /*$('.menubtn').on('click',function(e){
     if($bdy.hasClass('openmenu')) {
       jsAnimateMenu('close');
     } else {
       jsAnimateMenu('open');
     }
-  });
+  });*/
+   $('.menubtn').mouseenter(function() {
+    if($bdy.hasClass('openmenu')) {
+      jsAnimateMenu('close');
+    } else {
+      jsAnimateMenu('open');
+    }
+   });
+   /*.mouseleave(function(e) {
+      if($bdy.hasClass('openmenu')) {
+        var id = e.toElement.id;
+        if(e.toElement.id != 'hamburgermenu') {
+          jsAnimateMenu('close');
+        }
+      }
+   });*/
+
   
   $('.overlay').on('click', function(e){
     if($bdy.hasClass('openmenu')) {

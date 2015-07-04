@@ -13,6 +13,7 @@ function init(){
         jsObj.init();
         if(!isFirst){
             $("a.menubtn").trigger("click");
+
             chrome.storage.local.set({'newImagePath': 'yammerlogo_notifier.png'});
             // create alarm for polling new messages every 1 minutes
             chrome.alarms.create('checkNewTasks', {
@@ -23,6 +24,16 @@ function init(){
         chrome.browserAction.setIcon({
                     path: "yammerlogo.png"
         });
+    });
+
+    var links = [{
+                        "bgcolor":"blue",
+                        "icon":"+"
+                    }];
+    $('.kc_fab_wrapper').kc_fab(links);
+    $('.kc_fab_wrapper').find('button.kc_fab_main_btn').click(function(event) {
+      jsObj = loadJSObj("Postmessage");
+      jsObj.init();
     });
   
   $($("a.listAnc").get(0)).trigger("click", [true]);
@@ -39,6 +50,9 @@ function loadJSObj(jsVal){
     case "Analytics":
           jsObj = new Analytics();
           break;
+    case "Postmessage":
+          jsObj = new Postmessage();
+          break;          
   }
   return jsObj;
 }
