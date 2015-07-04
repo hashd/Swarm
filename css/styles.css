@@ -177,3 +177,11 @@ body.openmenu {
 #loadingIcon{
   display: none;
 }
+.search{
+  border-radius: 25px;
+  padding-left: 10px;
+  border: 1px #5186a8 solid;
+  height: 25px;
+  width: 50%;
+  float: right;
+}

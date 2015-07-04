@@ -35,6 +35,11 @@ function init(){
       jsObj = loadJSObj("Postmessage");
       jsObj.init();
     });
+    $(document).find('input.search').change(function(){
+        var target = $(this);
+        var searchObj = new Search();
+        searchObj.init(target.val());
+    });
   
   $($("a.listAnc").get(0)).trigger("click", [true]);
 };
