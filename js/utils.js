@@ -88,12 +88,12 @@ showProfile : function(data){
     str.push('<div class="profileDataDiv infoTitle"></div>');
     str.push('<div class="profileDataDiv summary"><div class="profileLabeldiv">Summary </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.summary)+'</div></div>');
     str.push('<div class="profileDataDiv department"><div class="profileLabeldiv">Department </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.department)+'</div></div>');
+    str.push('<div class="profileDataDiv location"><div class="profileLabeldiv">Location </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.location)+'</div></div>');
     str.push('<div class="profileDataDiv birth_date"><div class="profileLabeldiv">Birthday </div><div class="profileValuediv">'+data.birth_date+'</div></div>')
     str.push('<div class="profileDataDiv email"><div class="profileLabeldiv">Email </div><div class="profileValuediv">'+data.email+'</div></div>');
     str.push('<div class="profileDataDiv phone"><div class="profileLabeldiv">Phone </div><div class="profileValuediv">'+self.getPhoneNumberInfo(data.contact.phone_numbers)+'</div></div>');
     str.push('<div class="profileDataDiv interests"><div class="profileLabeldiv">Interests </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.interests)+'</div></div>');
-    str.push('<div class="profileDataDiv expertise"><div class="profileLabeldiv">Expertise </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.expertise)+'</div></div>');
-    str.push('<div class="profileDataDiv location"><div class="profileLabeldiv">Location </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.location)+'</div></div>');
+    str.push('<div class="profileDataDiv expertise"><div class="profileLabeldiv">Expertise </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.expertise)+'</div></div>');    
     str.push('<div class="profileDataDiv active_since"><div class="profileLabeldiv">Active Since </div><div class="profileValuediv">'+self.getActiveDuration(new Date(data.activated_at.toString()))+' </div></div>');
     str.push('</div>');
     container.empty().html(str.join(''));
