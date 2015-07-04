@@ -9,6 +9,7 @@ Feeds.prototype = {
   },
   getFeeds: function(){
       var self = this;
+      $("#content").empty();
       jQuery.ajax({
   		type :"GET",
   		url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
