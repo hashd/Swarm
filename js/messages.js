@@ -4,6 +4,10 @@ function Messages(){
 Messages.prototype = {
   init: function(){
   	var self = this;
+  	chrome.alarms.create('checkNewTasks', {
+          when: 1000,
+          periodInMinutes: 1
+    });
   	self.getReceivedMessages();
   },
   getReceivedMessages: function(){
