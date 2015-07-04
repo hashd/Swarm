@@ -52,9 +52,8 @@ var utils = {
         	str.push("</div>");
         	str.push("</div>");
     	});
-
-    	container.find('div.feed_main').append(str.join(''));
-
+    	container.find('div.feed_main').empty().append(str.join(''));
+  
     	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
 				var target = $(this),
 						userId = target.data("userid"),

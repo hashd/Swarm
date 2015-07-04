@@ -7,6 +7,6 @@ chrome.runtime.onMessage.addListener(
     });
 
 chrome.alarms.onAlarm.addListener(function (){
-	console.log("alarm called");
-	
+	//console.log("alarm called");
+
 });
