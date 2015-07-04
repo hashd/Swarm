@@ -7,7 +7,7 @@ var utils = {
 
 	hideLoadingIcon: function(){
 		$("#loadingIcon").hide();
-	
+
 	},
 	buildFeedInfo: function(data){
     	var self = this,
@@ -23,6 +23,7 @@ var utils = {
         	var senderArrObj = $.grep(references, function(e){ return e.id == msg.sender_id; }),
         	senderName = (senderArrObj.length > 0) ? senderArrObj[0].full_name : "",
         	senderPicURL = (senderArrObj.length > 0) ? senderArrObj[0].mugshot_url : "",
+					senderId = (senderArrObj.length > 0) ? senderArrObj[0].id : "",
         	msgCreatedDate = msg.created_at;
         	var todayDate = new Date();
         	var msgDate = new Date(msgCreatedDate);
@@ -36,10 +37,10 @@ var utils = {
           	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
         	}
         	str.push("<div class='msg_main'>");
-        	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' href='javascript:{}'><img src='"+senderPicURL+"'/></a></div>");
+        	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+senderId+"' href='javascript:{}'><img src='"+senderPicURL+"'/></a></div>");
         	str.push("<div class='msg_details_main'>");
         	str.push("<div class='msg_head'>");
-        	str.push("<div class='msg_sender_name'><a class='senderLinkAnc' href='javascript:{}'>"+senderName+"</a></div>");
+        	str.push("<div class='msg_sender_name'><a class='senderLinkAnc' data-userid='"+senderId+"' href='javascript:{}'>"+senderName+"</a></div>");
         	str.push("<div class='msg_date_time'>"+msgCreatedDate+"</div>");
         	str.push("</div>");
         	str.push("<div class='msg_body'>");
@@ -51,8 +52,10 @@ var utils = {
     	str.push("</div>");
     	container.empty().html(str.join(''));
     	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
-        var profileObj = new Profile();
-        profileObj.init();
+				var target = $(this),
+						userId = target.data("userid"),
+        		profileObj = new Profile();
+        profileObj.init(userId);
     });
   },
 
