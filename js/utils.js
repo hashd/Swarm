@@ -52,7 +52,7 @@ var utils = {
         	str.push("</div>");
         	str.push("</div>");
     	});
-    	container.find('div.feed_main').empty().append(str.join(''));
+    	container.find('div.feed_main').append(str.join(''));
   
     	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
 				var target = $(this),
@@ -68,7 +68,6 @@ var utils = {
     profile = data,
     profilePic = data.mugshot_url_template.replace("{width}x{height}","100x100"),
     str = [];
-    console.log(data);
     str.push('<div class="profile_pic"><img src="'+profilePic+'"/></div>');
     str.push('<div class="full_name">Name '+data.full_name+'</div>');
     str.push('<div class="birth_date">Birth Date '+data.birth_date+'</div>')
