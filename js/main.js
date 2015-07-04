@@ -13,8 +13,18 @@ function init(){
         jsObj.init();
         if(!isFirst){
             $("a.menubtn").trigger("click");
+            chrome.storage.local.set({'newImagePath': 'yammerlogo_notifier.png'});
+            // create alarm for polling new messages every 1 minutes
+            chrome.alarms.create('checkNewTasks', {
+              when: 1000,
+              periodInMinutes: 1
+            });
         }
+        chrome.browserAction.setIcon({
+                    path: "yammerlogo.png"
+        });
     });
+  
   $($("a.listAnc").get(0)).trigger("click", [true]);
 };
 function loadJSObj(jsVal){
