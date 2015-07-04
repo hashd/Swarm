@@ -26,6 +26,7 @@ Messages.prototype = {
     			withCredentials: false
     		},
     		success : function(data){
+            chrome.storage.local.set({'lastMsgId': data.messages[0].id});
           	utils.buildFeedInfo(data);
     			//console.log(data);
     		},
