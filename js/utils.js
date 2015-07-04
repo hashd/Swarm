@@ -15,10 +15,13 @@ var utils = {
         msgs = data.messages,
         references = data.references,
         str = [];
+        // do this only for the first set of messages
+        if(container.find('div.feed_main').length == 0){
+        	container.append('<div class="feed_main"></div>');
+        }
         var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
       		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     	];
-    	str.push("<div class='feed_main'>");
     	$.each(msgs, function(ind, msg){
         	var senderArrObj = $.grep(references, function(e){ return e.id == msg.sender_id; }),
         	senderName = (senderArrObj.length > 0) ? senderArrObj[0].full_name : "",
@@ -35,7 +38,7 @@ var utils = {
         	else {
           	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
         	}
-        	str.push("<div class='msg_main'>");
+        	str.push("<div class='msg_main' data-msg-id='"+msg.id+"'>");
         	str.push("<div class='msg_sender_pic'><img src='"+senderPicURL+"'/></div>");
         	str.push("<div class='msg_details_main'>");
         	str.push("<div class='msg_head'>");
@@ -48,8 +51,8 @@ var utils = {
         	str.push("</div>");
         	str.push("</div>");
     	});
-    	str.push("</div>");
-    	container.empty().html(str.join(''));
-  },
+    	
+    	container.find('div.feed_main').append(str.join(''));
+  }
 
 }

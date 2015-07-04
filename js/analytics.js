@@ -4,6 +4,7 @@ function Analytics(){
 Analytics.prototype = {
 	init: function(){
 		var self = this;
+		$(window).off('scroll');
 		utils.showLoadingIcon();
 	    jQuery.ajax({
 			type :"GET",
@@ -44,6 +45,7 @@ Analytics.prototype = {
   				withCredentials: false
   			},
   			success : function(data){
+  				$('#content').find('div.feed_main').remove();
         		utils.buildFeedInfo(data);
   				//console.log(data);
   			},
