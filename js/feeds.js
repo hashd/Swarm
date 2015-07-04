@@ -14,7 +14,7 @@ Feeds.prototype = {
   		type :"GET",
   		url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
       data:{
-        "limit":5
+        "limit":7
       },
   		dataType: 'json',
   		xhrFields: {
