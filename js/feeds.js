@@ -13,7 +13,7 @@ Feeds.prototype = {
   		type :"GET",
   		url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
       data:{
-        "limit":7
+        "limit":5
       },
   		dataType: 'json',
   		xhrFields: {
@@ -24,7 +24,7 @@ Feeds.prototype = {
   			//console.log(data);
   		},
   		error : function(){
-  			alert("error");
+  			alert("Error, Please login to Yammer");
   		}
   	});
   },
@@ -58,4 +58,5 @@ Feeds.prototype = {
         });
     });
   }
+  
 }
