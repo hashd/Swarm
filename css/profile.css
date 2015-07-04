@@ -29,9 +29,7 @@
   width: 100%;
 }
 .profileInfo_main .profile_cell_div{
-  display: table-cell;
-  vertical-align: middle;
-  width: 50%;
+  vertical-align: top;
 }
 .profileInfo_main .infoTitle{
   text-decoration: underline;
