@@ -87,10 +87,10 @@ showProfile : function(data){
     str.push('<div class="profile_cell_div">');
     str.push('<div class="profileDataDiv infoTitle"></div>');
     str.push('<div class="profileDataDiv summary"><div class="profileLabeldiv">Summary </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.summary)+'</div></div>');
-    str.push('<div class="profileDataDiv department"><div class="profileLabeldiv">Department </div><div class="profileValuediv">'+data.department+'</div></div>');
+    str.push('<div class="profileDataDiv department"><div class="profileLabeldiv">Department </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.department)+'</div></div>');
     str.push('<div class="profileDataDiv birth_date"><div class="profileLabeldiv">Birthday </div><div class="profileValuediv">'+data.birth_date+'</div></div>')
     str.push('<div class="profileDataDiv email"><div class="profileLabeldiv">Email </div><div class="profileValuediv">'+data.email+'</div></div>');
-    str.push('<div class="profileDataDiv phone"><div class="profileLabeldiv">Phone </div><div class="profileValuediv"></div></div>');
+    str.push('<div class="profileDataDiv phone"><div class="profileLabeldiv">Phone </div><div class="profileValuediv">'+self.getPhoneNumberInfo(data.contact.phone_numbers)+'</div></div>');
     str.push('<div class="profileDataDiv interests"><div class="profileLabeldiv">Interests </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.interests)+'</div></div>');
     str.push('<div class="profileDataDiv expertise"><div class="profileLabeldiv">Expertise </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.expertise)+'</div></div>');
     str.push('<div class="profileDataDiv location"><div class="profileLabeldiv">Location </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.location)+'</div></div>');
@@ -148,7 +148,17 @@ daysInMonth : function (date2_UTC){
     var monthLength = (monthEnd - monthStart) / (1000 * 60 * 60 * 24);
     return monthLength;
 },
-
+getPhoneNumberInfo : function(phoneNumbers){
+    var self = this,
+    result = [];
+    for(var phoneNumber in phoneNumbers){
+        result.push('<div>');
+            result.push('<div class="phoneType" style="display:inline;text-transform: capitalize;">'+phoneNumbers[phoneNumber].type+'</div>');
+            result.push('<div class="phoneNumber" style="display:inline;text-transform: capitalize;"> '+phoneNumbers[phoneNumber].number+'</div>');
+        result.push('</div>');
+    }
+    return result.join('');
+},
 getEmptyStringIfNull : function(data){
     var self = this;
     if(data == null || data == undefined){
