@@ -59,4 +59,37 @@ var utils = {
     });
   },
 
+  showProfile : function(data){
+    var self = this,
+    container = $("#content"),
+    profile = data,
+    profilePic = data.mugshot_url,
+    str = [];
+    console.log(data);
+    str.push('<div class="profile_pic"><img src="'+profilePic+'"/></div>');
+    str.push('<div class="full_name">Name '+data.full_name+'</div>');
+    str.push('<div class="birth_date">Birth Date '+data.birth_date+'</div>')
+    str.push('<div class="job_title">Job Title '+data.job_title+'</div>');
+    str.push('<div class="department">Department '+data.department+'</div>');
+    str.push('<div class="email">Email '+data.email+'</div>');
+    str.push('<div class="phone">Phone </div>');
+    str.push('<div class="active_since">Active Since '+self.getDaysBetween(new Date(data.activated_at.toString()))+'Days </div>');
+    str.push('<div class="stats">');
+    str.push('<div class="following">Following '+data.stats.followers+'</div>');
+    str.push('<div class="followers">Followers '+data.stats.following+'</div>');
+    str.push('<div class="updates"> Updates '+data.stats.updates+'</div>');
+    str.push('</div>');
+
+    container.empty().html(str.join(''));
+  },
+
+  getDaysBetween : function(date){
+    var oneDay = 24*60*60*1000, // hours * minutes * seconds * milliseconds
+    firstDate = date,
+    secondDate = new Date();
+
+    var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+    return diffDays;
+  }
+
 }
