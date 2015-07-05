@@ -2,9 +2,7 @@
 
 
 
-This is a chrome browser plugin, 
-it will fetch your yammer message feed and 
-you can post messages from the plugin.
+This is a chrome browser plugin, it will fetch your yammer message feed and you can post messages from the plugin.
 
 ### How do I install this?
 
