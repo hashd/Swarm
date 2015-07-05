@@ -27,7 +27,7 @@ function init(){
     });
 
     var links = [{
-                        "bgcolor":"blue",
+                        "bgcolor":"#386cbb",
                         "icon":"+"
                     }];
     $('.kc_fab_wrapper').kc_fab(links);

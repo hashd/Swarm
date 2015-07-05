@@ -5,6 +5,8 @@ Search.prototype = {
   init: function(query){
   	var self = this;
     if(query.length > 0){
+      container = $("#content"),
+      container.empty();
       self.getSearchQueryResults(query);
     }else{
       var feeds = new Feeds();
@@ -26,7 +28,8 @@ Search.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-        	utils.showSearchResults(data);
+        	//utils.showSearchResults(data);
+          utils.buildFeedInfo(data.messages);
   		},
   		error : function(){
   			alert("error");
