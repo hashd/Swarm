@@ -72,6 +72,11 @@ showSearchResults:function(data){
     str.push('<div>Groups '+data.count.groups+'</div>');
     str.push('<div>Pages '+data.count.pages+'</div>');
     str.push('<div>Topics '+data.count.topics+'</div>');
+    
+    //messages
+    str.push('<div>'+utils.buildFeedInfo(data.messages)+'</div>');
+    //users
+    
     str.push('</div>');
     container.empty().html(str.join(''));
 },
@@ -166,8 +171,8 @@ getPhoneNumberInfo : function(phoneNumbers){
     result = [];
     for(var phoneNumber in phoneNumbers){
         result.push('<div>');
-            result.push('<div class="phoneType" style="display:inline;text-transform: capitalize;">'+phoneNumbers[phoneNumber].type+'</div>');
-            result.push('<div class="phoneNumber" style="display:inline;text-transform: capitalize;"> '+phoneNumbers[phoneNumber].number+'</div>');
+            result.push('<div class="phoneType">'+phoneNumbers[phoneNumber].type+'</div>');
+            result.push('<div class="phoneNumber"> '+phoneNumbers[phoneNumber].number+'</div>');
         result.push('</div>');
     }
     return result.join('');

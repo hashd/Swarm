@@ -28,7 +28,6 @@ Search.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-        	//utils.showSearchResults(data);
           utils.buildFeedInfo(data.messages);
   		},
   		error : function(){
