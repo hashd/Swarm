@@ -16,7 +16,7 @@ Postmessage.prototype = {
 		var groupId = $("select#slt_groups").val();
 		var body_message = $("textarea#message_body").val();
 		//alert(body_message);
-		/*jQuery.ajax({
+		jQuery.ajax({
   		type :"POST",
   		url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
       	data:{
@@ -33,7 +33,7 @@ Postmessage.prototype = {
   		error : function(){
   			alert("error");
   		}
-  		});*/
+  		});
 
 	});
   },
