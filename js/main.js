@@ -5,6 +5,14 @@ $(document).ready(function() {
 });
 
 function init(){
+  $('#nav li').hover(
+        function () {
+            $('ul', this).stop(true, true).slideDown(200);
+        },
+        function () {
+            $('ul', this).stop(true, true).slideUp(200);
+        }
+  );
   $(document).find("div#navbar a.listAnc").click(function(event, isFirst){
     var target = $(this),
         jsVal = target.data("jsval"),
@@ -42,7 +50,7 @@ function init(){
         var searchObj = new Search();
         searchObj.init(target.val());
     });
-  
+
   $($("a.listAnc").get(0)).trigger("click", [true]);
 };
 function loadJSObj(jsVal){
@@ -59,7 +67,7 @@ function loadJSObj(jsVal){
           break;
     case "Postmessage":
           jsObj = new Postmessage();
-          break;          
+          break;
   }
   return jsObj;
 }

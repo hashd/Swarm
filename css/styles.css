@@ -179,17 +179,16 @@ body.openmenu {
   display: none;
 }
 .search{
-  border-radius: 25px;
-  padding-left: 10px;
-  border: 1px #5186a8 solid;
+  padding-left: 20px;
   height: 25px;
-  width: 50%;
+  width: 75%;
   float: right;
   font-size: 13px;
+  color: #fff;
 }
 
 a.listAnc{
-  padding: 1em;
+  /*padding: 1em;*/
 }
 
 a.listAnc.selected i{
@@ -206,4 +205,71 @@ i.fa{
 
 g.uv-arc-groups{
   cursor: pointer;
+}
+#navIconsContainer_main{
+  width: 2.2em;
+  position: relative;
+}
+#menuIconContainer{
+  width: 2em;
+  height: 40px;
+}
+#navbar .navIcons{
+  width:2.2em;
+  background-color: #ADADAD;
+  position: absolute;
+}
+
+#nav {
+  padding:0;
+  list-style:none;
+  line-height: 25px;
+}
+
+#nav li {
+  float:left;
+  display:block;
+  width:3em;
+  position:relative;
+  z-index:500;
+}
+
+#nav li a {
+  display:block;
+  height: 45px;
+  text-decoration: none;
+  text-align: center;
+}
+
+#nav ul {
+  position:absolute;
+  left:0;
+  display:none;
+  padding:0;
+  list-style:none;
+}
+
+#nav ul li {
+  float:left;
+}
+
+i.fa-search{
+  font-size: 1.4em;
+  float: right;
+  position: relative;
+  left: 15px;
+  top: 5px;
+}
+#nav li:hover{
+  background-color: rgb(57, 87, 107);
+}
+a.listAnc i.fa{
+  position: relative;
+  top: 20%;
+}
+input.mui-form-control:focus {
+  height: 25px;
+  margin-bottom: 0px;
+  border-color: rgba(0, 0, 0, 0.26);
+  border-width: 1px;
 }

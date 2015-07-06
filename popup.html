@@ -18,23 +18,23 @@ limitations under the License.
 
 <head>
   <title>OAuth 2.0 Popup</title>
-  
+
   <link rel="stylesheet" type="text/css" href="libs/css/mui.min.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="css/feeds.css">
   <link rel="stylesheet" type="text/css" href="css/profile.css">
   <link rel="stylesheet" href="libs/dist/css/kc.fab.css"/>
   <link rel="stylesheet" type="text/css" href="css/fa/css/font-awesome.min.css">
-  
 
-  
+
+
   <script type="text/javascript" src="libs/js/jquery-2.1.1.js"></script>
   <script src="libs/dist/js/kc.fab.min.js"></script>
   <script type="text/javascript" src="libs/js/hamburger-menu.js"></script>
   <script type="text/javascript" src="libs/js/d3.min.js"></script>
   <script type="text/javascript" src="libs/js/uvcharts.min.js"></script>
   <script type="text/javascript" src="libs/js/mui.min.js"></script>
-  
+
   <script src="oauth2/oauth2.js"></script>
   <script src="js/main.js"></script>
   <script src="js/feeds.js"></script>
@@ -53,11 +53,26 @@ limitations under the License.
   <div id="pgcontainer">
     <header>
       <div id="navbar">
-        <a href="#" class="listAnc" data-jsval="feeds"><i class="fa fa-home fa-2x"></i></a>
+        <div id="navIconsContainer_main">
+          <ul id="nav">
+        		<li>
+                <a href="#" id="menuIcon" data-jsval="feeds" style="height:30px;"><i class="fa fa-bars fa-2x"></i></a>
+        		    <ul style="background-color:#5186a8;opacity:0.8">
+        		        <li><a href="#" class="listAnc" data-jsval="feeds"><i class="fa fa-home fa-2x"></i></a></li>
+        		        <li><a href="#" class="listAnc" data-jsval="messages"><i class="fa fa-envelope fa-2x" style="font-size: 1.6em;"></i></a></li>
+        		        <li><a href="#" class="listAnc" data-jsval="analytics"><i class="fa fa-line-chart fa-2x" style="font-size: 1.6em;"></i></a></li>
+        		    </ul>
+        		</li>
+      	  </ul>
+        </div>
+        <input type="text" class="mui-form-control search" placeholder="Search">
+        <i class="fa fa-search fa-1x" style="float:right; "></i>
+
+        <!--<a href="#" class="listAnc" data-jsval="feeds"><i class="fa fa-home fa-2x"></i></a>
         <a href="#" class="listAnc" data-jsval="messages"><i class="fa fa-envelope fa-2x"></i></a>
-        <a href="#" class="listAnc" data-jsval="analytics"><i class="fa fa-line-chart fa-2x"></i></a>
-        <input type="text" class="search" placeholder="Search"></input>
-      
+        <a href="#" class="listAnc" data-jsval="analytics"><i class="fa fa-line-chart fa-2x"></i></a> -->
+        <!--<input type="text" class="search" placeholder="Search"></input>-->
+
       </div>
       <div id="loadingIcon" class="overlay">
           <img src="css/loading-blue.gif"/>
