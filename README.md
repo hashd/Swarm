@@ -1,32 +1,27 @@
 # Yammer Plugin for chrome
 
-* What is this?
 
-This is a chrome browser plugin, 
-it will fetch your yammer message feed and 
-you can post messages from the plugin.
 
-# Adding to chrome
+This is a chrome browser plugin, it will fetch your yammer message feed and you can post messages from the plugin.
 
-* How do I install this?
+### How do I install this?
 
-Its not yet published to chrome web store, 
-right now it can run only developer mode,
+Its not yet published to chrome web store, right now it can run only developer mode,
 
-+ clone or download zip from ```http://gitlab.pramati.com/leantaas/yammerpluginforchrome```
++ Clone or download zip from ```http://gitlab.pramati.com/leantaas/yammerpluginforchrome```
 + Open Chrome *Settings* page, click on *Extensions*
-+ check *Developer mode* check box.
-+ click on *Load unpacked extension* and navigate to the extracted folder.
++ Check *Developer mode* check box.
++ Click on *Load unpacked extension* and navigate to the extracted folder.
 
-now your yammer feed plugin is installed.
+Now your yammer feed plugin is installed.
 
-* How do I use it?
+### How do I use it?
 
 + Click on the plugin button and authorize the application to access your yammer feed.
 + A browser window is opened which will prompt you to authorize the app, click on *Allow* button, this will close the browser window.
-+ click on yammer feed plugin now to see your feed.
++ Click on yammer feed plugin now to see your feed.
 
 
-# Developer information
+### Developer information
 
 Manoj, Krishnam, Mohan, Risav.
