@@ -5,7 +5,7 @@ Analytics.prototype = {
 	init: function(){
 		var self = this;
 		$(window).off('scroll');
-		utils.showLoadingIcon();
+		// utils.showLoadingIcon();
 	    jQuery.ajax({
 			type :"GET",
 			url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",
@@ -19,7 +19,7 @@ Analytics.prototype = {
 				$("#content").html('<div id="donut_chart" style="width:350px;height:250px"></div>');
 				var groupData = self.generateGroupData(data) 
 				self.drawChart(groupData);
-				utils.hideLoadingIcon();
+				//utils.hideLoadingIcon();
 				$('div.uv-chart-div').off('click');
 				$('div.uv-chart-div').on('click', 'g.uv-arc-groups', function(e){
 					//alert(groupData[$(this).index()].id);

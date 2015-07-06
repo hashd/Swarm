@@ -186,3 +186,23 @@ body.openmenu {
   float: right;
   font-size: 13px;
 }
+
+a.listAnc{
+  padding: 1em;
+}
+
+a.listAnc.selected i{
+  color: #FFF;
+}
+
+a.listAnc i:hover{
+  color: #FFF;
+}
+
+i.fa{
+  color: #CCC;
+}
+
+g.uv-arc-groups{
+  cursor: pointer;
+}

@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 
 function init(){
-  $(document).find("div#hamburgermenu a.listAnc").click(function(event, isFirst){
+  $(document).find("div#navbar a.listAnc").click(function(event, isFirst){
     var target = $(this),
         jsVal = target.data("jsval"),
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
@@ -24,6 +24,8 @@ function init(){
         chrome.browserAction.setIcon({
                     path: "yammerlogo.png"
         });
+        target.parent().find('a').removeClass('selected');
+        target.addClass('selected');
     });
 
     var links = [{
