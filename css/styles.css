@@ -75,6 +75,7 @@ p {
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 0px;
+  background: #F9F9F9;
 }
 
 header {

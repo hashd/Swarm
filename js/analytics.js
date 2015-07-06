@@ -16,7 +16,7 @@ Analytics.prototype = {
 			success : function(data){
 				
 
-				$("#content").html('<div id="donut_chart" style="width:350px;height:250px"></div>');
+				$("#content").html('<div id="donut_chart" class="msg_main" style="width:340px;height:250px;padding-top:10px"></div>');
 				var groupData = self.generateGroupData(data) 
 				self.drawChart(groupData);
 				//utils.hideLoadingIcon();
