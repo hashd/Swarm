@@ -1,7 +1,7 @@
 .msg_main{
   border: 1px solid #DADADA;
   margin: 5px 0px;
-  font-size: 1.2em;
+  font-size: 1em;
   color: #343A41;
   display: table;
   width: 100%;
@@ -11,7 +11,7 @@
 }
 .msg_head{
   overflow: auto;
-  padding: 1em 0.5em;
+  padding: 0.5em;
 }
 .msg_sender_pic{
   display: table-cell;
@@ -19,8 +19,9 @@
   vertical-align: top;
 }
 .msg_sender_pic img{
-  border-radius: 25px;
-  border: 2px solid #DADADA;
+  border-radius: 50%;
+  padding: 6px;
+  width: 48px;
 }
 .msg_details_main{
   display: table-cell;
@@ -30,17 +31,17 @@
   float: left;
   color: #386cbb;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 0.9em;
 }
 .msg_date_time{
   float: right;
   color: #68717f;
-  font-size: 1.0em;
+  font-size: 0.8em;
 }
 .msg_body{
-  padding: 1em 0.5em;
-  font-size: 1.0em;
-  line-height: 1.2em;
+  padding: 0.5em;
+  font-size: 0.9em;
+  line-height: 1.1em;
 }
 .senderLinkAnc{
   text-decoration: initial;

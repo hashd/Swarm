@@ -9,7 +9,7 @@
   "browser_action": {
     "default_icon": "yammerlogo.png",
     "default_title": "Yammer Plugin",
-    "default_popup": "popup.html"
+    "default_popup": "home.html"
   },
   "content_scripts": [
     {

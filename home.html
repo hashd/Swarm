@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Yammer Home</title>
+
+  <!-- Stylesheets here -->
+  <link rel="stylesheet" href="./libs/css/mui.min.css">
+  <link rel="stylesheet" href="./css/feeds.css">
+  <link rel="stylesheet" href="./css/profile.css">
+  <link rel="stylesheet" href="./css/overrides.css">
+
+  <!-- Scripts here -->
+  <script type="text/javascript" src="libs/js/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="libs/js/d3.min.js"></script>
+  <script type="text/javascript" src="libs/js/uvcharts.min.js"></script>
+  <script type="text/javascript" src="oauth2/oauth2.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/feeds.js"></script>
+  <script type="text/javascript" src="js/messages.js"></script>
+  <script type="text/javascript" src="js/analytics.js"></script>
+  <script type="text/javascript" src="js/profile.js"></script>
+  <script type="text/javascript" src="js/search.js"></script>
+  <script type="text/javascript" src="js/utils.js"></script>
+  <script type="text/javascript" src="popup.js"></script>
+</head>
+<body class="mui-container plugin-container">
+  <div class="mui-row header">
+    <div class="left-pane mui-col-xs-1 mui-col-sm-1 mui-col-md-1">
+      <i class="material-icons">face</i>
+    </div>
+    <div class="right-pane mui-col-xs-11 mui-col-sm-11 mui-col-md-11 page-title" style="text-align: left;">
+      Yammer
+    </div>
+  </div>
+  <div class="mui-row main">
+    <div class="left-pane nav-bar mui-col-xs-1 mui-col-sm-1 mui-col-md-1">
+      <ul>
+        <li>
+          <i class="material-icons active" data-jsval="feeds">home</i>
+        </li><li>
+          <i class="material-icons" data-jsval="messages">email</i>
+        </li><li>
+          <i class="material-icons" data-jsval="">notifications</i>
+        </li><li>
+          <i class="material-icons separator">group</i>
+        </li><li>
+          <i class="material-icons" data-jsval="analytics">insert_chart</i>
+        </li><li>
+          <i class="material-icons">system_update_alt</i>
+        </li><li>
+          <i class="material-icons separator">search</i>
+        </li>
+      </ul>
+    </div>
+    <div id="content" class="right-pane mui-col-xs-11 mui-col-sm-11 mui-col-md-11"></div>
+  </div>
+  <div class="mui-row footer" style="display:none;"></div>
+</body>
+</html>

@@ -1,99 +1,60 @@
 <!doctype html>
 
-<!--
-Copyright 2011 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
-
 <head>
-  <title>OAuth 2.0 Popup</title>
-
+  <title>Yammer for Chrome</title>
   <link rel="stylesheet" type="text/css" href="libs/css/mui.min.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="css/feeds.css">
   <link rel="stylesheet" type="text/css" href="css/profile.css">
-  <link rel="stylesheet" href="libs/dist/css/kc.fab.css"/>
+  <link rel="stylesheet" href="libs/dist/css/kc.fab.css" />
   <link rel="stylesheet" type="text/css" href="css/fa/css/font-awesome.min.css">
-
-
+  <link rel="stylesheet" type="text/css" href="libs/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/overrides.css">
 
   <script type="text/javascript" src="libs/js/jquery-2.1.1.js"></script>
-  <script src="libs/dist/js/kc.fab.min.js"></script>
+  <script type="text/javascript" src="libs/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="libs/dist/js/kc.fab.min.js"></script>
   <script type="text/javascript" src="libs/js/hamburger-menu.js"></script>
   <script type="text/javascript" src="libs/js/d3.min.js"></script>
   <script type="text/javascript" src="libs/js/uvcharts.min.js"></script>
   <script type="text/javascript" src="libs/js/mui.min.js"></script>
-
-  <script src="oauth2/oauth2.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/feeds.js"></script>
-  <script src="js/messages.js"></script>
-  <script src="js/analytics.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/profile.js"></script>
-  <script src="js/postMessage.js"></script>
-  <script src="js/search.js"></script>
-  <script src="popup.js"></script>
+  <script type="text/javascript" src="oauth2/oauth2.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/feeds.js"></script>
+  <script type="text/javascript" src="js/messages.js"></script>
+  <script type="text/javascript" src="js/analytics.js"></script>
+  <script type="text/javascript" src="js/utils.js"></script>
+  <script type="text/javascript" src="js/profile.js"></script>
+  <script type="text/javascript" src="js/postMessage.js"></script>
+  <script type="text/javascript" src="js/search.js"></script>
+  <script type="text/javascript" src="popup.js"></script>
   <style>
-    #success { display: none; }
+  #success {
+    display: none;
+  }
   </style>
 </head>
-<body>
-  <div id="pgcontainer">
-    <header>
-      <div id="navbar">
-        <div id="navIconsContainer_main">
-          <ul id="nav">
-        		<li>
-                <a href="#" id="menuIcon" data-jsval="feeds" style="height:30px;"><i class="fa fa-bars fa-2x"></i></a>
-        		    <ul style="background-color:#5186a8;opacity:0.8">
-        		        <li><a href="#" class="listAnc" data-jsval="feeds"><i class="fa fa-home fa-2x"></i></a></li>
-        		        <li><a href="#" class="listAnc" data-jsval="messages"><i class="fa fa-envelope fa-2x" style="font-size: 1.6em;"></i></a></li>
-        		        <li><a href="#" class="listAnc" data-jsval="analytics"><i class="fa fa-line-chart fa-2x" style="font-size: 1.6em;"></i></a></li>
-        		    </ul>
-        		</li>
-      	  </ul>
-        </div>
-        <input type="text" class="mui-form-control search" placeholder="Search">
-        <i class="fa fa-search fa-1x" style="float:right; "></i>
 
-        <!--<a href="#" class="listAnc" data-jsval="feeds"><i class="fa fa-home fa-2x"></i></a>
-        <a href="#" class="listAnc" data-jsval="messages"><i class="fa fa-envelope fa-2x"></i></a>
-        <a href="#" class="listAnc" data-jsval="analytics"><i class="fa fa-line-chart fa-2x"></i></a> -->
-        <!--<input type="text" class="search" placeholder="Search"></input>-->
-
+<body class="container">
+  <div class="row">
+    <div class="left-panel col-sm-1 col-xs-1 col-md-1">
+      <a href="#" data-jsval="current-user"><i class="fa fa-bars fa-2x"></i></a>
+      <div style="min-height: 480px;">
+        <ul class="nav-bar">
+          <li class="nav-icon">
+            <a href="#" data-jsval="feeds"><i class="fa fa-home fa-2x"></i></a>
+          </li><li>
+            <a href="#" data-jsval="messages"><i class="fa fa-envelope fa-2x"></i></a>
+          </li><li>
+            <a href="#" data-jsval="analytics"><i class="fa fa-line-chart fa-2x"></i></a>
+          </li><li>
+          </li>
+        </ul>
       </div>
-      <div id="loadingIcon" class="overlay">
-          <img src="css/loading-blue.gif"/>
-
-      </div>
-    </header>
-
-    <div id="content">
+    </div>
+    <div class="right-panel col-sm-11 col-xs-11 col-md-11">
 
     </div>
-    <div class="kc_fab_wrapper" >
-
-    </div>
-  </div><!-- @end #pgcontainer -->
-
-<form id="form">
-
-</form>
-<div id="success">
-  Successfully created new task with ID <span id="taskid"></span>.
-</div>
-
+  </div>
 </body>
 </html>
