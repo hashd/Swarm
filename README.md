@@ -24,4 +24,4 @@ Now your yammer feed plugin is installed.
 
 ### Developer information
 
-Manoj, Krishnam, Mohan, Risav.
+Manoj, Krishnam, Mohan, Risav, Kiran.
