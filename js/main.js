@@ -1,5 +1,6 @@
 $(document).ready(function() {
     init();
+    loadCurrentUserMugshot();
 });
 
 function init(){
@@ -55,4 +56,13 @@ function loadJSObj(jsVal){
           break;
   }
   return jsObj;
+}
+
+function loadCurrentUserMugshot() {
+  new Profile().getCurrentUserProfileInformation(function (data) {
+    $('.header .current-mugshot').html($('<img />').attr('src', data.mugshot_url_template.replace("{width}x{height}","100x100")).height('34px')
+      .on('click', function () {
+        new Profile().getCurrentUserProfileInformation();
+      }));
+  });
 }

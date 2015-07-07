@@ -54,8 +54,7 @@
 }
 
 .left-pane {
-  text-align: center;
-  background-color: #eee;
+  background-color: #fafaff;
 }
 
 .main > div {
@@ -77,16 +76,21 @@
 }
 
 .header .pane {
-  background-color: #2196F3;
+  background-color: #1976D2;
   color: #fff;
   display: table-cell;
   vertical-align: middle;
   float: none;
 }
 
+.current-mugshot img {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .nav-bar {
   margin-left: -1px;
-  border-right: 1px solid #2196F3;
+  border-right: 1px solid #1976D2;
 }
 
 .nav-bar ul {

@@ -5,9 +5,7 @@ var yammer = new OAuth2('yammer', {
 });
 
 yammer.authorize(function() {
-
   var TASK_CREATE_URL = 'https://www.yammer.com/api/v1/users/current.json?access_token='+yammer.getAccessToken();
-
   // store the accessToken for background script
   chrome.storage.local.set({'newAccessToken':yammer.getAccessToken()});
 });
