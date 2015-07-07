@@ -30,6 +30,12 @@ function init(){
     });*/
 
   $(".nav-bar i").first().trigger("click", [true]);
+
+  $('#content').enscroll({
+    showOnHover: true,
+    verticalTrackClass: 'track3',
+    verticalHandleClass: 'handle3'
+  });
 };
 
 function loadJSObj(jsVal){

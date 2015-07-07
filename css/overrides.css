@@ -39,13 +39,23 @@
   font-feature-settings: 'liga';
 }
 
+.mui-row {
+  margin: 0;
+}
+
+.mui-panel {
+  padding: 4px;
+}
+
 .plugin-container {
   width: 360px;
+  margin: 0;
+  padding: 0;
 }
 
 .left-pane {
   text-align: center;
-  background-color: #ddd;
+  background-color: #eee;
 }
 
 .main > div {
@@ -54,18 +64,29 @@
   overflow: auto;
 }
 
-.header > div {
-  background-color: #0072c6;
+.header {
+  display: table;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  margin: 0;
+}
+
+.header-row {
+  display: table-row;
+  height: 40px;
+}
+
+.header .pane {
+  background-color: #2196F3;
   color: #fff;
-  border-bottom: 1px solid #ccc;
-  padding: 6px 0;
-  height: 36px;
-  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
 }
 
 .nav-bar {
   margin-left: -1px;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #2196F3;
 }
 
 .nav-bar ul {
@@ -76,24 +97,24 @@
 
 .nav-bar .material-icons {
   font-size: 1.8em;
-  margin-bottom: 0.5em;
-  margin-left: -12px;
+  margin-left: -6px;
   cursor: pointer;
-  padding: 6px 0;
+  padding: 4px 0;
   color: #888;
 }
 
 .nav-bar .material-icons:hover {
-  color: #2BBBFF;
+  color: #2196F3;
 }
 
 .nav-bar .material-icons.active {
-  color: #0072c6;
+  color: #1976D2;
 }
 
 .material-icons.separator {
-  border-top: 1px solid #999;
+  border-top: 1px solid #CCC;
   margin-top: 12px;
+  padding-top: 12px;
 }
 
 .nav-bar li:first-child {

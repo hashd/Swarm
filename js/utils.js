@@ -39,7 +39,7 @@ var utils = {
      else {
          msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
      }
-     str.push("<div class='msg_main' data-msg-id='"+msg.id+"'>");
+     str.push("<div class='msg_main mui-panel' data-msg-id='"+msg.id+"'>");
      str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+senderId+"' href='javascript:{}'><img src='"+senderPicURL+"'/></a></div>");
      str.push("<div class='msg_details_main'>");
      str.push("<div class='msg_head'>");
@@ -72,11 +72,11 @@ showSearchResults:function(data){
     str.push('<div>Groups '+data.count.groups+'</div>');
     str.push('<div>Pages '+data.count.pages+'</div>');
     str.push('<div>Topics '+data.count.topics+'</div>');
-    
+
     //messages
     str.push('<div>'+utils.buildFeedInfo(data.messages)+'</div>');
     //users
-    
+
     str.push('</div>');
     container.empty().html(str.join(''));
 },
@@ -111,7 +111,7 @@ showProfile : function(data){
     str.push('<div class="profileDataDiv email"><div class="profileLabeldiv">Email </div><div class="profileValuediv">'+data.email+'</div></div>');
     str.push('<div class="profileDataDiv phone"><div class="profileLabeldiv">Phone </div><div class="profileValuediv">'+self.getPhoneNumberInfo(data.contact.phone_numbers)+'</div></div>');
     str.push('<div class="profileDataDiv interests"><div class="profileLabeldiv">Interests </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.interests)+'</div></div>');
-    str.push('<div class="profileDataDiv expertise"><div class="profileLabeldiv">Expertise </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.expertise)+'</div></div>');    
+    str.push('<div class="profileDataDiv expertise"><div class="profileLabeldiv">Expertise </div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.expertise)+'</div></div>');
     str.push('<div class="profileDataDiv active_since"><div class="profileLabeldiv">Active Since </div><div class="profileValuediv">'+self.getActiveDuration(new Date(data.activated_at.toString()))+' </div></div>');
     str.push('</div>');
     container.empty().html(str.join(''));
@@ -143,19 +143,19 @@ getTimeDuration : function(date_1, date_2){
         date2_UTC.setFullYear(date2_UTC.getFullYear() - 1);
         months += 12;
     }
-    
+
     //--------------------------------------------------------------
     var years = date2_UTC.getFullYear() - date1_UTC.getFullYear();
     var result = '';
     if (years > 1){
-        result += years + " years ";  
-    } 
+        result += years + " years ";
+    }
     if (months > 1){
-        result += months + " months ";  
-    } 
+        result += months + " months ";
+    }
     if (days > 1){
-        result += days+" days";  
-    } 
+        result += days+" days";
+    }
 
     return result;
 },
