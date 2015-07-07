@@ -1,6 +1,7 @@
 $(document).ready(function() {
     init();
     loadCurrentUserMugshot();
+    getCurrentNetwork();
 });
 
 function init(){
@@ -64,5 +65,16 @@ function loadCurrentUserMugshot() {
       .on('click', function () {
         new Profile().getCurrentUserProfileInformation();
       }));
+  });
+}
+
+function getCurrentNetwork() {
+  new Network().getCurrentNetworkInformation(function (data) {
+    for (var i = 0, length = data.length; i < length; i++) {
+      if (data[i].is_primary === true) {
+        $('.header .left-pane').html(data[i].name);
+        return false;
+      }
+    }
   });
 }

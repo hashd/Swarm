@@ -76,8 +76,9 @@
 }
 
 .header .pane {
-  background-color: #1976D2;
-  color: #fff;
+  background-color: #fafaff;
+  color: #1976D2;
+  font-weight: bold;
   display: table-cell;
   vertical-align: middle;
   float: none;
@@ -90,7 +91,7 @@
 
 .nav-bar {
   margin-left: -1px;
-  border-right: 1px solid #1976D2;
+  border-right: 1px solid #ddd;
 }
 
 .nav-bar ul {
@@ -100,11 +101,11 @@
 }
 
 .nav-bar .material-icons {
-  font-size: 1.8em;
+  font-size: 1.5em;
   margin-left: -6px;
   cursor: pointer;
-  padding: 4px 0;
-  color: #888;
+  padding: 4px 2px;
+  color: #666;
 }
 
 .nav-bar .material-icons:hover {
