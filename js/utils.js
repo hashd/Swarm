@@ -56,7 +56,7 @@ container.find('div.feed_main').append(str.join(''));
 container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     var target = $(this),
     userId = target.data("userid"),
-    profileObj = new Profile();
+    profileObj = new Swarm.Profile();
     $(window).off("scroll");
     profileObj.init(userId);
 });

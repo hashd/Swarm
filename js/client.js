@@ -38,8 +38,9 @@ Swarm.Client.prototype = {
     self.navBar.find('i').click(function(event, isFirst){
       var target = $(this),
         jsVal = target.data("jsval"),
+        title = target.attr('title'),
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
-        self.makeActiveTab(jsValCap);
+        self.makeActiveTab(jsValCap, title);
 
         if (!isFirst) {
           chrome.storage.local.set({'newImagePath': '/img/yammerlogo_notifier.png'});
@@ -63,33 +64,27 @@ Swarm.Client.prototype = {
     });
   },
 
-  makeActiveTab: function (jsVal){
+  makeActiveTab: function (jsVal, title){
     var self = this,
-      pageTitle = self.header.find('.page-title');
+      pageTitle = self.header.find('.page-title').html(title);
 
     switch (jsVal){
       case "Feeds":
-        pageTitle.html('Network Feed');
         self.feedsService.init();
         break;
       case "Messages":
-        pageTitle.html('Messages');
         self.messagesService.init();
         break;
       case "Analytics":
-        pageTitle.html('Analytics');
         self.analyticsService.init();
         break;
       case "Postmessage":
-        pageTitle.html('Post Message');
         self.postMessageService.init();
         break;
       case "Activityfeed":
-        pageTitle.html('Recent Activity');
         self.activityFeedService.init();
         break;
       case "Notifications":
-        pageTitle.html('Notifications');
         self.notificationsService.init();
         break;
       case "Search":
