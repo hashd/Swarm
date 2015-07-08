@@ -68,6 +68,10 @@ Swarm.Client.prototype = {
     var self = this,
       pageTitle = self.header.find('.page-title').html(title);
 
+    // Update slimscrollbar position for content change
+    self.content.slimScroll();
+    self.content.parent().find('.slimScrollBar').css('top',0);
+
     switch (jsVal){
       case "Feeds":
         self.feedsService.init();
@@ -99,10 +103,11 @@ Swarm.Client.prototype = {
 
   invokeCustomization: function () {
     var self = this;
-    self.content.enscroll({
-      showOnHover: true,
-      verticalTrackClass: 'track3',
-      verticalHandleClass: 'handle3'
+    self.content.slimScroll({
+      height: '480px',
+      width: '330px'
+    }).bind('slimscroll', function (e, pos) {
+      console.log('At position ' + pos);
     });
   },
 
