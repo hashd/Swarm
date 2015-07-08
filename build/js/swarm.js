@@ -458,7 +458,7 @@ Swarm.Feeds.prototype = {
   		},
   		success : function(data){
         Swarm.utils.buildFeedInfo(data);
-        $('#content').append('<div><button class="mui-z3 mui-btn mui-btn-accent mui-btn-floating mui-btn-floating-mini post-btn"><i class="material-icons">add</i></button></div>');
+        $('#content').append('<div><button class="mui-z3 mui-btn mui-btn-floating mui-btn-floating-mini post-btn"><i class="material-icons">add</i></button></div>');
   			//console.log(data);
   		},
   		error : function(){
