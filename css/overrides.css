@@ -84,6 +84,15 @@
   float: none;
 }
 
+.header .mui-form-group {
+  padding: 0;
+  margin: 0;
+}
+
+.header label {
+  top: -4px;
+}
+
 .header button.mui-btn {
   margin: 0;
   padding-right: 4px;

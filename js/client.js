@@ -92,6 +92,10 @@ Swarm.Client.prototype = {
         pageTitle.html('Notifications');
         self.notificationsService.init();
         break;
+      case "Search":
+        pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label>Search</label></div>');
+        pageTitle.find('input').focus();
+        break;
       default:
         console.log('Unregistered service: ' + jsVal);
         break;
