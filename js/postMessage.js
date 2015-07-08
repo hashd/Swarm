@@ -18,11 +18,16 @@ Postmessage.prototype = {
 		//alert(body_message);
 		jQuery.ajax({
   		type :"POST",
+      beforeSend: function (request)
+      {
+        request.setRequestHeader("Authorization", "Bearer "+yammer.getAccessToken());
+      },
   		url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
       	data:{
         	"group_id":groupId,
         	"body":body_message
       	},
+
   		dataType: 'json',
   		xhrFields: {
   			withCredentials: false
