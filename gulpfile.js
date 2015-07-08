@@ -11,10 +11,12 @@ var options = {
 }
 
 gulp.task('build:src', function () {
-   gulp.src(paths['swarm:src'])
-      .pipe(concat('swarm.js'))
-      .pipe(uglify())
-      .pipe(gulp.dest('build/js'))
+  gulp.src(paths['swarm:src'])
+    .pipe(concat('swarm.js'))
+    .pipe(gulp.dest('build/js'))
+    .pipe(uglify())
+    .pipe(concat('swarm.min.js'))
+    .pipe(gulp.dest('build/js'))
 });
 
 gulp.task('watch:src', function () {

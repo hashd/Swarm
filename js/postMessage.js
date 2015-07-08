@@ -1,8 +1,8 @@
-Swarm.Postmessage = function (){
+Swarm.PostMessage = function (){
   var self = this;
 };
 
-Swarm.Postmessage.prototype = {
+Swarm.PostMessage.prototype = {
   init: function(){
   	var self = this;
   	self.postMessageToGroup();

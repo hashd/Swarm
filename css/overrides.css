@@ -77,15 +77,20 @@
 
 .header .pane {
   background-color: #fafaff;
-  color: #1976D2;
+  color: #536DFE;
   font-weight: bold;
   display: table-cell;
   vertical-align: middle;
   float: none;
 }
 
+.header button.mui-btn {
+  margin: 0;
+  padding-right: 4px;
+}
+
 .current-mugshot img {
-  height: 40px;
+  height: 36px;
   border-radius: 50%;
   cursor: pointer;
   border: 1px solid #536DFE;
@@ -115,7 +120,7 @@
 }
 
 .nav-bar .material-icons.active {
-  color: #1976D2;
+  color: #536DFE;
 }
 
 .material-icons.separator {
