@@ -70,10 +70,17 @@ function loadCurrentUserMugshot() {
 
 function getCurrentNetwork() {
   new Network().getCurrentNetworkInformation(function (data) {
+    data.push({ id: 10001, name: 'Imaginea' });
+    data.push({ id: 10002, name: 'Wavemaker' });
+
+    var select = $('.header .left-pane').html($('<div class="mui-dropdown" />')).find('.mui-dropdown');
+    select.append($('<button class="mui-btn mui-btn-accent mui-btn-raised" data-mui-toggle="dropdown" />').append($('<span class="mui-caret" />')));
+    select.append($('<ul class="mui-dropdown-menu" />'));
     for (var i = 0, length = data.length; i < length; i++) {
+      select.find('.mui-dropdown-menu').append($('<li />').append($('<a />').attr('href', '#').data('networkId', data[i].id).html(data[i].name)));
       if (data[i].is_primary === true) {
-        $('.header .left-pane').html(data[i].name);
-        return false;
+        select.find('.mui-btn').remove();
+        select.prepend($('<button class="mui-btn mui-btn-accent mui-btn-raised" data-mui-toggle="dropdown" />').html(data[i].name).append($('<span class="mui-caret" />')));
       }
     }
   });
