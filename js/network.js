@@ -1,8 +1,8 @@
-function Network(){
+Swarm.Network = function (){
   var self = this;
 };
 
-Network.prototype = {
+Swarm.Network.prototype = {
   getCurrentNetworkInformation: function (cb) {
     var self = this;
     jQuery.ajax({

@@ -1,0 +1,53 @@
+{
+  "name": "Swarm-for-Yammer",
+  "version": "0.0.1",
+  "description": "Yammer plugin for Chrome",
+  "main": "background.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^1.2.0",
+    "gulp-watch": "^4.2.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.pramati.com/leantaas/yammerpluginforchrome.git"
+  },
+  "keywords": [
+    "Swarm",
+    "Yammer",
+    "Plugin",
+    "Chrome",
+    "Pramati",
+    "Imaginea"
+  ],
+  "author": "Team LeanTaaS <leantaas@imaginea.com>",
+  "contributors": [
+    {
+      "name": "Manoj Padala",
+      "email": "manoj.padala@imaginea.com"
+    },
+    {
+      "name": "Krishnam Raju G",
+      "email": "krishnam.g@imaginea.com"
+    },
+    {
+      "name": "Mohanraj T",
+      "email": "mohanraj.t@imaginea.com"
+    },
+    {
+      "name": "Rishav Verma",
+      "email": "risav.v@imaginea.com"
+    },
+    {
+      "name": "Kiran Danduprolu",
+      "email": "kiran.d@imaginea.com"
+    }
+  ],
+  "private": true,
+  "license": "MIT"
+}

@@ -85,8 +85,10 @@
 }
 
 .current-mugshot img {
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
+  border: 1px solid #536DFE;
 }
 
 .nav-bar {
@@ -129,4 +131,16 @@
 #content {
   padding: 0.3em;
   background-color: #f0f0f0;
+}
+
+#content .post-btn {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 12px;
+  line-height: 4px;
+}
+
+.post-btn i {
+  font-size: 28px;
 }

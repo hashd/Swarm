@@ -1,7 +1,8 @@
-function Search(){
+Swarm.Search = function (){
   var self = this;
 };
-Search.prototype = {
+
+Swarm.Search.prototype = {
   init: function(query){
   	var self = this;
     if(query.length > 0){
@@ -9,7 +10,7 @@ Search.prototype = {
       container.empty();
       self.getSearchQueryResults(query);
     }else{
-      var feeds = new Feeds();
+      var feeds = new Swarm.Feeds();
       feeds.init();
     }
   },
@@ -28,7 +29,7 @@ Search.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-          utils.buildFeedInfo(data.messages);
+          Swarm.utils.buildFeedInfo(data.messages);
   		},
   		error : function(){
   			alert("error");

@@ -1,4 +1,4 @@
-var utils = {
+Swarm.utils = {
 
 	showLoadingIcon: function(){
 		$("#loadingIcon").show();
@@ -74,7 +74,7 @@ showSearchResults:function(data){
     str.push('<div>Topics '+data.count.topics+'</div>');
 
     //messages
-    str.push('<div>'+utils.buildFeedInfo(data.messages)+'</div>');
+    str.push('<div>'+Swarm.utils.buildFeedInfo(data.messages)+'</div>');
     //users
 
     str.push('</div>');

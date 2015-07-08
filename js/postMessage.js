@@ -1,7 +1,8 @@
-function Postmessage(){
+Swarm.Postmessage = function (){
   var self = this;
 };
-Postmessage.prototype = {
+
+Swarm.Postmessage.prototype = {
   init: function(){
   	var self = this;
   	self.postMessageToGroup();
@@ -33,7 +34,7 @@ Postmessage.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-        	
+
   		},
   		error : function(){
   			alert("error");
@@ -69,7 +70,7 @@ Postmessage.prototype = {
 				str.push('<option value='+'"'+val.id+'"'+'>'+val.full_name+'</option>')	;
 			});
 			str.push('</select>');
-      
+
       str.push("</div>");
       str.push("</div>");
 			//str.push('<br/>');

@@ -1,7 +1,8 @@
-function Profile(){
+Swarm.Profile = function (){
   var self = this;
 };
-Profile.prototype = {
+
+Swarm.Profile.prototype = {
   init: function(userId){
   	var self = this;
   	self.getProfileInformation(userId);
@@ -19,7 +20,7 @@ Profile.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-        	utils.showProfile(data);
+        	Swarm.utils.showProfile(data);
   			//console.log(data);
   		},
   		error : function(){
@@ -43,7 +44,7 @@ Profile.prototype = {
         if (cb) {
           cb(data);
         } else {
-          utils.showProfile(data);
+          Swarm.utils.showProfile(data);
         }
         //console.log(data);
       },

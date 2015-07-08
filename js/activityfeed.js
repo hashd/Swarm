@@ -1,8 +1,8 @@
-function Activityfeed(){
+Swarm.ActivityFeed = function (){
   var self = this;
 };
 
-Activityfeed.prototype = {
+Swarm.ActivityFeed.prototype = {
   init: function(){
   	var self = this;
   	self.displayActivityFeed();
@@ -59,21 +59,21 @@ Activityfeed.prototype = {
         		item_name = (referencesArrObj.length > 0) ? referencesArrObj[0].full_name : "";
         		item_url = (referencesArrObj.length > 0) ? referencesArrObj[0].mugshot_url : "";
         		userName = item_name;
-    		} 
+    		}
     		else if ((firstIndex=temp.indexOf('group:')) != -1) {
     			groupId = temp.substring(firstIndex+6, lastIndex);
     			var referencesArrObj = $.grep(references, function(e){ return e.id == groupId; });
         		item_name = (referencesArrObj.length > 0) ? referencesArrObj[0].full_name : "";
-    		} 
+    		}
     		else if ((firstIndex=temp.indexOf('page:')) != -1) {
     			pageId = temp.substring(firstIndex+5, lastIndex);
     			var ObjectsArr = $.grep(references, function(e){ return e.id == pageId; });
-    			item_name = (ObjectsArr.length > 0) ? ObjectsArr[0].full_name : "";	
+    			item_name = (ObjectsArr.length > 0) ? ObjectsArr[0].full_name : "";
     		}
     		else if ((firstIndex=temp.indexOf('uploaded_file:')) != -1) {
     			pageId = temp.substring(firstIndex+14, lastIndex);
     			var ObjectsArr = $.grep(references, function(e){ return e.id == pageId; });
-    			item_name = (ObjectsArr.length > 0) ? ObjectsArr[0].full_name : "";	
+    			item_name = (ObjectsArr.length > 0) ? ObjectsArr[0].full_name : "";
     		}
     		else {
     			item_name = temp;
@@ -93,7 +93,7 @@ Activityfeed.prototype = {
      	else {
         	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
      	}
-     	
+
      	str.push("<div class='msg_main mui-panel' data-msg-id=''>");
      	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+userId+"' href='javascript:{}'><img src='"+item_url+"'/></a></div>");
      	str.push("<div class='msg_details_main'>");
@@ -108,11 +108,11 @@ Activityfeed.prototype = {
      	str.push("</div>");
  	});
 	container.find('div.feed_main').append(str.join(''));
-	
+
 	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     	var target = $(this),
     	userId = target.data("userid"),
-    	profileObj = new Profile();
+    	profileObj = new Swarm.Profile();
     	$(window).off("scroll");
     	profileObj.init(userId);
 	});

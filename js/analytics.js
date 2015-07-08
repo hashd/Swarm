@@ -1,11 +1,12 @@
-function Analytics(){
+Swarm.Analytics = function (){
   var self = this;
 };
-Analytics.prototype = {
+
+Swarm.Analytics.prototype = {
 	init: function(){
 		var self = this;
 		$(window).off('scroll');
-		// utils.showLoadingIcon();
+		// Swarm.utils.showLoadingIcon();
 	    jQuery.ajax({
 			type :"GET",
 			url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",
@@ -14,12 +15,12 @@ Analytics.prototype = {
 				withCredentials: false
 			},
 			success : function(data){
-				
+
 
 				$("#content").html('<div id="donut_chart" class="msg_main" style="width:340px;height:250px;padding-top:10px"></div>');
-				var groupData = self.generateGroupData(data) 
+				var groupData = self.generateGroupData(data)
 				self.drawChart(groupData);
-				//utils.hideLoadingIcon();
+				//Swarm.utils.hideLoadingIcon();
 				$('div.uv-chart-div').off('click');
 				$('div.uv-chart-div').on('click', 'g.uv-arc-groups', function(e){
 					//alert(groupData[$(this).index()].id);
@@ -46,7 +47,7 @@ Analytics.prototype = {
   			},
   			success : function(data){
   				$('#content').find('div.feed_main').remove();
-        		utils.buildFeedInfo(data);
+        		Swarm.utils.buildFeedInfo(data);
   				//console.log(data);
   			},
   			error : function(){
@@ -54,7 +55,7 @@ Analytics.prototype = {
   			}
   		});
 	},
-	
+
 
 	generateGroupData: function(data){
 		var result = [];
@@ -63,7 +64,7 @@ Analytics.prototype = {
 				result.push({name: val.full_name, value: (21 - (i*2)), id: val.id});
 			}
 		});
-		return result;	
+		return result;
 	},
 	generateGroupChart : function(data, result){
 			var self = this;
@@ -83,7 +84,7 @@ Analytics.prototype = {
 	},
 
 	constructGroupData: function(data, index, cb){
-		
+
 		var groupId = data.group_memberships[index].id;
 		var groupName = data.group_memberships[index].full_name;
 		jQuery.ajax({
@@ -94,7 +95,7 @@ Analytics.prototype = {
 				withCredentials: false
 			},
 			success : function(data){
-				cb(data);				
+				cb(data);
 			},
 			error : function(){
 				alert("error");
@@ -140,20 +141,20 @@ Analytics.prototype = {
 		},
 
 		axis : {
-			fontfamily : 'PT Sans'
+			fontfamily : 'Arial'
 		},
 
 		legend : {
 			position: 'right',
-			fontfamily : 'PT Sans'
+			fontfamily : 'Arial'
 		},
 
 		caption : {
-			fontfamily: 'PT Sans'
+			fontfamily: 'Arial'
 		},
 
 		subCaption : {
-			fontfamily : 'PT Sans'
+			fontfamily : 'Arial'
 		}
 	 };
 
@@ -167,5 +168,5 @@ Analytics.prototype = {
 	github_lang_config.meta.position = '#donut_chart';
 	uv.chart('Pie', github_lang_data, github_lang_config);
 
-	}	
+	}
 }

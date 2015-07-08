@@ -1,13 +1,14 @@
-function Messages(){
+Swarm.Messages = function (){
   var self = this;
 };
-Messages.prototype = {
+
+Swarm.Messages.prototype = {
   init: function(){
   	var self = this;
   	self.getReceivedMessages();
     self.attachWindowScrollEvent();
   },
-  
+
   getReceivedMessages: function(){
       var self = this;
       $("#content").empty();
@@ -23,7 +24,7 @@ Messages.prototype = {
     		},
     		success : function(data){
             chrome.storage.local.set({'lastMsgId': data.messages[0].id});
-          	utils.buildFeedInfo(data);
+          	Swarm.utils.buildFeedInfo(data);
     			//console.log(data);
     		},
     		error : function(){
@@ -31,16 +32,16 @@ Messages.prototype = {
     		}
   	  });
   },
-  
+
   attachWindowScrollEvent: function(){
     var self = this;
     $(window).off('scroll').on('scroll', function(e){
         if($('body').height() != ($(window).height() + window.pageYOffset)){
           return false;
         }
-        
+
         var lastMsgId = $('div.msg_main:last').attr('data-msg-id');
-        
+
         jQuery.ajax({
             type :"GET",
             url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
@@ -53,8 +54,8 @@ Messages.prototype = {
               withCredentials: false
             },
             success : function(data){
-                utils.buildFeedInfo(data);
-              
+                Swarm.utils.buildFeedInfo(data);
+
             },
             error : function(){
               alert("error");

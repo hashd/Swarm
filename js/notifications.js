@@ -1,8 +1,8 @@
-function Notifications(){
+Swarm.Notifications = function (){
   var self = this;
 };
 
-Notifications.prototype = {
+Swarm.Notifications.prototype = {
   init: function(){
   	var self = this;
   	self.displayNotifications();
@@ -46,7 +46,7 @@ Notifications.prototype = {
     var str = [];
     $.each(items, function(ind, item){
 
-    	var msg_body = item.message;       
+    	var msg_body = item.message;
     	var firstIndex,lastIndex,userId,item_name, item_url,groupId,userName;
     	var msgArray = [];
     	$.each(msg_body.split(' '), function(ind, temp) {
@@ -58,18 +58,18 @@ Notifications.prototype = {
         		item_name = (referencesArrObj.length > 0) ? referencesArrObj[0].full_name : userArrObj[0].full_name;
         		item_url = (referencesArrObj.length > 0) ? referencesArrObj[0].mugshot_url : userArrObj[0].full_name;
         		userName = item_name;
-    		} 
+    		}
     		else if ((firstIndex=temp.indexOf('group:')) != -1) {
     			groupId = temp.substring(firstIndex+6, lastIndex);
     			var referencesArrObj = $.grep(references, function(e){ return e.id == groupId; });
         		item_name = (referencesArrObj.length > 0) ? referencesArrObj[0].full_name : "";
-    		} 
+    		}
     		else {
     			item_name = temp;
     		}
     		msgArray.push(item_name);
     	});
-      if(typeof userName === 'undefined') { 
+      if(typeof userName === 'undefined') {
         userId = item.objects[0].id;
         var userArrObj = $.grep(users, function(e){ return e.id == userId; }),
             item_name = (userArrObj.length > 0) ? userArrObj[0].full_name : "";
@@ -89,7 +89,7 @@ Notifications.prototype = {
      	else {
         	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
      	}
-     	
+
      	str.push("<div class='msg_main mui-panel' data-msg-id=''>");
      	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+userId+"' href='javascript:{}'><img src='"+item_url+"'/></a></div>");
      	str.push("<div class='msg_details_main'>");
@@ -104,11 +104,11 @@ Notifications.prototype = {
      	str.push("</div>");
  	});
 	container.find('div.feed_main').append(str.join(''));
-	
+
 	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     	var target = $(this),
     	userId = target.data("userid"),
-    	profileObj = new Profile();
+    	profileObj = new Swarm.Profile();
     	$(window).off("scroll");
     	profileObj.init(userId);
 	 });

@@ -1,8 +1,8 @@
 # Yammer Plugin for chrome
 
-
-
 This is a chrome browser plugin, it will fetch your yammer message feed and you can post messages from the plugin.
+
+### Developer notes
 
 ### How do I install this?
 
@@ -24,4 +24,4 @@ Now your yammer feed plugin is installed.
 
 ### Developer information
 
-Manoj, Krishnam, Mohan, Risav.
+Manoj, Krishnam, Mohan, Risav, Kiran.

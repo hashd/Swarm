@@ -1,7 +1,8 @@
-function Feeds(){
+Swarm.Feeds = function (){
   var self = this;
 };
-Feeds.prototype = {
+
+Swarm.Feeds.prototype = {
   init: function(){
     var self = this;
     self.getFeeds();
@@ -21,7 +22,8 @@ Feeds.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-        utils.buildFeedInfo(data);
+        Swarm.utils.buildFeedInfo(data);
+        $('#content').append('<div><button class="mui-z3 mui-btn mui-btn-accent mui-btn-floating mui-btn-floating-mini post-btn"><i class="material-icons">add</i></button></div>');
   			//console.log(data);
   		},
   		error : function(){
@@ -35,9 +37,9 @@ Feeds.prototype = {
         if($('body').height() != ($(window).height() + window.pageYOffset)){
           return false;
         }
-        
+
         var lastMsgId = $('div.msg_main:last').attr('data-msg-id');
-        
+
         jQuery.ajax({
             type :"GET",
             url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
@@ -50,8 +52,8 @@ Feeds.prototype = {
               withCredentials: false
             },
             success : function(data){
-                utils.buildFeedInfo(data);
-              
+                Swarm.utils.buildFeedInfo(data);
+
             },
             error : function(){
               alert("error");
@@ -59,5 +61,5 @@ Feeds.prototype = {
         });
     });
   }
-  
+
 }
