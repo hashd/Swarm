@@ -10,7 +10,7 @@
 }
 .msg_head{
   overflow: auto;
-  padding: 0.5em;
+  padding: 0.3em;
 }
 .msg_sender_pic{
   display: table-cell;
@@ -18,7 +18,6 @@
   vertical-align: top;
 }
 .msg_sender_pic img{
-  border-radius: 50%;
   padding: 6px;
   width: 48px;
 }
@@ -38,7 +37,7 @@
   font-size: 0.8em;
 }
 .msg_body{
-  padding: 0.5em;
+  padding: 0.5em 0.3em;
   font-size: 0.9em;
   line-height: 1.1em;
 }

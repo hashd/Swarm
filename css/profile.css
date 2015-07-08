@@ -1,26 +1,29 @@
+div.profileInfo_main {
+  padding: 8px;
+}
 .profileInfo_main .profile_pic{
   text-align: center;
 }
 .profileInfo_main .profile_pic img{
   border-radius: 50px;
-  border: 2px solid #5186a8;
+  border: 2px solid #0072C6;
 }
 .profileInfo_main .full_name{
   font-size: 1.5em;
   text-align: center;
-  color: #6C6C6C;
-  font-weight: bold;
+  color: #0072C6;
+  font-weight: normal;
   margin: 0.2em 0;
 }
 .profileInfo_main .job_title{
   text-align: center;
-  font-size: 1.2em;
-  color: #9E9D9D;
-  font-weight: bold;
+  font-size: 1em;
+  color: #666;
+  font-weight: normal;
   margin: 0.2em 0;
 }
 .profileInfo_main .profileDataDiv{
-  margin: 0.6em 0;
+  margin: 0.3em 0;
   display: table;
   width: 100%;
 }
@@ -34,37 +37,59 @@
 .profileInfo_main .infoTitle{
   text-decoration: underline;
   font-size: 1.4em;
-  font-weight: bold;
+  font-weight: normal;
   color: #6C6C6C;
 }
 .profileLabeldiv{
   margin: 0 0.5em 0 0;
-  font-weight: bold;
-  font-size: 1.1em;
-  color: #6C6C6C;
+  font-weight: normal;
+  font-size: 0.9em;
+  color: #444;
   display: table-cell;
-  width: 50%;
+  width: 30%;
 }
 .profileValuediv{
   margin: 0 0 0 0.5em;
-  font-weight: bold;
-  font-size: 1.1em;
-  color: #969595;
+  font-weight: normal;
+  font-size: 0.9em;
+  color: #777;
   display: table-cell;
-  width: 50%;
+  text-overflow:ellipsis;
+  width: 60%;
+}
+.profileBreakDiv {
+  width:10%;
+  display: table-cell;
 }
 .stats{
-  text-align:center;
+  text-align: center;
+  margin: 1em;
+  margin-top: 0.5em;
+  padding: 8px;
+}
+.stats img {
+  vertical-align: top;
 }
 .statsVal{
   position: relative;
   top: -3px;
   font-size: 1em;
-  font-weight: bold;
-  color: #6C6C6C;
+  font-weight: normal;
+  color: #666;
   margin-left: 2px;
 }
 .phoneType, .phoneNumber{
   display : inline;
   text-transform : capitalize;
+}
+.profile-summary {
+  padding: 6px;
+}
+.summary {
+  border-bottom: 1px solid #0072C6;
+  margin-bottom: 12px !important;
+}
+.summary div {
+  color: #0072C6;
+  text-transform: uppercase;
 }
