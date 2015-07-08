@@ -36,6 +36,7 @@ Activityfeed.prototype = {
   	var items = data.items;
   	//var users = data.objects.user;
   	var references = data.references;
+  	var objects = data.objects;
   	// do this only for the first set of messages
     if(container.find('div.feed_main').length == 0) {
        	container.append('<div class="feed_main"></div>');
@@ -64,6 +65,16 @@ Activityfeed.prototype = {
     			var referencesArrObj = $.grep(references, function(e){ return e.id == groupId; });
         		item_name = (referencesArrObj.length > 0) ? referencesArrObj[0].full_name : "";
     		} 
+    		else if ((firstIndex=temp.indexOf('page:')) != -1) {
+    			pageId = temp.substring(firstIndex+5, lastIndex);
+    			var ObjectsArr = $.grep(references, function(e){ return e.id == pageId; });
+    			item_name = (ObjectsArr.length > 0) ? ObjectsArr[0].full_name : "";	
+    		}
+    		else if ((firstIndex=temp.indexOf('uploaded_file:')) != -1) {
+    			pageId = temp.substring(firstIndex+14, lastIndex);
+    			var ObjectsArr = $.grep(references, function(e){ return e.id == pageId; });
+    			item_name = (ObjectsArr.length > 0) ? ObjectsArr[0].full_name : "";	
+    		}
     		else {
     			item_name = temp;
     		}
