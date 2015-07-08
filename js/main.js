@@ -55,6 +55,12 @@ function loadJSObj(jsVal){
     case "Postmessage":
           jsObj = new Postmessage();
           break;
+    case "Activityfeed":
+          jsObj = new Activityfeed();
+          break;
+    case "Notifications":
+          jsObj = new Notifications();
+          break;
   }
   return jsObj;
 }

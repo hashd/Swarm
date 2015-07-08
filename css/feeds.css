@@ -45,4 +45,5 @@
 .senderLinkAnc{
   text-decoration: initial;
   color: #386cbb;
+  text-transform: capitalize;
 }
