@@ -43,15 +43,16 @@ Swarm.Client.prototype = {
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
         self.makeActiveTab(jsValCap, title);
 
-        if (!isFirst) {
-          chrome.storage.local.set({'newImagePath': '/img/yammerlogo_notifier.png'});
-          // create alarm for polling new messages every 1 minutes
-          chrome.alarms.create('checkNewTasks', {
+        
+        //chrome.storage.local.set({'newImagePath': '/img/yammerlogo_notifier.png'});
+        // create alarm for polling new messages every 1 minutes
+        chrome.alarms.create('checkNewTasks', {
             when: 1000,
             periodInMinutes: 1
-          });
-        }
-        chrome.browserAction.setIcon({ path: "/img/yammerlogo.png" });
+        });
+        
+        chrome.browserAction.setBadgeText({text: ""});
+        
         target.parent().siblings().find('i').removeClass('active');
         target.addClass('active');
     });
