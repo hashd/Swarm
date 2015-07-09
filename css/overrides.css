@@ -45,6 +45,7 @@
 
 .mui-panel {
   padding: 0;
+  margin-bottom: 1em;
 }
 
 .plugin-container {
@@ -148,7 +149,7 @@
 
 #loading-icon {
   padding: 10em;
-  margin-top: 6em;
+  margin-top: 5em;
 }
 
 #content {
@@ -169,4 +170,8 @@
 
 .post-btn i {
   font-size: 28px;
+}
+
+.post_form {
+  padding: 1em;
 }

@@ -98,7 +98,7 @@ Swarm.ActivityFeed.prototype = {
         	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
      	}
 
-     	str.push("<div class='msg_main mui-panel' data-msg-id=''>");
+     	str.push("<div class='msg_main mui-panel mui-z2' data-msg-id=''>");
      	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+userId+"' href='javascript:{}'><img src='"+item_url+"'/></a></div>");
      	str.push("<div class='msg_details_main'>");
      	str.push("<div class='msg_head'>");
@@ -369,7 +369,7 @@ Swarm.Client.prototype = {
       pageTitle = self.header.find('.page-title').html(title);
 
     // Update slimscrollbar position for content change
-    self.content.slimScroll();
+    self.content.slimScroll().removeData('events');
     self.content.parent().find('.slimScrollBar').css('top',0);
 
     switch (jsVal){
@@ -795,7 +795,7 @@ Swarm.Notifications.prototype = {
         	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
      	}
 
-     	str.push("<div class='msg_main mui-panel' data-msg-id=''>");
+     	str.push("<div class='msg_main mui-panel mui-z2' data-msg-id=''>");
      	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+userId+"' href='javascript:{}'><img src='"+item_url+"'/></a></div>");
      	str.push("<div class='msg_details_main'>");
      	str.push("<div class='msg_head'>");
@@ -879,8 +879,8 @@ Swarm.PostMessage.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-        	str = [];
-        	str.push("<div class='post_form'>");
+          str = [];
+        	str.push("<div class='post_form mui-panel mui-z2'>");
         	str.push("<form>");
           str.push('<div class="mui-form-group">');
           str.push('<label>Groups</label>');
@@ -888,26 +888,22 @@ Swarm.PostMessage.prototype = {
           str.push('<div class="mui-select">');
         	str.push('<select name="groups" id="slt_groups">');
 
-  			$.each(data.group_memberships, function(i,val){
-				str.push('<option value='+'"'+val.id+'"'+'>'+val.full_name+'</option>')	;
-			});
-			str.push('</select>');
-
-      str.push("</div>");
-      str.push("</div>");
-			//str.push('<br/>');
-			//str.push('<label style="font-size:12px">Message Body:</label>');
-			//str.push('<br/>');
-      str.push('<div class="mui-form-group">');
-			str.push('<textarea name="message_body" class="mui-form-control" id="message_body" rows="10" cols="37"/>');
-      str.push('<label class="mui-form-floating-label">Write Message Here</label>');
-			str.push("</div>");
-      //str.push('<br/>');
-			str.push('<input class="post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat" type="submit" ></input>');
-			str.push("</form>");
-			str.push("</div>");
-			container.empty().html(str.join(''));
-			self.postMessage();
+          $.each(data.group_memberships, function(i,val){
+				    str.push('<option value='+'"'+val.id+'"'+'>'+val.full_name+'</option>')	;
+          });
+          str.push('</select>');
+          str.push("</div>");
+          str.push("</div>");
+          str.push('<div class="mui-form-group">');
+          str.push('<textarea name="message_body" class="mui-form-control" id="message_body" rows="10" cols="37"/>');
+          str.push('<label class="mui-form-floating-label">Write Message Here</label>');
+          str.push("</div>");
+          str.push('<input class="post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat" type="submit" ></input>');
+          str.push("</form>");
+          str.push("</div>");
+          container.empty().html(str.join(''));
+          container.find('textarea[name="message_body"]').focus();
+          self.postMessage();
   		},
   		error : function(){
   			alert("error");
@@ -1044,6 +1040,7 @@ Swarm.utils = {
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
         $.each(msgs, function(ind, msg){
+          console.log(msg);
         	var senderArrObj = $.grep(references, function(e){ return e.id == msg.sender_id; }),
         	senderName = (senderArrObj.length > 0) ? senderArrObj[0].full_name : "",
         	senderPicURL = (senderArrObj.length > 0) ? senderArrObj[0].mugshot_url : "",
@@ -1060,7 +1057,7 @@ Swarm.utils = {
      else {
          msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
      }
-     str.push("<div class='msg_main mui-panel' data-msg-id='"+msg.id+"'>");
+     str.push("<div class='msg_main mui-panel mui-z2' data-msg-id='"+msg.id+"'>");
      str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+senderId+"' href='javascript:{}'><img src='"+senderPicURL+"'/></a></div>");
      str.push("<div class='msg_details_main'>");
      str.push("<div class='msg_head'>");
@@ -1068,8 +1065,12 @@ Swarm.utils = {
      str.push("<div class='msg_date_time'>"+msgCreatedDate+"</div>");
      str.push("</div>");
      str.push("<div class='msg_body'>");
-     str.push(msg.body.plain);
+     str.push(msg.body.rich || msg.body.plain);
      str.push("</div>");
+     str.push("<div class='msg_info'>");
+     str.push("<div class='msg_like_number'><i class='material-icons'>thumb_up</i><span>" + msg.liked_by.count + "</span></div>");
+     str.push("<div class='msg_replies_number'><i class='material-icons'>comment</i><span>" + 0 + "</span></div>");
+     str.push("</div>")
      str.push("</div>");
      str.push("</div>");
  });

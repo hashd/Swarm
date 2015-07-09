@@ -70,7 +70,7 @@ Swarm.Client.prototype = {
       pageTitle = self.header.find('.page-title').html(title);
 
     // Update slimscrollbar position for content change
-    self.content.slimScroll();
+    self.content.slimScroll().removeData('events');
     self.content.parent().find('.slimScrollBar').css('top',0);
 
     switch (jsVal){

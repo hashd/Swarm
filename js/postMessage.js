@@ -58,7 +58,7 @@ Swarm.PostMessage.prototype = {
   		},
   		success : function(data){
           str = [];
-        	str.push("<div class='post_form'>");
+        	str.push("<div class='post_form mui-panel mui-z2'>");
         	str.push("<form>");
           str.push('<div class="mui-form-group">');
           str.push('<label>Groups</label>');
@@ -80,6 +80,7 @@ Swarm.PostMessage.prototype = {
           str.push("</form>");
           str.push("</div>");
           container.empty().html(str.join(''));
+          container.find('textarea[name="message_body"]').focus();
           self.postMessage();
   		},
   		error : function(){

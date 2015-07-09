@@ -97,7 +97,7 @@ Swarm.ActivityFeed.prototype = {
         	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
      	}
 
-     	str.push("<div class='msg_main mui-panel' data-msg-id=''>");
+     	str.push("<div class='msg_main mui-panel mui-z2' data-msg-id=''>");
      	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+userId+"' href='javascript:{}'><img src='"+item_url+"'/></a></div>");
      	str.push("<div class='msg_details_main'>");
      	str.push("<div class='msg_head'>");

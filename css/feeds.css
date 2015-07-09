@@ -37,7 +37,7 @@
   font-size: 0.8em;
 }
 .msg_body{
-  padding: 0.5em 0.3em;
+  padding: 0.5em 0.3em 1.2em 0.3em;
   font-size: 0.9em;
   line-height: 1.1em;
 }
@@ -45,4 +45,31 @@
   text-decoration: initial;
   color: #386cbb;
   text-transform: capitalize;
+}
+.msg_info {
+  background-color: #f4f4f4;
+  margin-left: -18%;
+}
+.msg_info > div {
+  display: inline-block;
+  width: 50%;
+  cursor: pointer;
+}
+.msg_info i {
+  font-size: 1.1em;
+  margin: 0 0.5em;
+  color: #666;
+  padding: 6px 0 2px 0;
+  cursor: pointer;
+}
+.msg_info i:hover {
+  color: #0072C6;
+}
+.msg_info > div span {
+  margin-top: -8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.msg_info > div:first-child {
+  padding-left: 15%;
 }

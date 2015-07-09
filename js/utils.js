@@ -22,6 +22,7 @@ Swarm.utils = {
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
         $.each(msgs, function(ind, msg){
+          console.log(msg);
         	var senderArrObj = $.grep(references, function(e){ return e.id == msg.sender_id; }),
         	senderName = (senderArrObj.length > 0) ? senderArrObj[0].full_name : "",
         	senderPicURL = (senderArrObj.length > 0) ? senderArrObj[0].mugshot_url : "",
@@ -38,7 +39,7 @@ Swarm.utils = {
      else {
          msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
      }
-     str.push("<div class='msg_main mui-panel' data-msg-id='"+msg.id+"'>");
+     str.push("<div class='msg_main mui-panel mui-z2' data-msg-id='"+msg.id+"'>");
      str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+senderId+"' href='javascript:{}'><img src='"+senderPicURL+"'/></a></div>");
      str.push("<div class='msg_details_main'>");
      str.push("<div class='msg_head'>");
@@ -46,8 +47,12 @@ Swarm.utils = {
      str.push("<div class='msg_date_time'>"+msgCreatedDate+"</div>");
      str.push("</div>");
      str.push("<div class='msg_body'>");
-     str.push(msg.body.plain);
+     str.push(msg.body.rich || msg.body.plain);
      str.push("</div>");
+     str.push("<div class='msg_info'>");
+     str.push("<div class='msg_like_number'><i class='material-icons'>thumb_up</i><span>" + msg.liked_by.count + "</span></div>");
+     str.push("<div class='msg_replies_number'><i class='material-icons'>comment</i><span>" + 0 + "</span></div>");
+     str.push("</div>")
      str.push("</div>");
      str.push("</div>");
  });
