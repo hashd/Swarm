@@ -22,7 +22,6 @@ Swarm.utils = {
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
         $.each(msgs, function(ind, msg){
-          console.log(msg);
         	var senderArrObj = $.grep(references, function(e){ return e.id == msg.sender_id; }),
         	senderName = (senderArrObj.length > 0) ? senderArrObj[0].full_name : "",
         	senderPicURL = (senderArrObj.length > 0) ? senderArrObj[0].mugshot_url : "",
