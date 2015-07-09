@@ -17,14 +17,12 @@ chrome.alarms.onAlarm.addListener(function () {
     		},
     		success : function(data) {
             	if(data.messages.length != 0) {
-            		var newMessageNotifierImgPath ;
-            		chrome.storage.local.get(function(result){
-						newMessageNotifierImgPath = result.newImagePath;
-						// set the notifier icon
-						chrome.browserAction.setIcon({
+					// set the notifier icon
+					/*chrome.browserAction.setIcon({
             				path: newMessageNotifierImgPath
-        				});
-					});
+        			});*/
+                    var badgeText = data.messages.length.toString();;
+                    chrome.browserAction.setBadgeText({text: badgeText});
             	}
             	else {
             		//console.log("empty messages");
