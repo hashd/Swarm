@@ -1,7 +1,7 @@
 Swarm.utils = {
 
 	showLoadingIcon: function(){
-		$("#content").html('<div id="loading-icon"><div class="la-ball-running-dots"><div></div><div></div><div></div><div></div><div></div></div></div>');
+		$("#content").html('<div id="loading-icon"><div class="la-pacman la-lg"><div></div><div></div><div></div><div></div><div></div></div></div>');
 	},
 
 	hideLoadingIcon: function(){

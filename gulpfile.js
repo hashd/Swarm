@@ -22,3 +22,5 @@ gulp.task('build:src', function () {
 gulp.task('watch:src', function () {
   gulp.watch(paths['swarm:src'], ['build:src']);
 });
+
+gulp.task('default', ['build:src', 'watch:src']);
