@@ -89,7 +89,7 @@ div.profileInfo_main {
   border-bottom: 1px solid #0072C6;
   margin-bottom: 12px !important;
 }
-.summary div {
+.summary div.profileLabeldiv{
   color: #0072C6;
   text-transform: uppercase;
 }
