@@ -38,33 +38,36 @@ Swarm.Messages.prototype = {
 
   attachWindowScrollEvent: function(){
     var self = this;
-    $(window).off('scroll').on('scroll', function(e){
-        if($('body').height() != ($(window).height() + window.pageYOffset)){
-          return false;
-        }
+    var content = $("#content");
+    content.slimScroll().bind('slimscroll', function (e, pos) {
 
-        var lastMsgId = $('div.msg_main:last').attr('data-msg-id');
+        if(pos == 'bottom') {
+          if($('body').height() != ($(window).height() + window.pageYOffset)){
+            return false;
+          }
 
-        jQuery.ajax({
-            type :"GET",
-            url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
-            data:{
-              "limit":7,
-              "older_than": lastMsgId
-            },
-            dataType: 'json',
-            xhrFields: {
-              withCredentials: false
-            },
-            success : function(data){
-                Swarm.utils.buildFeedInfo(data);
-
-            },
-            error : function(){
-              alert("error");
-            }
-        });
+          var lastMsgId = $('div.msg_main:last').attr('data-msg-id');
+          jQuery.ajax({
+              type :"GET",
+              url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
+              data:{
+                "limit":7,
+                "older_than": lastMsgId
+              },
+              dataType: 'json',
+              xhrFields: {
+                withCredentials: false
+              },
+              success : function(data){
+                  Swarm.utils.buildFeedInfo(data);
+              },
+              error : function(){
+                alert("error");
+              } 
+          });
+       } 
     });
+
   }
 
 }

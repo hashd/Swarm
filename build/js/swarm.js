@@ -310,6 +310,7 @@ Swarm.Client = function () {
   self.searchService = new Swarm.Search();
   self.postMessageService = new Swarm.PostMessage();
   self.notificationsService = new Swarm.Notifications();
+  self.groupsService = new Swarm.Groups();
 
   self.init();
 };
@@ -389,6 +390,9 @@ Swarm.Client.prototype = {
         break;
       case "Notifications":
         self.notificationsService.init();
+        break;
+      case "Groups":
+        self.groupsService.init();
         break;
       case "Search":
         pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label>Search</label></div>');
@@ -478,14 +482,18 @@ Swarm.Feeds.prototype = {
   },
   attachWindowScrollEvent: function(){
     var self = this;
-    $(window).off('scroll').on('scroll', function(e){
+    var content = $("#content");
+    
+    content.slimScroll().unbind('slimscroll').bind('slimscroll', function (e, pos) {
+      //console.log('At position ' + pos);
+      if(pos == 'bottom') {
         if($('body').height() != ($(window).height() + window.pageYOffset)){
           return false;
         }
 
-        var lastMsgId = $('div.msg_main:last').attr('data-msg-id');
+      var lastMsgId = $('div.msg_main:last').attr('data-msg-id');
 
-        jQuery.ajax({
+      jQuery.ajax({
             type :"GET",
             url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
             data:{
@@ -504,11 +512,88 @@ Swarm.Feeds.prototype = {
               alert("error");
             }
         });
+      }
     });
   }
 
 }
 
+Swarm.Groups = function (){
+  var self = this;
+};
+
+Swarm.Groups.prototype = {
+  init: function(){
+  	var self = this;
+  	self.buildGroupMessageFeed();
+  },
+
+  buildGroupMessageFeed : function(){
+  	var self = this;
+  	container = $("#content"),
+  	jQuery.ajax({
+  		type :"GET",
+  		url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",
+      	data:{
+        	"limit":1
+      	},
+  		dataType: 'json',
+  		xhrFields: {
+  			withCredentials: false
+  		},
+  		success : function(data){
+        	str = [];
+          	str.push('<div class="mui-form-group group_list">');
+          	str.push('<label>Groups</label>');
+        	//str.push('<label style="font-size:12px">Groups:</label>');
+          	str.push('<div class="mui-select">');
+        	str.push('<select name="groups" id="slt_groups">');
+
+  			$.each(data.group_memberships, function(i,val){
+				str.push('<option value='+'"'+val.id+'"'+'>'+val.full_name+'</option>')	;
+			});
+			str.push('</select>');
+      		str.push("</div>");
+      		str.push("</div>");
+			container.empty().html(str.join(''));
+			self.displayGroupMessages();
+			$('#slt_groups').trigger('change');
+  		},
+  		error : function(){
+  			alert("error");
+  		}
+  	});
+  },
+
+  displayGroupMessages :function() {
+  	var self = this;
+	$('#slt_groups').change(function() {
+		var content = $("#content");
+		var groupId = $("select#slt_groups").val();
+		
+		jQuery.ajax({
+  		type :"GET",
+      
+  		url : 'https://www.yammer.com/api/v1/messages/in_group/'+groupId+'.json?access_token='+yammer.getAccessToken(),
+      	data:{
+        	"limit":7
+      	},
+  		dataType: 'json',
+  		xhrFields: {
+  			withCredentials: false
+  		},
+  		success : function(data){
+  			content.find('div.feed_main').remove();
+        	Swarm.utils.buildFeedInfo(data);
+  		},
+  		error : function(){
+  			alert("error");
+  		}
+  		});
+
+	});
+  },
+}
 $(document).ready(function() {
   swarmInstance = new Swarm.Client();
 });
@@ -553,33 +638,36 @@ Swarm.Messages.prototype = {
 
   attachWindowScrollEvent: function(){
     var self = this;
-    $(window).off('scroll').on('scroll', function(e){
-        if($('body').height() != ($(window).height() + window.pageYOffset)){
-          return false;
-        }
+    var content = $("#content");
+    content.slimScroll().bind('slimscroll', function (e, pos) {
 
-        var lastMsgId = $('div.msg_main:last').attr('data-msg-id');
+        if(pos == 'bottom') {
+          if($('body').height() != ($(window).height() + window.pageYOffset)){
+            return false;
+          }
 
-        jQuery.ajax({
-            type :"GET",
-            url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
-            data:{
-              "limit":7,
-              "older_than": lastMsgId
-            },
-            dataType: 'json',
-            xhrFields: {
-              withCredentials: false
-            },
-            success : function(data){
-                Swarm.utils.buildFeedInfo(data);
-
-            },
-            error : function(){
-              alert("error");
-            }
-        });
+          var lastMsgId = $('div.msg_main:last').attr('data-msg-id');
+          jQuery.ajax({
+              type :"GET",
+              url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
+              data:{
+                "limit":7,
+                "older_than": lastMsgId
+              },
+              dataType: 'json',
+              xhrFields: {
+                withCredentials: false
+              },
+              success : function(data){
+                  Swarm.utils.buildFeedInfo(data);
+              },
+              error : function(){
+                alert("error");
+              } 
+          });
+       } 
     });
+
   }
 
 }

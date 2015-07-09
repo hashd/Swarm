@@ -11,6 +11,7 @@ Swarm.Client = function () {
   self.searchService = new Swarm.Search();
   self.postMessageService = new Swarm.PostMessage();
   self.notificationsService = new Swarm.Notifications();
+  self.groupsService = new Swarm.Groups();
 
   self.init();
 };
@@ -90,6 +91,9 @@ Swarm.Client.prototype = {
         break;
       case "Notifications":
         self.notificationsService.init();
+        break;
+      case "Groups":
+        self.groupsService.init();
         break;
       case "Search":
         pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label>Search</label></div>');
