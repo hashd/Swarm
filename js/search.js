@@ -16,6 +16,7 @@ Swarm.Search.prototype = {
   },
   getSearchQueryResults : function(query){
   	var self = this;
+    Swarm.utils.showLoadingIcon();
   	jQuery.ajax({
   		type :"GET",
   		url : "https://www.yammer.com/api/v1/search.json?access_token="+yammer.getAccessToken(),
@@ -29,9 +30,11 @@ Swarm.Search.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-          Swarm.utils.buildFeedInfo(data.messages);
+        Swarm.utils.hideLoadingIcon();
+        Swarm.utils.buildFeedInfo(data.messages);
   		},
   		error : function(){
+        Swarm.utils.hideLoadingIcon();
   			alert("error");
   		}
   	});

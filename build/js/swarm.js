@@ -12,6 +12,7 @@ Swarm.ActivityFeed.prototype = {
   displayActivityFeed : function() {
   	var self = this;
   	$("#content").empty();
+    Swarm.utils.showLoadingIcon();
   	jQuery.ajax({
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/streams/activities.json?access_token="+yammer.getAccessToken(),
@@ -23,9 +24,11 @@ Swarm.ActivityFeed.prototype = {
     			withCredentials: false
     		},
     		success : function(data){
-          		self.buildActivityFeed(data);
+          Swarm.utils.hideLoadingIcon();
+      		self.buildActivityFeed(data);
     		},
     		error : function(){
+          Swarm.utils.hideLoadingIcon();
     			alert("error");
     		}
   	  });
@@ -128,7 +131,7 @@ Swarm.Analytics.prototype = {
 	init: function(){
 		var self = this;
 		$(window).off('scroll');
-		// Swarm.utils.showLoadingIcon();
+		Swarm.utils.showLoadingIcon();
 	    jQuery.ajax({
 			type :"GET",
 			url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",
@@ -142,7 +145,7 @@ Swarm.Analytics.prototype = {
 				$("#content").html('<div id="donut_chart" class="msg_main" style="width:340px;height:250px;padding-top:10px"></div>');
 				var groupData = self.generateGroupData(data)
 				self.drawChart(groupData);
-				//Swarm.utils.hideLoadingIcon();
+				Swarm.utils.hideLoadingIcon();
 				$('div.uv-chart-div').off('click');
 				$('div.uv-chart-div').on('click', 'g.uv-arc-groups', function(e){
 					//alert(groupData[$(this).index()].id);
@@ -150,6 +153,7 @@ Swarm.Analytics.prototype = {
 				});
 			},
 			error : function(){
+        Swarm.utils.hideLoadingIcon();
 				alert("error");
 			}
 		});
@@ -444,9 +448,10 @@ Swarm.Feeds.prototype = {
     self.attachWindowScrollEvent();
   },
   getFeeds: function(){
-      var self = this;
-      $("#content").empty();
-      jQuery.ajax({
+    var self = this;
+    $("#content").empty();
+    Swarm.utils.showLoadingIcon();
+    jQuery.ajax({
   		type :"GET",
   		url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
       data:{
@@ -457,6 +462,7 @@ Swarm.Feeds.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
+        Swarm.utils.hideLoadingIcon();
         Swarm.utils.buildFeedInfo(data);
         $('#content').append('<div><button class="mui-z3 mui-btn mui-btn-floating mui-btn-floating-mini post-btn"><i class="material-icons">add</i></button></div>');
   			$('.post-btn').click(function (event){
@@ -465,6 +471,7 @@ Swarm.Feeds.prototype = {
         //console.log(data);
   		},
   		error : function(){
+        Swarm.utils.hideLoadingIcon();
   			alert("Error, Please login to Yammer");
   		}
   	});
@@ -520,6 +527,7 @@ Swarm.Messages.prototype = {
   getReceivedMessages: function(){
       var self = this;
       $("#content").empty();
+      Swarm.utils.showLoadingIcon();
       jQuery.ajax({
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
@@ -531,11 +539,13 @@ Swarm.Messages.prototype = {
     			withCredentials: false
     		},
     		success : function(data){
-            chrome.storage.local.set({'lastMsgId': data.messages[0].id});
-          	Swarm.utils.buildFeedInfo(data);
+          Swarm.utils.hideLoadingIcon();
+          chrome.storage.local.set({'lastMsgId': data.messages[0].id});
+        	Swarm.utils.buildFeedInfo(data);
     			//console.log(data);
     		},
     		error : function(){
+          Swarm.utils.hideLoadingIcon();
     			alert("error");
     		}
   	  });
@@ -615,6 +625,7 @@ Swarm.Notifications.prototype = {
   displayNotifications : function() {
   	var self = this;
   	$("#content").empty();
+    Swarm.utils.showLoadingIcon();
   	jQuery.ajax({
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/streams/notifications.json?access_token="+yammer.getAccessToken(),
@@ -626,9 +637,11 @@ Swarm.Notifications.prototype = {
     			withCredentials: false
     		},
     		success : function(data){
+          Swarm.utils.hideLoadingIcon();
           		self.buildNotificationFeed(data);
     		},
     		error : function(){
+          Swarm.utils.hideLoadingIcon();
     			alert("error");
     		}
   	  });
@@ -826,6 +839,8 @@ Swarm.Profile.prototype = {
   },
   getProfileInformation : function(userId){
   	var self = this;
+    $('#content').empty();
+    Swarm.utils.showLoadingIcon();
   	jQuery.ajax({
   		type :"GET",
   		url : "https://www.yammer.com/api/v1/users/"+userId+".json?access_token="+yammer.getAccessToken(),
@@ -837,10 +852,12 @@ Swarm.Profile.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-        	Swarm.utils.showProfile(data);
+        Swarm.utils.hideLoadingIcon();
+      	Swarm.utils.showProfile(data);
   			//console.log(data);
   		},
   		error : function(){
+        Swarm.utils.hideLoadingIcon();
   			alert("error");
   		}
   	});
@@ -890,6 +907,7 @@ Swarm.Search.prototype = {
   },
   getSearchQueryResults : function(query){
   	var self = this;
+    Swarm.utils.showLoadingIcon();
   	jQuery.ajax({
   		type :"GET",
   		url : "https://www.yammer.com/api/v1/search.json?access_token="+yammer.getAccessToken(),
@@ -903,9 +921,11 @@ Swarm.Search.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-          Swarm.utils.buildFeedInfo(data.messages);
+        Swarm.utils.hideLoadingIcon();
+        Swarm.utils.buildFeedInfo(data.messages);
   		},
   		error : function(){
+        Swarm.utils.hideLoadingIcon();
   			alert("error");
   		}
   	});
@@ -915,14 +935,13 @@ Swarm.Search.prototype = {
 Swarm.utils = {
 
 	showLoadingIcon: function(){
-		$("#loadingIcon").show();
-
+		$("#content").html('<div id="loading-icon"><div class="la-ball-running-dots"><div></div><div></div><div></div><div></div><div></div></div></div>');
 	},
 
 	hideLoadingIcon: function(){
-		$("#loadingIcon").hide();
-
+		$("#loading-icon").remove();
 	},
+
 	buildFeedInfo: function(data){
        var self = this,
        container = $("#content"),

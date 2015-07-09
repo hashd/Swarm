@@ -9,6 +9,8 @@ Swarm.Profile.prototype = {
   },
   getProfileInformation : function(userId){
   	var self = this;
+    $('#content').empty();
+    Swarm.utils.showLoadingIcon();
   	jQuery.ajax({
   		type :"GET",
   		url : "https://www.yammer.com/api/v1/users/"+userId+".json?access_token="+yammer.getAccessToken(),
@@ -20,10 +22,12 @@ Swarm.Profile.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-        	Swarm.utils.showProfile(data);
+        Swarm.utils.hideLoadingIcon();
+      	Swarm.utils.showProfile(data);
   			//console.log(data);
   		},
   		error : function(){
+        Swarm.utils.hideLoadingIcon();
   			alert("error");
   		}
   	});

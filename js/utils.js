@@ -1,14 +1,13 @@
 Swarm.utils = {
 
 	showLoadingIcon: function(){
-		$("#loadingIcon").show();
-
+		$("#content").html('<div id="loading-icon"><div class="la-ball-running-dots"><div></div><div></div><div></div><div></div><div></div></div></div>');
 	},
 
 	hideLoadingIcon: function(){
-		$("#loadingIcon").hide();
-
+		$("#loading-icon").remove();
 	},
+
 	buildFeedInfo: function(data){
        var self = this,
        container = $("#content"),

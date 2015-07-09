@@ -6,7 +6,7 @@ Swarm.Analytics.prototype = {
 	init: function(){
 		var self = this;
 		$(window).off('scroll');
-		// Swarm.utils.showLoadingIcon();
+		Swarm.utils.showLoadingIcon();
 	    jQuery.ajax({
 			type :"GET",
 			url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",
@@ -20,7 +20,7 @@ Swarm.Analytics.prototype = {
 				$("#content").html('<div id="donut_chart" class="msg_main" style="width:340px;height:250px;padding-top:10px"></div>');
 				var groupData = self.generateGroupData(data)
 				self.drawChart(groupData);
-				//Swarm.utils.hideLoadingIcon();
+				Swarm.utils.hideLoadingIcon();
 				$('div.uv-chart-div').off('click');
 				$('div.uv-chart-div').on('click', 'g.uv-arc-groups', function(e){
 					//alert(groupData[$(this).index()].id);
@@ -28,6 +28,7 @@ Swarm.Analytics.prototype = {
 				});
 			},
 			error : function(){
+        Swarm.utils.hideLoadingIcon();
 				alert("error");
 			}
 		});

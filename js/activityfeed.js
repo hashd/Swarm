@@ -11,6 +11,7 @@ Swarm.ActivityFeed.prototype = {
   displayActivityFeed : function() {
   	var self = this;
   	$("#content").empty();
+    Swarm.utils.showLoadingIcon();
   	jQuery.ajax({
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/streams/activities.json?access_token="+yammer.getAccessToken(),
@@ -22,9 +23,11 @@ Swarm.ActivityFeed.prototype = {
     			withCredentials: false
     		},
     		success : function(data){
-          		self.buildActivityFeed(data);
+          Swarm.utils.hideLoadingIcon();
+      		self.buildActivityFeed(data);
     		},
     		error : function(){
+          Swarm.utils.hideLoadingIcon();
     			alert("error");
     		}
   	  });

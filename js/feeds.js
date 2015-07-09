@@ -9,9 +9,10 @@ Swarm.Feeds.prototype = {
     self.attachWindowScrollEvent();
   },
   getFeeds: function(){
-      var self = this;
-      $("#content").empty();
-      jQuery.ajax({
+    var self = this;
+    $("#content").empty();
+    Swarm.utils.showLoadingIcon();
+    jQuery.ajax({
   		type :"GET",
   		url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
       data:{
@@ -22,6 +23,7 @@ Swarm.Feeds.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
+        Swarm.utils.hideLoadingIcon();
         Swarm.utils.buildFeedInfo(data);
         $('#content').append('<div><button class="mui-z3 mui-btn mui-btn-floating mui-btn-floating-mini post-btn"><i class="material-icons">add</i></button></div>');
   			$('.post-btn').click(function (event){
@@ -30,6 +32,7 @@ Swarm.Feeds.prototype = {
         //console.log(data);
   		},
   		error : function(){
+        Swarm.utils.hideLoadingIcon();
   			alert("Error, Please login to Yammer");
   		}
   	});

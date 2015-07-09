@@ -146,6 +146,11 @@
   margin-top: 4px;
 }
 
+#loading-icon {
+  padding: 10em;
+  margin-top: 6em;
+}
+
 #content {
   padding: 0.3em;
   height: 480px;

@@ -12,6 +12,7 @@ Swarm.Messages.prototype = {
   getReceivedMessages: function(){
       var self = this;
       $("#content").empty();
+      Swarm.utils.showLoadingIcon();
       jQuery.ajax({
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
@@ -23,11 +24,13 @@ Swarm.Messages.prototype = {
     			withCredentials: false
     		},
     		success : function(data){
-            chrome.storage.local.set({'lastMsgId': data.messages[0].id});
-          	Swarm.utils.buildFeedInfo(data);
+          Swarm.utils.hideLoadingIcon();
+          chrome.storage.local.set({'lastMsgId': data.messages[0].id});
+        	Swarm.utils.buildFeedInfo(data);
     			//console.log(data);
     		},
     		error : function(){
+          Swarm.utils.hideLoadingIcon();
     			alert("error");
     		}
   	  });

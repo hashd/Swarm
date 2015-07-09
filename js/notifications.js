@@ -11,6 +11,7 @@ Swarm.Notifications.prototype = {
   displayNotifications : function() {
   	var self = this;
   	$("#content").empty();
+    Swarm.utils.showLoadingIcon();
   	jQuery.ajax({
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/streams/notifications.json?access_token="+yammer.getAccessToken(),
@@ -22,9 +23,11 @@ Swarm.Notifications.prototype = {
     			withCredentials: false
     		},
     		success : function(data){
+          Swarm.utils.hideLoadingIcon();
           		self.buildNotificationFeed(data);
     		},
     		error : function(){
+          Swarm.utils.hideLoadingIcon();
     			alert("error");
     		}
   	  });
