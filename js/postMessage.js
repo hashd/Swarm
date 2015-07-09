@@ -77,7 +77,7 @@ Swarm.PostMessage.prototype = {
 			//str.push('<label style="font-size:12px">Message Body:</label>');
 			//str.push('<br/>');
       str.push('<div class="mui-form-group">');
-			str.push('<textarea name="message_body" class="mui-form-control" id="message_body" rows="7" cols="37"/>');
+			str.push('<textarea name="message_body" class="mui-form-control" id="message_body" rows="10" cols="37"/>');
       str.push('<label class="mui-form-floating-label">Write Message Here</label>');
 			str.push("</div>");
       //str.push('<br/>');

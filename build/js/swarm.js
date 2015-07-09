@@ -459,7 +459,10 @@ Swarm.Feeds.prototype = {
   		success : function(data){
         Swarm.utils.buildFeedInfo(data);
         $('#content').append('<div><button class="mui-z3 mui-btn mui-btn-floating mui-btn-floating-mini post-btn"><i class="material-icons">add</i></button></div>');
-  			//console.log(data);
+  			$('.post-btn').click(function (event){
+          swarmInstance.postMessageService.init();
+        });
+        //console.log(data);
   		},
   		error : function(){
   			alert("Error, Please login to Yammer");
@@ -795,7 +798,7 @@ Swarm.PostMessage.prototype = {
 			//str.push('<label style="font-size:12px">Message Body:</label>');
 			//str.push('<br/>');
       str.push('<div class="mui-form-group">');
-			str.push('<textarea name="message_body" class="mui-form-control" id="message_body" rows="7" cols="37"/>');
+			str.push('<textarea name="message_body" class="mui-form-control" id="message_body" rows="10" cols="37"/>');
       str.push('<label class="mui-form-floating-label">Write Message Here</label>');
 			str.push("</div>");
       //str.push('<br/>');
