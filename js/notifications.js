@@ -107,7 +107,8 @@ Swarm.Notifications.prototype = {
      	str.push("</div>");
  	});
 	container.find('div.feed_main').append(str.join(''));
-
+  container.slimScroll().off('slimscroll');
+  container.slimScroll().removeData('events');
 	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     	var target = $(this),
     	userId = target.data("userid"),

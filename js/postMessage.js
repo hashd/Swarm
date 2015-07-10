@@ -80,6 +80,8 @@ Swarm.PostMessage.prototype = {
           str.push("</form>");
           str.push("</div>");
           container.empty().html(str.join(''));
+          container.slimScroll().off('slimscroll');
+          container.slimScroll().removeData('events');
           container.find('textarea[name="message_body"]').focus();
           self.postMessage();
   		},

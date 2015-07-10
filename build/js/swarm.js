@@ -11,6 +11,7 @@ Swarm.ActivityFeed.prototype = {
 
   displayActivityFeed : function() {
   	var self = this;
+    var content = $("#content");
   	$("#content").empty();
     Swarm.utils.showLoadingIcon();
   	jQuery.ajax({
@@ -112,7 +113,9 @@ Swarm.ActivityFeed.prototype = {
      	str.push("</div>");
  	});
 	container.find('div.feed_main').append(str.join(''));
-
+  
+  container.slimScroll().off('slimscroll');
+  container.slimScroll().removeData('events');
 	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     	var target = $(this),
     	userId = target.data("userid"),
@@ -342,15 +345,16 @@ Swarm.Client.prototype = {
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
         self.makeActiveTab(jsValCap, title);
 
-        if (!isFirst) {
-          chrome.storage.local.set({'newImagePath': '/img/yammerlogo_notifier.png'});
-          // create alarm for polling new messages every 1 minutes
-          chrome.alarms.create('checkNewTasks', {
+        
+        //chrome.storage.local.set({'newImagePath': '/img/yammerlogo_notifier.png'});
+        // create alarm for polling new messages every 1 minutes
+        chrome.alarms.create('checkNewTasks', {
             when: 1000,
             periodInMinutes: 1
-          });
-        }
-        chrome.browserAction.setIcon({ path: "/img/yammerlogo.png" });
+        });
+        
+        chrome.browserAction.setBadgeText({text: ""});
+        
         target.parent().siblings().find('i').removeClass('active');
         target.addClass('active');
     });
@@ -576,7 +580,7 @@ Swarm.Groups.prototype = {
       
   		url : 'https://www.yammer.com/api/v1/messages/in_group/'+groupId+'.json?access_token='+yammer.getAccessToken(),
       	data:{
-        	"limit":7
+        	"limit":20
       	},
   		dataType: 'json',
   		xhrFields: {
@@ -809,7 +813,8 @@ Swarm.Notifications.prototype = {
      	str.push("</div>");
  	});
 	container.find('div.feed_main').append(str.join(''));
-
+  container.slimScroll().off('slimscroll');
+  container.slimScroll().removeData('events');
 	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     	var target = $(this),
     	userId = target.data("userid"),
@@ -902,6 +907,8 @@ Swarm.PostMessage.prototype = {
           str.push("</form>");
           str.push("</div>");
           container.empty().html(str.join(''));
+          container.slimScroll().off('slimscroll');
+          container.slimScroll().removeData('events');
           container.find('textarea[name="message_body"]').focus();
           self.postMessage();
   		},
@@ -1040,7 +1047,6 @@ Swarm.utils = {
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
         $.each(msgs, function(ind, msg){
-          console.log(msg);
         	var senderArrObj = $.grep(references, function(e){ return e.id == msg.sender_id; }),
         	senderName = (senderArrObj.length > 0) ? senderArrObj[0].full_name : "",
         	senderPicURL = (senderArrObj.length > 0) ? senderArrObj[0].mugshot_url : "",
@@ -1136,6 +1142,8 @@ showProfile : function(data){
     str.push('<div class="profileDataDiv active_since"><div class="profileLabeldiv">Active Since </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getActiveDuration(new Date(data.activated_at.toString()))+' </div></div>');
     str.push('</div>');
     container.empty().html(str.join(''));
+    container.slimScroll().off('slimscroll');
+    container.slimScroll().removeData('events');
 },
 
 getActiveDuration : function(date){

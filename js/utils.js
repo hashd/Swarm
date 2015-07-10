@@ -117,6 +117,8 @@ showProfile : function(data){
     str.push('<div class="profileDataDiv active_since"><div class="profileLabeldiv">Active Since </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getActiveDuration(new Date(data.activated_at.toString()))+' </div></div>');
     str.push('</div>');
     container.empty().html(str.join(''));
+    container.slimScroll().off('slimscroll');
+    container.slimScroll().removeData('events');
 },
 
 getActiveDuration : function(date){

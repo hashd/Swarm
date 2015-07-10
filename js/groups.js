@@ -56,7 +56,7 @@ Swarm.Groups.prototype = {
       
   		url : 'https://www.yammer.com/api/v1/messages/in_group/'+groupId+'.json?access_token='+yammer.getAccessToken(),
       	data:{
-        	"limit":7
+        	"limit":20
       	},
   		dataType: 'json',
   		xhrFields: {
