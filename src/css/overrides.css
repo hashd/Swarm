@@ -1,0 +1,197 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../libs/fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../../libs/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../../libs/fonts/MaterialIcons-Regular.woff) format('woff'),
+       url(../../libs/fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'),
+       url(../../libs/fonts/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Condensed'),
+       url(../../libs/fonts/RobotoCondensed-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+body {
+  font-family: 'Roboto';
+}
+
+.mui-row {
+  margin: 0;
+}
+
+.mui-panel {
+  padding: 0;
+  margin-bottom: 1em;
+}
+
+.plugin-container {
+  width: 360px;
+  margin: 0;
+  padding: 0;
+}
+
+.left-pane {
+  background-color: #fff;
+}
+
+.main > div {
+  min-height: 480px;
+  height: 480px;
+  overflow: auto;
+}
+
+.header {
+  display: table;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  margin: 0;
+}
+
+.header-row {
+  display: table-row;
+  height: 40px;
+}
+
+.header .pane {
+  background-color: #fff;
+  color: #0072C6;
+  text-transform: uppercase;
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
+}
+
+.header .mui-form-group {
+  padding: 0;
+  margin: 0;
+}
+
+.header label {
+  top: -4px;
+}
+
+.header button.mui-btn {
+  margin: 0;
+  padding-right: 4px;
+}
+
+.current-mugshot {
+  padding-left: 2px;
+}
+
+.current-mugshot img {
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #0072C6;
+}
+
+.nav-bar {
+  margin-left: -1px;
+  margin-top: -1px;
+}
+
+.nav-bar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-bar .material-icons {
+  font-size: 1.5em;
+  margin-left: -6px;
+  cursor: pointer;
+  padding: 4px 2px;
+  color: #666;
+}
+
+.nav-bar .material-icons:hover {
+  color: #2196F3;
+}
+
+.nav-bar .material-icons.active {
+  color: #0072C6;
+}
+
+.material-icons.separator {
+  border-top: 1px solid #CCC;
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+.nav-bar li:first-child {
+  margin-top: 4px;
+}
+
+#loading-icon {
+  padding: 10em;
+  margin-top: 5em;
+}
+
+#content {
+  padding: 0.3em;
+  height: 480px;
+  background-color: #f0f0f0;
+  border: 1px solid #0072C6;
+}
+
+#content .post-btn {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 12px;
+  line-height: 4px;
+  background-color: #0072C6;
+}
+
+.post-btn i {
+  font-size: 28px;
+}
+
+.post_form {
+  padding: 1em;
+}

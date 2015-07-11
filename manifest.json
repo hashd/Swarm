@@ -1,0 +1,33 @@
+{
+  "name": "Yammer Plugin",
+  "version": "1.0",
+  "description": "Chrome Plugin for Yammer",
+  "icons": {
+    "128": "./resources/img/yammerlogo.png"
+  },
+  "manifest_version":2,
+  "browser_action": {
+    "default_icon": "./resources/img/yammerlogo.png",
+    "default_title": "Yammer Plugin",
+    "default_popup": "home.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.yammer.com/robots.txt*"],
+      "js": ["src/oauth2/oauth2_inject.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "https://www.yammer.com/oauth2/*",
+    "https://www.yammer.com/api/*",
+    "storage",
+    "alarms"
+  ],
+  "web_accessible_resources" : [
+    "src/oauth2/oauth2.html"
+  ],
+  "background": {
+    "scripts": ["libs/js/jquery-2.1.1.js","background/js/background.js"]
+  }
+}

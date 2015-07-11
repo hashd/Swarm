@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Yammer Home</title>
+
+  <!-- Stylesheets here -->
+  <link rel="stylesheet" href="libs/css/mui.css">
+  <link rel="stylesheet" href="libs/css/material.min.css">
+  <link rel="stylesheet" href="src/css/feeds.css">
+  <link rel="stylesheet" href="src/css/profile.css">
+  <link rel="stylesheet" href="src/css/overrides.css">
+  <link rel="stylesheet" href="src/css/loading.css">
+
+  <!-- Scripts here -->
+  <script type="text/javascript" src="libs/js/material.min.js"></script>
+  <script type="text/javascript" src="libs/js/mui.min.js"></script>
+  <script type="text/javascript" src="libs/js/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="libs/js/jquery.slimscroll.min.js"></script>
+  <script type="text/javascript" src="libs/js/d3.min.js"></script>
+  <script type="text/javascript" src="libs/js/uvcharts.min.js"></script>
+  <script type="text/javascript" src="src/oauth2/oauth2.js"></script>
+  <script type="text/javascript" src="src/oauth2/authenticate.js"></script>
+  <script type="text/javascript" src="build/js/swarm.js"></script>
+</head>
+<body class="mui-container plugin-container">
+  <div class="mui-row header">
+    <div class="header-row">
+      <div class="pane current-mugshot mui-col-xs-2 mui-col-sm-2 mui-col-md-2">
+        <i class="material-icons" style="font-size:2.5em;">face</i>
+      </div>
+      <div class="pane left-pane mui-col-xs-11 mui-col-sm-11 mui-col-md-11 page-title" >
+        Yammer
+      </div>
+      <div class="pane right-pane mui-col-xs-11 mui-col-sm-11 mui-col-md-11 network-dropdown" style="text-align: right" >
+      </div>
+    </div>
+  </div>
+  <div class="mui-row main">
+    <div class="left-pane nav-bar mui-col-xs-2 mui-col-sm-2 mui-col-md-2">
+      <ul>
+        <li>
+          <i id="yc-search" class="material-icons" data-jsval="search" title="Search">search</i>
+        </li><li>
+          <i id="yc-home" class="separator material-icons" data-jsval="feeds" title="Network Feed">home</i>
+        </li><li>
+          <i id="yc-messages" class="material-icons" data-jsval="messages" title="Messages">email</i>
+        </li><li>
+          <i id="yc-notifications" class="material-icons" data-jsval="notifications" title="Notifications">notifications</i>
+        </li><li>
+          <i id="yc-people" class="material-icons separator" title="People">wc</i>
+        </li><li>
+          <i id="yc-groups" class="material-icons" data-jsval="groups" title="Groups">group</i>
+        </li><li>
+          <i id="yc-analytics" class="material-icons" data-jsval="analytics" title="Analytics">insert_chart</i>
+        </li><li>
+          <i id="yc-activity" class="material-icons" data-jsval="activityfeed" title="Recent Activity">reorder</i>
+        </li>
+      </ul>
+    </div>
+    <div id="content" class="right-pane mui-col-xs-22 mui-col-sm-22 mui-col-md-22"></div>
+  </div>
+  <div class="mui-row footer" style="display:none;"></div>
+</body>
+</html>

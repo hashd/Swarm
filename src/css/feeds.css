@@ -1,0 +1,76 @@
+.msg_main{
+  border: 1px solid #DADADA;
+  margin: 5px 0px;
+  font-size: 1em;
+  color: #343A41;
+  display: table;
+  width: 100%;
+  background-color: #FFF;
+
+}
+.msg_head{
+  overflow: auto;
+  padding: 0.3em;
+}
+.msg_sender_pic{
+  display: table-cell;
+  width: 15%;
+  vertical-align: top;
+}
+.msg_sender_pic img{
+  padding: 6px;
+  width: 48px;
+}
+.msg_details_main{
+  display: table-cell;
+  width: 85%;
+}
+.msg_sender_name{
+  float: left;
+  color: #386cbb;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.msg_date_time{
+  float: right;
+  color: #68717f;
+  font-size: 0.8em;
+}
+.msg_body{
+  padding: 0.5em 0.3em 1.2em 0.3em;
+  font-size: 0.9em;
+  line-height: 1.1em;
+  word-break: break-word;
+}
+.senderLinkAnc{
+  text-decoration: initial;
+  color: #386cbb;
+  text-transform: capitalize;
+}
+.msg_info {
+  background-color: #f4f4f4;
+  margin-left: -18%;
+}
+.msg_info > div {
+  display: inline-block;
+  width: 50%;
+  cursor: pointer;
+}
+.msg_info i {
+  font-size: 1.1em;
+  margin: 0 0.5em;
+  color: #666;
+  padding: 6px 0 2px 0;
+  cursor: pointer;
+}
+.msg_info i:hover {
+  color: #0072C6;
+}
+.msg_info > div span {
+  margin-top: -8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.msg_info > div:first-child {
+  padding-left: 15%;
+}
