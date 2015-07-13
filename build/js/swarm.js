@@ -1073,6 +1073,9 @@ Swarm.utils = {
      str.push("<div class='msg_body' data-thread-id='"+msg.thread_id+"'>");
      //str.push("<a class='msg_main_body' data-thread-id='"+msg.thread_id+"' href='javascript:{}'>'");
      str.push(msg.body.rich || msg.body.plain);
+     if(msg.attachments.length != 0) {
+        str.push(msg.attachments[0].inline_html);
+     }
      str.push("</div>");
      str.push("<div class='msg_info'>");
      str.push("<div class='msg_like_number'><i class='material-icons'>thumb_up</i><span>" + msg.liked_by.count + "</span></div>");
@@ -1098,7 +1101,7 @@ container.off("click", ".feed_main .msg_body").on("click", ".feed_main .msg_body
         type :"GET",
         url : 'https://www.yammer.com/api/v1/messages/in_thread/'+threadId+'.json?access_token='+yammer.getAccessToken(),
         data:{
-            "limit":7
+            "limit":10
         },
         dataType: 'json',
             xhrFields: {
