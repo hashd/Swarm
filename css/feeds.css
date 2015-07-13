@@ -41,6 +41,7 @@
   font-size: 0.9em;
   line-height: 1.1em;
   word-break: break-word;
+  cursor: pointer;
 }
 .senderLinkAnc{
   text-decoration: initial;
