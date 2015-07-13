@@ -1070,7 +1070,8 @@ Swarm.utils = {
      str.push("<div class='msg_sender_name'><a class='senderLinkAnc' data-userid='"+senderId+"' href='javascript:{}'>"+senderName+"</a></div>");
      str.push("<div class='msg_date_time'>"+msgCreatedDate+"</div>");
      str.push("</div>");
-     str.push("<div class='msg_body'>");
+     str.push("<div class='msg_body' data-thread-id='"+msg.thread_id+"'>");
+     //str.push("<a class='msg_main_body' data-thread-id='"+msg.thread_id+"' href='javascript:{}'>'");
      str.push(msg.body.rich || msg.body.plain);
      str.push("</div>");
      str.push("<div class='msg_info'>");
@@ -1088,7 +1089,40 @@ container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.s
     $(window).off("scroll");
     profileObj.init(userId);
 });
+
+container.off("click", ".feed_main .msg_body").on("click", ".feed_main .msg_body", function(){
+    var self = this;
+    var target = $(this),
+    threadId = target.data("thread-id");
+    jQuery.ajax({
+        type :"GET",
+        url : 'https://www.yammer.com/api/v1/messages/in_thread/'+threadId+'.json?access_token='+yammer.getAccessToken(),
+        data:{
+            "limit":7
+        },
+        dataType: 'json',
+            xhrFields: {
+            withCredentials: false
+        },
+        success : function(data){
+
+            container.empty();
+            container.slimScroll().off('slimscroll');
+            container.slimScroll().removeData('events');
+            Swarm.utils.hideLoadingIcon();
+            Swarm.utils.buildFeedInfo(data);
+            
+        },
+        error : function(){
+            Swarm.utils.hideLoadingIcon();
+            alert("error");
+        }
+    });
+    
+});
 },
+
+
 showSearchResults:function(data){
     var self = this;
     container = $("#content"),
