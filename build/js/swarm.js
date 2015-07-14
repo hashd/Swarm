@@ -1097,11 +1097,13 @@ container.off("click", ".feed_main .msg_replies_number").on("click", ".feed_main
     var target = $(this),
     msg_main = target.parents(".msg_details_main"),
     temp = [];
-    temp.push('<div class="reply_message mui-form-group">');
-    temp.push('<textarea name="message_body" class="mui-form-control" id="reply_body" rows="5" cols="37" autofocus/>');
-    temp.push('<button class="post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat">Post</button>');
-    temp.push("</div>");
-    msg_main.append(temp.join(''));
+    if(msg_main.find('.reply_message').length==0) {
+        temp.push('<div class="reply_message mui-form-group">');
+        temp.push('<textarea name="message_body" class="mui-form-control" id="reply_body" rows="5" cols="37" autofocus/>');
+        temp.push('<button class="post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat">Post</button>');
+        temp.push("</div>");
+        msg_main.append(temp.join(''));
+    }
 
 });
 
@@ -1126,6 +1128,7 @@ container.off("click", ".feed_main .reply_message .post_button").on("click", ".f
             withCredentials: false
         },
         success : function(data){
+            // show the message thread if the reply is success
             target.parents(".msg_details_main").find('.msg_body').trigger("click", [true]);
         },
         error : function(){
