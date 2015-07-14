@@ -75,3 +75,7 @@
 .msg_info > div:first-child {
   padding-left: 15%;
 }
+
+.post_button {
+  float: right;
+}

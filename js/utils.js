@@ -68,6 +68,78 @@ container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.s
     profileObj.init(userId);
 });
 
+container.off("click", ".feed_main .msg_replies_number").on("click", ".feed_main .msg_replies_number", function(){
+    var target = $(this),
+    msg_main = target.parents(".msg_details_main"),
+    temp = [];
+    temp.push('<div class="reply_message mui-form-group">');
+    temp.push('<textarea name="message_body" class="mui-form-control" id="reply_body" rows="5" cols="37" autofocus/>');
+    temp.push('<button class="post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat">Post</button>');
+    temp.push("</div>");
+    msg_main.append(temp.join(''));
+
+});
+
+container.off("click", ".feed_main .reply_message .post_button").on("click", ".feed_main .reply_message .post_button", function(){
+    var target = $(this),
+    msg_main = target.parents(".msg_main"),
+    msgId = msg_main.data("msg-id"),
+    reply_text = target.parent().find('textarea').val();
+    jQuery.ajax({
+        type :"POST",
+        beforeSend: function (request)
+        {
+            request.setRequestHeader("Authorization", "Bearer "+yammer.getAccessToken());
+        },
+        url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
+        data:{
+            "replied_to_id":msgId,
+            "body":reply_text
+        },
+        dataType: 'json',
+        xhrFields: {
+            withCredentials: false
+        },
+        success : function(data){
+            target.parents(".msg_details_main").find('.msg_body').trigger("click", [true]);
+        },
+        error : function(){
+            alert("error");
+        }
+    });
+    
+});
+
+container.off("click", ".feed_main .msg_like_number").on("click", ".feed_main .msg_like_number", function(){
+    var target = $(this),
+    msg_main = target.parents(".msg_main"),
+    msgId = msg_main.data("msg-id");
+    jQuery.ajax({
+        type :"POST",
+        beforeSend: function (request)
+        {
+            request.setRequestHeader("Authorization", "Bearer "+yammer.getAccessToken());
+        },
+        url : 'https://www.yammer.com/api/v1/messages/liked_by/current.json?message_id='+msgId+'&access_token='+yammer.getAccessToken(),
+        data:{
+            "message_id" : msgId
+        },
+        dataType: 'text',
+        xhrFields: {
+            withCredentials: false
+        },
+        success : function(data){
+            var like_number = parseInt(target.find('span').text());
+            target.find('span').html(like_number+1);
+            
+        },
+        error : function(){
+            //Swarm.utils.hideLoadingIcon();
+            alert("like error");
+        }
+    });
+});
+
 container.off("click", ".feed_main .msg_body").on("click", ".feed_main .msg_body", function(){
     var self = this;
     var target = $(this),
