@@ -79,3 +79,4 @@
 .post_button {
   float: right;
 }
+#content img { max-width: 100% }

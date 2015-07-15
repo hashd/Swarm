@@ -39,6 +39,9 @@ Swarm.Messages.prototype = {
   attachWindowScrollEvent: function(){
     var self = this;
     var content = $("#content");
+    content.slimScroll().off('slimscroll');
+    content.slimScroll().removeData('events');
+    content.slimScroll().on('slimscroll');
     content.slimScroll().bind('slimscroll', function (e, pos) {
 
         if(pos == 'bottom') {
