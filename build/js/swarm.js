@@ -1244,6 +1244,7 @@ Swarm.utils = {
                     container.slimScroll().off('slimscroll');
                     container.slimScroll().removeData('events');
                     Swarm.utils.hideLoadingIcon();
+                    data.messages.reverse();
                     Swarm.utils.buildFeedInfo(data);
             
                 },
