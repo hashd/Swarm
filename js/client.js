@@ -25,6 +25,7 @@ Swarm.Client.prototype = {
 
     self.getCurrentUserMugshot();
     self.getCurrentUserNetworks();
+    self.getCurrentUserAccessTokens();
 
     self.navBar.find("i").first().trigger("click", [true]);
   },
@@ -142,6 +143,31 @@ Swarm.Client.prototype = {
           select.find('.mui-btn').remove();
           select.prepend($('<button class="mui-btn mui-btn-default mui-btn-flat" data-mui-toggle="dropdown" />').html(data[i].name).append($('<span class="mui-caret" />')));
         }
+      }
+    });
+  },
+
+  getCurrentUserAccessTokens: function () {
+    jQuery.ajax({
+      type: "GET",
+      url: "https://www.yammer.com/api/v1/oauth/tokens.json?access_token="+yammer.getAccessToken(),
+      beforeSend: function (request) {
+        request.setRequestHeader("Authorization", "Bearer "+yammer.getAccessToken());
+      },
+      data: {
+        client_id: '4U9LMyxNql8uwVusWytHfw',
+        client_secret: '3wGDnQpuz6Auu3ZHHXYxUMmD8W6NrxoCsXLLfaxdZg'
+      },
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: false
+      },
+      success : function(data){
+        //console.log(data);
+      },
+      error : function(e){
+        //console.log(e);
+        alert("Looks like something is wrong.");
       }
     });
   }
