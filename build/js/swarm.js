@@ -1126,7 +1126,7 @@ Swarm.utils = {
             //str.push("<a class='msg_main_body' data-thread-id='"+msg.thread_id+"' href='javascript:{}'>'");
             str.push(msg.body.rich || msg.body.plain);
             if(msg.attachments.length != 0) {
-                str.push(msg.attachments[0].inline_html);
+                str.push(msg.attachments[0].inline_html || msg.attachments[0].comment || msg.attachments[0].content_excerpt);
             }
             str.push("</div>");
             str.push("<div class='msg_info'>");
