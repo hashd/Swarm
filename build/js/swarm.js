@@ -1126,7 +1126,10 @@ Swarm.utils = {
             //str.push("<a class='msg_main_body' data-thread-id='"+msg.thread_id+"' href='javascript:{}'>'");
             str.push(msg.body.rich || msg.body.plain);
             if(msg.attachments.length != 0) {
-                str.push(msg.attachments[0].inline_html || msg.attachments[0].comment || msg.attachments[0].content_excerpt);
+                
+                    str.push(msg.attachments[0].inline_html || msg.attachments[0].comment || 
+                        msg.attachments[0].content_excerpt || msg.attachments[0].name) ;
+                
             }
             str.push("</div>");
             str.push("<div class='msg_info'>");
@@ -1246,6 +1249,9 @@ Swarm.utils = {
                     Swarm.utils.hideLoadingIcon();
                     data.messages.reverse();
                     Swarm.utils.buildFeedInfo(data);
+                    $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
+                                                    'border-left': '3px solid #71a6f6',
+                                                    'background': '#f3f5f8'});
             
                 },
                 error : function(){
