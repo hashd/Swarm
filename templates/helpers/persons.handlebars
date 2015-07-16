@@ -1,0 +1,8 @@
+<div class="mui-row sw-people">
+	{{#each users}}
+	<div class="mui-col-xs-5 sw-person mui-panel" data-user-id="{{id}}">
+		<div class="sw-person-mugshot"><img src="{{mugshot_url_template}}" /></div>
+		<div class="sw-person-fullname">{{full_name}}</div>
+	</div>
+	{{/each}}
+</div>

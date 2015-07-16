@@ -1,0 +1,43 @@
+.sw-person-fullname {
+    font-size: 12px;
+    word-wrap: normal;
+    word-break: normal;
+    color: #0072C6;
+    padding: 6px;
+    height: 48px;
+    text-align: center;
+    text-overflow: ellipsis;
+}
+
+.sw-person {
+	margin: 6px;
+	cursor: pointer;
+}
+
+.sw-people-alpha-index {
+    padding: 6px 12px;
+    text-align: center;
+    position: fixed;
+    margin-right: 6px;
+    opacity: 0.9;
+}
+
+.sw-people-content {
+	padding-top: 64px;
+}
+
+.sw-people-alpha {
+    padding: 2px 2px;
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+}
+
+.sw-people-alpha:hover {
+	cursor: pointer;
+	color: #0072C6;
+}
+
+.sw-people-alpha.active {
+	color: #0072C6;
+	border-bottom: 2px solid #0072C6;
+}

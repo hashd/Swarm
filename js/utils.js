@@ -1,7 +1,7 @@
 Swarm.utils = {
 
-	showLoadingIcon: function(){
-		$("#content").html('<div id="loading-icon"><div class="la-pacman la-lg"><div></div><div></div><div></div><div></div><div></div></div></div>');
+	showLoadingIcon: function(selector){
+		$(selector || "#content").html('<div id="loading-icon"><div class="la-pacman la-lg"><div></div><div></div><div></div><div></div><div></div></div></div>');
 	},
 
 	hideLoadingIcon: function(){
@@ -29,7 +29,7 @@ Swarm.utils = {
             msgCreatedDate = msg.created_at;
             var todayDate = new Date();
             var msgDate = new Date(msgCreatedDate);
-            
+
             if(todayDate.getDate() == msgDate.getDate() &&
                todayDate.getMonth() == msgDate.getMonth() &&
                todayDate.getFullYear() == msgDate.getFullYear()) {
@@ -51,10 +51,10 @@ Swarm.utils = {
             //str.push("<a class='msg_main_body' data-thread-id='"+msg.thread_id+"' href='javascript:{}'>'");
             str.push(msg.body.rich || msg.body.plain);
             if(msg.attachments.length != 0) {
-                
-                    str.push(msg.attachments[0].inline_html || msg.attachments[0].comment || 
+
+                    str.push(msg.attachments[0].inline_html || msg.attachments[0].comment ||
                         msg.attachments[0].content_excerpt || msg.attachments[0].name) ;
-                
+
             }
             str.push("</div>");
             str.push("<div class='msg_info'>");
@@ -119,7 +119,7 @@ Swarm.utils = {
                     alert("error");
                 }
             });
-    
+
         });
 
         container.off("click", ".feed_main .msg_like_number").on("click", ".feed_main .msg_like_number", function(){
@@ -143,7 +143,7 @@ Swarm.utils = {
                 success : function(data){
                     var like_number = parseInt(target.find('span').text());
                     target.find('span').html(like_number+1);
-            
+
                 },
                 error : function(){
                     //Swarm.utils.hideLoadingIcon();
@@ -177,14 +177,14 @@ Swarm.utils = {
                     $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
                                                     'border-left': '3px solid #71a6f6',
                                                     'background': '#f3f5f8'});
-            
+
                 },
                 error : function(){
                     Swarm.utils.hideLoadingIcon();
                     alert("error");
             }
         });
-    
+
     });
 },
 

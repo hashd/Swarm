@@ -12,6 +12,7 @@ Swarm.Client = function () {
   self.postMessageService = new Swarm.PostMessage();
   self.notificationsService = new Swarm.Notifications();
   self.groupsService = new Swarm.Groups();
+  self.peopleService = new Swarm.People();
 
   self.init();
 };
@@ -43,16 +44,16 @@ Swarm.Client.prototype = {
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
         self.makeActiveTab(jsValCap, title);
 
-        
+
         //chrome.storage.local.set({'newImagePath': '/img/yammerlogo_notifier.png'});
         // create alarm for polling new messages every 1 minutes
         chrome.alarms.create('checkNewTasks', {
             when: 1000,
             periodInMinutes: 1
         });
-        
+
         chrome.browserAction.setBadgeText({text: ""});
-        
+
         target.parent().siblings().find('i').removeClass('active');
         target.addClass('active');
     });
@@ -95,6 +96,9 @@ Swarm.Client.prototype = {
         break;
       case "Groups":
         self.groupsService.init();
+        break;
+      case "People":
+        self.peopleService.init();
         break;
       case "Search":
         pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label>Search</label></div>');

@@ -314,6 +314,7 @@ Swarm.Client = function () {
   self.postMessageService = new Swarm.PostMessage();
   self.notificationsService = new Swarm.Notifications();
   self.groupsService = new Swarm.Groups();
+  self.peopleService = new Swarm.People();
 
   self.init();
 };
@@ -345,16 +346,16 @@ Swarm.Client.prototype = {
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
         self.makeActiveTab(jsValCap, title);
 
-        
+
         //chrome.storage.local.set({'newImagePath': '/img/yammerlogo_notifier.png'});
         // create alarm for polling new messages every 1 minutes
         chrome.alarms.create('checkNewTasks', {
             when: 1000,
             periodInMinutes: 1
         });
-        
+
         chrome.browserAction.setBadgeText({text: ""});
-        
+
         target.parent().siblings().find('i').removeClass('active');
         target.addClass('active');
     });
@@ -397,6 +398,9 @@ Swarm.Client.prototype = {
         break;
       case "Groups":
         self.groupsService.init();
+        break;
+      case "People":
+        self.peopleService.init();
         break;
       case "Search":
         pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label>Search</label></div>');
@@ -828,6 +832,99 @@ Swarm.Notifications.prototype = {
   },
  }
 
+Swarm.People = function (){
+  var self = this;
+};
+
+Swarm.People.prototype = {
+  init: function () {
+    this.bindPersonLiveEvent();
+    this.bindIndexLiveEvent();
+    this.displayPeopleFeed();
+  },
+
+  displayPeopleFeed: function () {
+    var self = this,
+      container = $("#content").empty();
+
+    container.append(Handlebars.templates.people({}));
+    container.find('.sw-people-alpha').first().trigger('click');
+  },
+
+  displayPeopleList: function (pageNumber, initialLetter, sortFactor) {
+    var self = this,
+      container = $("#content .sw-people-content").empty();
+
+    Swarm.utils.showLoadingIcon("#content .sw-people-content");
+    jQuery.ajax({
+      type :"GET",
+      url : "https://www.yammer.com/api/v1/users.json?access_token="+yammer.getAccessToken(),
+      data:{
+        "page": pageNumber || 1,
+        "letter": initialLetter || 'A'
+      },
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: false
+      },
+      success : function(data){
+        Swarm.utils.hideLoadingIcon();
+        data.forEach(function (d, i) {
+          d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
+        });
+        container.empty().append(Handlebars.templates.persons({ 'users': data }));
+      },
+      error : function(){
+        Swarm.utils.hideLoadingIcon();
+        alert("Looks like something is wrong.");
+      }
+    });
+  },
+
+  bindPersonLiveEvent: function () {
+    var self = this,
+      container = $("#content");
+
+    container.on('click', '.sw-person', function () {
+      var clkd = $(this),
+        userId = clkd.attr('data-user-id');
+
+      jQuery.ajax({
+        type: "GET",
+        url: "https://www.yammer.com/api/v1/users/" + userId + ".json?access_token=" + yammer.getAccessToken(),
+        data: {
+          "limit": 1
+        },
+        dataType: 'json',
+        xhrFields: {
+          withCredentials: false
+        },
+        success: function(data){
+          Swarm.utils.showProfile(data);
+        },
+        error: function(){
+          alert("Looks like something is wrong.");
+        }
+      });
+    });
+  },
+
+  bindIndexLiveEvent: function () {
+    var self = this,
+      container = $("#content");
+
+    container.on('click', '.sw-people-alpha', function () {
+      var clkd = $(this),
+        alphabet = clkd.attr('value');
+
+      $('.sw-people-alpha').removeClass('active');
+      clkd.addClass('active');
+
+      self.displayPeopleList(1, alphabet);
+    });
+  }
+};
+
 Swarm.PostMessage = function (){
   var self = this;
 };
@@ -1077,8 +1174,8 @@ Swarm.Search.prototype = {
 
 Swarm.utils = {
 
-	showLoadingIcon: function(){
-		$("#content").html('<div id="loading-icon"><div class="la-pacman la-lg"><div></div><div></div><div></div><div></div><div></div></div></div>');
+	showLoadingIcon: function(selector){
+		$(selector || "#content").html('<div id="loading-icon"><div class="la-pacman la-lg"><div></div><div></div><div></div><div></div><div></div></div></div>');
 	},
 
 	hideLoadingIcon: function(){
@@ -1106,7 +1203,7 @@ Swarm.utils = {
             msgCreatedDate = msg.created_at;
             var todayDate = new Date();
             var msgDate = new Date(msgCreatedDate);
-            
+
             if(todayDate.getDate() == msgDate.getDate() &&
                todayDate.getMonth() == msgDate.getMonth() &&
                todayDate.getFullYear() == msgDate.getFullYear()) {
@@ -1128,10 +1225,10 @@ Swarm.utils = {
             //str.push("<a class='msg_main_body' data-thread-id='"+msg.thread_id+"' href='javascript:{}'>'");
             str.push(msg.body.rich || msg.body.plain);
             if(msg.attachments.length != 0) {
-                
-                    str.push(msg.attachments[0].inline_html || msg.attachments[0].comment || 
+
+                    str.push(msg.attachments[0].inline_html || msg.attachments[0].comment ||
                         msg.attachments[0].content_excerpt || msg.attachments[0].name) ;
-                
+
             }
             str.push("</div>");
             str.push("<div class='msg_info'>");
@@ -1196,7 +1293,7 @@ Swarm.utils = {
                     alert("error");
                 }
             });
-    
+
         });
 
         container.off("click", ".feed_main .msg_like_number").on("click", ".feed_main .msg_like_number", function(){
@@ -1220,7 +1317,7 @@ Swarm.utils = {
                 success : function(data){
                     var like_number = parseInt(target.find('span').text());
                     target.find('span').html(like_number+1);
-            
+
                 },
                 error : function(){
                     //Swarm.utils.hideLoadingIcon();
@@ -1254,14 +1351,14 @@ Swarm.utils = {
                     $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
                                                     'border-left': '3px solid #71a6f6',
                                                     'background': '#f3f5f8'});
-            
+
                 },
                 error : function(){
                     Swarm.utils.hideLoadingIcon();
                     alert("error");
             }
         });
-    
+
     });
 },
 

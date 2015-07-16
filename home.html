@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./css/profile.css">
   <link rel="stylesheet" href="./css/overrides.css">
   <link rel="stylesheet" href="./css/loading.css">
+  <link rel="stylesheet" href="./css/templates.css">
 
   <!-- Scripts here -->
   <script type="text/javascript" src="libs/js/jquery-2.1.1.js"></script>
@@ -19,6 +20,7 @@
   <script type="text/javascript" src="libs/js/jquery.slimscroll.min.js"></script>
   <script type="text/javascript" src="libs/js/uvcharts.min.js"></script>
   <script type="text/javascript" src="libs/js/mui.min.js"></script>
+  <script type="text/javascript" src="libs/js/handlebars.runtime-v3.0.3.js"></script>
   <script type="text/javascript" src="oauth2/oauth2.js"></script>
   <script type="text/javascript" src="build/js/swarm.js"></script>
   <script type="text/javascript" src="popup.js"></script>
@@ -46,7 +48,7 @@
         </li><li>
           <i class="material-icons" data-jsval="notifications" title="Notifications">notifications</i>
         </li><li>
-          <i class="material-icons separator" title="People">wc</i>
+          <i class="material-icons separator" data-jsval="people" title="People">wc</i>
         </li><li>
           <i class="material-icons" data-jsval="groups" title="Groups">group</i>
         </li><li>
@@ -61,5 +63,9 @@
     <div id="content" class="right-pane mui-col-xs-22 mui-col-sm-22 mui-col-md-22"></div>
   </div>
   <div class="mui-row footer" style="display:none;"></div>
+
+  <!-- Load any precompiled handlebar templates here -->
+  <script type="text/javascript" src="templates/helpers/persons.precompiled.handlebars"></script>
+  <script type="text/javascript" src="templates/helpers/people.precompiled.handlebars"></script>
 </body>
 </html>

@@ -175,3 +175,7 @@
 .post_form {
   padding: 1em;
 }
+
+#content img {
+  max-width: 100%;
+}
