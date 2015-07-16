@@ -1179,7 +1179,7 @@ Swarm.Search.prototype = {
 Swarm.utils = {
 
 	showLoadingIcon: function(selector){
-		$(selector || "#content").html('<div id="loading-icon"><div class="la-pacman la-lg"><div></div><div></div><div></div><div></div><div></div></div></div>');
+		$(selector || "#content").html('<div id="loading-icon"><div class="la-square-spin la-2x"><div></div></div>');
 	},
 
 	hideLoadingIcon: function(){
