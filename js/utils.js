@@ -29,11 +29,13 @@ Swarm.utils = {
             msgCreatedDate = msg.created_at;
             var todayDate = new Date();
             var msgDate = new Date(msgCreatedDate);
+            
             if(todayDate.getDate() == msgDate.getDate() &&
                todayDate.getMonth() == msgDate.getMonth() &&
                todayDate.getFullYear() == msgDate.getFullYear()) {
-                msgCreatedDate = msgCreatedDate.split(' ')[1];
-                msgCreatedDate = msgCreatedDate.split(':')[0]+":"+msgCreatedDate.split(':')[1];
+                var minutes = msgDate.getMinutes();
+                minutes = minutes < 10 ? ('0'+minutes):minutes;
+                msgCreatedDate = msgDate.getHours() + ":" + minutes;
             }
             else {
                 msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
