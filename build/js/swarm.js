@@ -853,9 +853,8 @@ Swarm.People.prototype = {
 
   displayPeopleList: function (pageNumber, initialLetter, sortFactor) {
     var self = this,
-      container = $("#content .sw-people-content").empty();
+      container = $("#content .sw-people-content");
 
-    Swarm.utils.showLoadingIcon("#content .sw-people-content");
     jQuery.ajax({
       type :"GET",
       url : "https://www.yammer.com/api/v1/users.json?access_token="+yammer.getAccessToken(),
@@ -868,11 +867,14 @@ Swarm.People.prototype = {
         withCredentials: false
       },
       success : function(data){
-        Swarm.utils.hideLoadingIcon();
-        data.forEach(function (d, i) {
-          d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
-        });
-        container.empty().append(Handlebars.templates.persons({ 'users': data }));
+        if (data.length !== 0) {
+          Swarm.utils.hideLoadingIcon();
+          data.forEach(function (d, i) {
+            d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
+          });
+          container.append(Handlebars.templates.persons({ 'users': data }));
+          self.displayPeopleList(pageNumber + 1, initialLetter);
+        }
       },
       error : function(){
         Swarm.utils.hideLoadingIcon();
@@ -920,6 +922,8 @@ Swarm.People.prototype = {
       $('.sw-people-alpha').removeClass('active');
       clkd.addClass('active');
 
+      container.find('.sw-people-content').empty();
+      Swarm.utils.showLoadingIcon("#content .sw-people-content");
       self.displayPeopleList(1, alphabet);
     });
   }
