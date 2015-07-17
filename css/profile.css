@@ -14,6 +14,7 @@ div.profileInfo_main {
   color: #0072C6;
   font-weight: normal;
   margin: 0.2em 0;
+  text-transform: capitalize;
 }
 .profileInfo_main .job_title{
   text-align: center;
