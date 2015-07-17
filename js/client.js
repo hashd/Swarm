@@ -126,7 +126,7 @@ Swarm.Client.prototype = {
       content = $('#content');
 
     Swarm.api.getCurrentUserProfile(function (data) {
-      mugshotContainer.html($('<img />').attr('src', data.mugshot_url_template.replace("{width}x{height}","100x100")));
+      mugshotContainer.html($('<img />').attr('src', data.mugshot_url));
       mugshotContainer.find('img').on('click', function () {
         Swarm.utils.showProfile(data);
       });
@@ -136,7 +136,7 @@ Swarm.Client.prototype = {
   getCurrentUserNetworks: function () {
     var self = this;
     Swarm.api.getUserNetworks(function (data) {
-      self.header.find('.right-pane').html(Handlebars.templates.network_selection({ networks: data}));
+      self.header.find('.right-pane').html(Swarm.templates.network_selection({ networks: data}));
     });
   }
 };

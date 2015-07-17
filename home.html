@@ -29,7 +29,7 @@
   <div class="mui-row header">
     <div class="header-row">
       <div class="pane current-mugshot mui-col-xs-2 mui-col-sm-2 mui-col-md-2">
-        <i class="material-icons" style="font-size:2.5em;">face</i>
+        <i class="material-icons" style="font-size:2.5em;">portrait</i>
       </div>
       <div class="pane left-pane mui-col-xs-11 mui-col-sm-11 mui-col-md-11 page-title" >
         Yammer
@@ -39,8 +39,8 @@
     </div>
   </div>
   <div class="mui-row main">
-    <div class="left-pane nav-bar mui-col-xs-2 mui-col-sm-2 mui-col-md-2">
-      <ul>
+    <div class="left-pane mui-col-xs-2 mui-col-sm-2 mui-col-md-2">
+      <ul class="nav-bar">
         <li>
           <i class="material-icons active" data-jsval="feeds" title="Network Feed">home</i>
         </li><li>
@@ -59,15 +59,21 @@
           <i class="material-icons separator" data-jsval="search" title="Search">search</i>
         </li>
       </ul>
+      <ul class="app-bar">
+        <li>
+          <i class="material-icons" data-jsval="settings" title="Settings">settings</i>
+        </li><li>
+          <i class="material-icons separator" data-jsval="code" title="Github Link">code</i>
+        </li><li>
+          <i class="material-icons" data-jsval="about" title="Info">info</i>
+        </li>
+      </ul>
     </div>
     <div id="content" class="right-pane mui-col-xs-22 mui-col-sm-22 mui-col-md-22"></div>
   </div>
   <div class="mui-row footer" style="display:none;"></div>
 
   <!-- Load any precompiled handlebar templates here -->
-  <script type="text/javascript" src="templates/helpers/persons.precompiled.handlebars"></script>
-  <script type="text/javascript" src="templates/helpers/people.precompiled.handlebars"></script>
-  <script type="text/javascript" src="templates/helpers/network_selection.precompiled.handlebars"></script>
-  <script type="text/javascript" src="templates/helpers/user_profile.precompiled.handlebars"></script>
+  <script type="text/javascript" src="build/js/swarm.templates.js"></script>
 </body>
 </html>

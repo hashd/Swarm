@@ -56,6 +56,12 @@
 
 .left-pane {
   background-color: #fff;
+  position: relative;
+}
+
+.left-pane ul {
+  padding: 0;
+  margin-left: -1px;
 }
 
 .main > div {
@@ -111,8 +117,12 @@
 }
 
 .nav-bar {
-  margin-left: -1px;
   margin-top: -1px;
+}
+
+.app-bar {
+  position: absolute;
+  bottom: 0;
 }
 
 .nav-bar ul {
@@ -121,7 +131,8 @@
   padding: 0;
 }
 
-.nav-bar .material-icons {
+.nav-bar .material-icons,
+.app-bar .material-icons {
   font-size: 1.5em;
   margin-left: -6px;
   cursor: pointer;
@@ -129,11 +140,13 @@
   color: #666;
 }
 
-.nav-bar .material-icons:hover {
+.nav-bar .material-icons:hover,
+.app-bar .material-icons:hover {
   color: #2196F3;
 }
 
-.nav-bar .material-icons.active {
+.nav-bar .material-icons.active,
+.app-bar .material-icons.active {
   color: #0072C6;
 }
 

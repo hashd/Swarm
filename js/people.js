@@ -13,7 +13,7 @@ Swarm.People.prototype = {
     var self = this,
       container = $("#content").empty();
 
-    container.append(Handlebars.templates.people({}));
+    container.append(Swarm.templates.people({}));
     container.find('.sw-people-alpha').first().trigger('click');
   },
 
@@ -38,7 +38,7 @@ Swarm.People.prototype = {
           data.forEach(function (d, i) {
             d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
           });
-          container.append(Handlebars.templates.persons({ 'users': data }));
+          container.append(Swarm.templates.persons({ 'users': data }));
           self.displayPeopleList(pageNumber + 1, initialLetter);
         }
       },

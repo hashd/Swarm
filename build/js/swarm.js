@@ -519,7 +519,7 @@ Swarm.Client.prototype = {
       content = $('#content');
 
     Swarm.api.getCurrentUserProfile(function (data) {
-      mugshotContainer.html($('<img />').attr('src', data.mugshot_url_template.replace("{width}x{height}","100x100")));
+      mugshotContainer.html($('<img />').attr('src', data.mugshot_url));
       mugshotContainer.find('img').on('click', function () {
         Swarm.utils.showProfile(data);
       });
@@ -529,7 +529,7 @@ Swarm.Client.prototype = {
   getCurrentUserNetworks: function () {
     var self = this;
     Swarm.api.getUserNetworks(function (data) {
-      self.header.find('.right-pane').html(Handlebars.templates.network_selection({ networks: data}));
+      self.header.find('.right-pane').html(Swarm.templates.network_selection({ networks: data}));
     });
   }
 };
@@ -933,7 +933,7 @@ Swarm.People.prototype = {
     var self = this,
       container = $("#content").empty();
 
-    container.append(Handlebars.templates.people({}));
+    container.append(Swarm.templates.people({}));
     container.find('.sw-people-alpha').first().trigger('click');
   },
 
@@ -958,7 +958,7 @@ Swarm.People.prototype = {
           data.forEach(function (d, i) {
             d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
           });
-          container.append(Handlebars.templates.persons({ 'users': data }));
+          container.append(Swarm.templates.persons({ 'users': data }));
           self.displayPeopleList(pageNumber + 1, initialLetter);
         }
       },
@@ -1480,7 +1480,7 @@ showProfile: function(data) {
   data.mugshot_url_template = data.mugshot_url_template.replace("{width}x{height}","100x100"),
   data.active_since = self.getActiveDuration(new Date(data.activated_at.toString()));
 
-  container.empty().html(Handlebars.templates.user_profile(data));
+  container.empty().html(Swarm.templates.user_profile(data));
   container.slimScroll().off('slimscroll');
   container.slimScroll().removeData('events');
 },

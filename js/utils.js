@@ -216,7 +216,7 @@ showProfile: function(data) {
   data.mugshot_url_template = data.mugshot_url_template.replace("{width}x{height}","100x100"),
   data.active_since = self.getActiveDuration(new Date(data.activated_at.toString()));
 
-  container.empty().html(Handlebars.templates.user_profile(data));
+  container.empty().html(Swarm.templates.user_profile(data));
   container.slimScroll().off('slimscroll');
   container.slimScroll().removeData('events');
 },
