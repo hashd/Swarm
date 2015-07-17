@@ -5,4 +5,9 @@
 		<div class="sw-person-fullname">{{full_name}}</div>
 	</div>
 	{{/each}}
+  {{#unless users.length}}
+  <div class="mui-col-xs-24 mui-panel sw-no-user-found">
+    No users found.
+  </div>
+  {{/unless}}
 </div>

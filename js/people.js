@@ -34,7 +34,7 @@ Swarm.People.prototype = {
       },
       success : function(data){
         Swarm.utils.hideLoadingIcon();
-        if (data.length !== 0) {
+        if (!(pageNumber > 1 && data.length === 0)) {
           data.forEach(function (d, i) {
             d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
           });
