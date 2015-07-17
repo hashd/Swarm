@@ -1,0 +1,48 @@
+(function() {
+  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['user_profile'] = template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "        <div>\n          <div class=\"phoneType\">"
+    + alias3(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"type","hash":{},"data":data}) : helper)))
+    + "</div><div class=\"phoneNumber\">"
+    + alias3(((helper = (helper = helpers.number || (depth0 != null ? depth0.number : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"number","hash":{},"data":data}) : helper)))
+    + "</div>\n        </div>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
+
+  return "<div class=\"profileInfo_main mui-panel mui-z2\" data-user-id=\""
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\n  <div class=\"profile_cell_div\">\n    <div class=\"profileDataDiv profile_pic\"><img src=\""
+    + alias3(((helper = (helper = helpers.mugshot_url_template || (depth0 != null ? depth0.mugshot_url_template : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mugshot_url_template","hash":{},"data":data}) : helper)))
+    + "\"></div>\n    <div class=\"profileDataDiv full_name\">"
+    + alias3(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"full_name","hash":{},"data":data}) : helper)))
+    + "</div>\n    <div class=\"profileDataDiv job_title\">"
+    + alias3(((helper = (helper = helpers.job_title || (depth0 != null ? depth0.job_title : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"job_title","hash":{},"data":data}) : helper)))
+    + "</div>\n    <div class=\"stats\">\n      <table width=\"100%\">\n        <tbody>\n          <tr>\n            <td width=\"33%\"><div class=\"following\"><img title=\"followers\" src=\"../img/followers.png\"><span class=\"statsVal\"> "
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.stats : depth0)) != null ? stack1.followers : stack1), depth0))
+    + "</span></div></td>\n            <td width=\"33%\"><div class=\"followers\"><img title=\"following\" src=\"../img/following.png\"> <span class=\"statsVal\"> "
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.stats : depth0)) != null ? stack1.following : stack1), depth0))
+    + "</span></div></td>\n            <td width=\"33%\"><div class=\"updates\"> <img title=\"updates\" src=\"../img/updates.png\"><span class=\"statsVal\"> "
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.stats : depth0)) != null ? stack1.updates : stack1), depth0))
+    + "</span></div></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n\n  <div class=\"profile_cell_div profile-summary\">\n    <div class=\"profileDataDiv summary\">\n      <div class=\"profileLabeldiv\">Summary </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
+    + alias3(((helper = (helper = helpers.summary || (depth0 != null ? depth0.summary : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"summary","hash":{},"data":data}) : helper)))
+    + "</div>\n    </div>\n    <div class=\"profileDataDiv department\">\n      <div class=\"profileLabeldiv\">Department </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
+    + alias3(((helper = (helper = helpers.department || (depth0 != null ? depth0.department : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"department","hash":{},"data":data}) : helper)))
+    + "</div>\n    </div>\n    <div class=\"profileDataDiv location\">\n      <div class=\"profileLabeldiv\">Location </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
+    + alias3(((helper = (helper = helpers.location || (depth0 != null ? depth0.location : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"location","hash":{},"data":data}) : helper)))
+    + "</div>\n    </div>\n    <div class=\"profileDataDiv birth_date\">\n      <div class=\"profileLabeldiv\">Birthday </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
+    + alias3(((helper = (helper = helpers.birth_date || (depth0 != null ? depth0.birth_date : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"birth_date","hash":{},"data":data}) : helper)))
+    + "</div>\n    </div>\n    <div class=\"profileDataDiv email\">\n      <div class=\"profileLabeldiv\">Email </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
+    + alias3(((helper = (helper = helpers.email || (depth0 != null ? depth0.email : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"email","hash":{},"data":data}) : helper)))
+    + "</div>\n    </div>\n    <div class=\"profileDataDiv phone\">\n      <div class=\"profileLabeldiv\">Phone </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">\n"
+    + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.contact : depth0)) != null ? stack1.phone_numbers : stack1),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "      </div>\n    </div>\n    <div class=\"profileDataDiv interests\">\n      <div class=\"profileLabeldiv\">Interests </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
+    + alias3(((helper = (helper = helpers.interests || (depth0 != null ? depth0.interests : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"interests","hash":{},"data":data}) : helper)))
+    + "</div>\n    </div>\n    <div class=\"profileDataDiv expertise\">\n      <div class=\"profileLabeldiv\">Expertise </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
+    + alias3(((helper = (helper = helpers.expertise || (depth0 != null ? depth0.expertise : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"expertise","hash":{},"data":data}) : helper)))
+    + "</div>\n    </div>\n    <div class=\"profileDataDiv active_since\">\n      <div class=\"profileLabeldiv\">Active Since </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
+    + alias3(((helper = (helper = helpers.active_since || (depth0 != null ? depth0.active_since : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"active_since","hash":{},"data":data}) : helper)))
+    + "</div>\n    </div>\n  </div>\n</div>\n";
+},"useData":true});
+})();

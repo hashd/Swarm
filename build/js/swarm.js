@@ -300,6 +300,97 @@ Swarm.Analytics.prototype = {
 	}
 }
 
+Swarm.API = function (accessToken) {
+  var self = this;
+  self.networks = {};
+  self.primaryAccessToken = accessToken;
+  self.accessToken = accessToken;
+
+  self.init();
+};
+
+Swarm.API.prototype = {
+  init: function () {
+    var self = this;
+    self.getUserNetworkAccessTokens();
+  },
+
+  ajaxCall: function (type, url, data, cb) {
+    var self = this;
+    jQuery.ajax({
+      type: type,
+      url: url,
+      beforeSend: function (request) {
+        request.setRequestHeader("Authorization", "Bearer " + self.getAccessToken());
+      },
+      data: $.extend({}, {}, data),
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: false
+      },
+      success: function(data){
+        if (cb !== undefined) {
+          cb(data);
+        }
+      },
+      error: function(e) {
+        console.log(e);
+        alert("Unable to fetch data from Yammer network");
+      }
+    });
+  },
+
+  setAccessToken: function (accessToken) {
+    this.accessToken = accessToken;
+  },
+
+  getAccessToken: function () {
+    return this.accessToken;
+  },
+
+  setNetworks: function (networks) {
+    var self = this;
+    networks.forEach(function (i, d) {
+      self.networks[d.network_id] = d;
+    });
+  },
+
+  setPrimaryNetwork: function (networkId) {
+    var self = this;
+    self.activeNetwork = self.networks[networkId];
+  },
+
+  switchNetwork: function (networkdId) {
+    var self = this;
+    self.activeNetwork = self.networks[networkId];
+    self.setAccessToken(self.activeNetwork.token);
+  },
+
+
+
+  /** All Yammer API Calls below */
+  getCurrentUserProfile: function (cb) {
+    var self = this;
+    self.ajaxCall('GET', 'https://www.yammer.com/api/v1/users/current.json', {}, cb);
+  },
+
+  getUserNetworks: function (cb) {
+    var self = this;
+    self.ajaxCall('GET', 'https://www.yammer.com/api/v1/networks/current.json', {}, cb);
+  },
+
+  getUserNetworkAccessTokens: function (cb) {
+    var self = this,
+      tempAccessToken = self.accessToken;
+
+    self.setAccessToken(self.primaryAccessToken);
+    self.ajaxCall('GET', 'https://www.yammer.com/api/v1/oauth/tokens.json', {}, function (data) {
+      self.setNetworks(data);
+      self.setAccessToken(tempAccessToken);
+    });
+  }
+}
+
 Swarm.Client = function () {
   var self = this;
   self.navBar = $('.nav-bar');
@@ -327,7 +418,6 @@ Swarm.Client.prototype = {
 
     self.getCurrentUserMugshot();
     self.getCurrentUserNetworks();
-    self.getCurrentUserAccessTokens();
 
     self.navBar.find("i").first().trigger("click", [true]);
   },
@@ -424,53 +514,22 @@ Swarm.Client.prototype = {
   },
 
   getCurrentUserMugshot: function () {
-    var self = this;
-    new Swarm.Profile().getCurrentUserProfileInformation(function (data) {
-    $('.header .current-mugshot').html($('<img />').attr('src', data.mugshot_url_template.replace("{width}x{height}","100x100"))
-      .on('click', function () {
-        new Swarm.Profile().getCurrentUserProfileInformation();
-      }));
+    var self = this,
+      mugshotContainer = $('.header .current-mugshot'),
+      content = $('#content');
+
+    Swarm.api.getCurrentUserProfile(function (data) {
+      mugshotContainer.html($('<img />').attr('src', data.mugshot_url_template.replace("{width}x{height}","100x100")));
+      mugshotContainer.find('img').on('click', function () {
+        Swarm.utils.showProfile(data);
+      });
     });
   },
 
   getCurrentUserNetworks: function () {
     var self = this;
-    new Swarm.Network().getCurrentNetworkInformation(function (data) {
-      var select = self.header.find('.right-pane').html($('<div class="mui-dropdown" />')).find('.mui-dropdown');
-      select.append($('<button class="mui-btn mui-btn-default mui-btn-flat" data-mui-toggle="dropdown" />').append($('<span class="mui-caret" />')));
-      select.append($('<ul class="mui-dropdown-menu mui-dropdown-menu-right" />'));
-      for (var i = 0, length = data.length; i < length; i++) {
-        select.find('.mui-dropdown-menu').append($('<li />').append($('<a />').attr('href', '#').data('networkId', data[i].id).html(data[i].name)));
-        if (data[i].is_primary === true) {
-          select.find('.mui-btn').remove();
-          select.prepend($('<button class="mui-btn mui-btn-default mui-btn-flat" data-mui-toggle="dropdown" />').html(data[i].name).append($('<span class="mui-caret" />')));
-        }
-      }
-    });
-  },
-
-  getCurrentUserAccessTokens: function () {
-    jQuery.ajax({
-      type: "GET",
-      url: "https://www.yammer.com/api/v1/oauth/tokens.json?access_token="+yammer.getAccessToken(),
-      beforeSend: function (request) {
-        request.setRequestHeader("Authorization", "Bearer "+yammer.getAccessToken());
-      },
-      data: {
-        client_id: '4U9LMyxNql8uwVusWytHfw',
-        client_secret: '3wGDnQpuz6Auu3ZHHXYxUMmD8W6NrxoCsXLLfaxdZg'
-      },
-      dataType: 'json',
-      xhrFields: {
-        withCredentials: false
-      },
-      success : function(data){
-        //console.log(data);
-      },
-      error : function(e){
-        //console.log(e);
-        alert("Looks like something is wrong.");
-      }
+    Swarm.api.getUserNetworks(function (data) {
+      self.header.find('.right-pane').html(Handlebars.templates.network_selection({ networks: data}));
     });
   }
 };
@@ -629,6 +688,7 @@ Swarm.Groups.prototype = {
   },
 }
 $(document).ready(function() {
+  Swarm.api = new Swarm.API(yammer.getAccessToken());
   swarmInstance = new Swarm.Client();
 });
 
@@ -893,8 +953,8 @@ Swarm.People.prototype = {
         withCredentials: false
       },
       success : function(data){
+        Swarm.utils.hideLoadingIcon();
         if (data.length !== 0) {
-          Swarm.utils.hideLoadingIcon();
           data.forEach(function (d, i) {
             d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
           });
@@ -1412,49 +1472,24 @@ showSearchResults:function(data){
     str.push('</div>');
     container.empty().html(str.join(''));
 },
-showProfile : function(data){
-    var self = this,
-    container = $("#content"),
-    profile = data,
-    profilePic = data.mugshot_url_template.replace("{width}x{height}","100x100"),
-    emailData =
-    str = [];
-    str.push('<div class="profileInfo_main mui-panel mui-z2">');
-    str.push('<div class="profile_cell_div">');
-    str.push('<div class="profileDataDiv profile_pic"><img src="'+profilePic+'"/></div>');
-    str.push('<div class="profileDataDiv full_name">'+data.full_name+'</div>');
-    str.push('<div class="profileDataDiv job_title">'+self.getEmptyStringIfNull(data.job_title)+'</div>');
-    str.push('<div class="stats">');
-    str.push('<table width="100%">');
-    str.push('<tr>');
-    str.push('<td width="33%"><div class="following"><img title="followers" src="../img/followers.png"><span class="statsVal"> '+data.stats.followers+'</span></div></td>');
-    str.push('<td width="33%"><div class="followers"><img title="following" src="../img/following.png"> <span class="statsVal"> '+data.stats.following+'</span></div></td>');
-    str.push('<td width="33%"><div class="updates"> <img title="updates" src="../img/updates.png"><span class="statsVal"> '+data.stats.updates+'</span></div></td>');
-    str.push('</tr>');
-    str.push('</table>');
-    str.push('</div>');
-    str.push('</div>');
-    str.push('<div class="profile_cell_div profile-summary">');
-    str.push('<div class="profileDataDiv summary"><div class="profileLabeldiv">Summary </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.summary)+'</div></div>');
-    str.push('<div class="profileDataDiv department"><div class="profileLabeldiv">Department </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.department)+'</div></div>');
-    str.push('<div class="profileDataDiv location"><div class="profileLabeldiv">Location </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.location)+'</div></div>');
-    str.push('<div class="profileDataDiv birth_date"><div class="profileLabeldiv">Birthday </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+data.birth_date+'</div></div>')
-    str.push('<div class="profileDataDiv email"><div class="profileLabeldiv">Email </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+data.email+'</div></div>');
-    str.push('<div class="profileDataDiv phone"><div class="profileLabeldiv">Phone </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getPhoneNumberInfo(data.contact.phone_numbers)+'</div></div>');
-    str.push('<div class="profileDataDiv interests"><div class="profileLabeldiv">Interests </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.interests)+'</div></div>');
-    str.push('<div class="profileDataDiv expertise"><div class="profileLabeldiv">Expertise </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.expertise)+'</div></div>');
-    str.push('<div class="profileDataDiv active_since"><div class="profileLabeldiv">Active Since </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getActiveDuration(new Date(data.activated_at.toString()))+' </div></div>');
-    str.push('</div>');
-    container.empty().html(str.join(''));
-    container.slimScroll().off('slimscroll');
-    container.slimScroll().removeData('events');
+
+showProfile: function(data) {
+  var self = this,
+    container = $("#content");
+
+  data.mugshot_url_template = data.mugshot_url_template.replace("{width}x{height}","100x100"),
+  data.active_since = self.getActiveDuration(new Date(data.activated_at.toString()));
+
+  container.empty().html(Handlebars.templates.user_profile(data));
+  container.slimScroll().off('slimscroll');
+  container.slimScroll().removeData('events');
 },
 
 getActiveDuration : function(date){
-    var self = this;
-    var oneDay = 24*60*60*1000, // hours * minutes * seconds * milliseconds
-    firstDate = date,
-    secondDate = new Date();
+    var self = this,
+      firstDate = date,
+      secondDate = new Date();
+
     return self.getTimeDuration(firstDate, secondDate);
 },
 

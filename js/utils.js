@@ -208,49 +208,24 @@ showSearchResults:function(data){
     str.push('</div>');
     container.empty().html(str.join(''));
 },
-showProfile : function(data){
-    var self = this,
-    container = $("#content"),
-    profile = data,
-    profilePic = data.mugshot_url_template.replace("{width}x{height}","100x100"),
-    emailData =
-    str = [];
-    str.push('<div class="profileInfo_main mui-panel mui-z2">');
-    str.push('<div class="profile_cell_div">');
-    str.push('<div class="profileDataDiv profile_pic"><img src="'+profilePic+'"/></div>');
-    str.push('<div class="profileDataDiv full_name">'+data.full_name+'</div>');
-    str.push('<div class="profileDataDiv job_title">'+self.getEmptyStringIfNull(data.job_title)+'</div>');
-    str.push('<div class="stats">');
-    str.push('<table width="100%">');
-    str.push('<tr>');
-    str.push('<td width="33%"><div class="following"><img title="followers" src="../img/followers.png"><span class="statsVal"> '+data.stats.followers+'</span></div></td>');
-    str.push('<td width="33%"><div class="followers"><img title="following" src="../img/following.png"> <span class="statsVal"> '+data.stats.following+'</span></div></td>');
-    str.push('<td width="33%"><div class="updates"> <img title="updates" src="../img/updates.png"><span class="statsVal"> '+data.stats.updates+'</span></div></td>');
-    str.push('</tr>');
-    str.push('</table>');
-    str.push('</div>');
-    str.push('</div>');
-    str.push('<div class="profile_cell_div profile-summary">');
-    str.push('<div class="profileDataDiv summary"><div class="profileLabeldiv">Summary </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.summary)+'</div></div>');
-    str.push('<div class="profileDataDiv department"><div class="profileLabeldiv">Department </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.department)+'</div></div>');
-    str.push('<div class="profileDataDiv location"><div class="profileLabeldiv">Location </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.location)+'</div></div>');
-    str.push('<div class="profileDataDiv birth_date"><div class="profileLabeldiv">Birthday </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+data.birth_date+'</div></div>')
-    str.push('<div class="profileDataDiv email"><div class="profileLabeldiv">Email </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+data.email+'</div></div>');
-    str.push('<div class="profileDataDiv phone"><div class="profileLabeldiv">Phone </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getPhoneNumberInfo(data.contact.phone_numbers)+'</div></div>');
-    str.push('<div class="profileDataDiv interests"><div class="profileLabeldiv">Interests </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.interests)+'</div></div>');
-    str.push('<div class="profileDataDiv expertise"><div class="profileLabeldiv">Expertise </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getEmptyStringIfNull(data.expertise)+'</div></div>');
-    str.push('<div class="profileDataDiv active_since"><div class="profileLabeldiv">Active Since </div><div class="profileBreakDiv"></div><div class="profileValuediv">'+self.getActiveDuration(new Date(data.activated_at.toString()))+' </div></div>');
-    str.push('</div>');
-    container.empty().html(str.join(''));
-    container.slimScroll().off('slimscroll');
-    container.slimScroll().removeData('events');
+
+showProfile: function(data) {
+  var self = this,
+    container = $("#content");
+
+  data.mugshot_url_template = data.mugshot_url_template.replace("{width}x{height}","100x100"),
+  data.active_since = self.getActiveDuration(new Date(data.activated_at.toString()));
+
+  container.empty().html(Handlebars.templates.user_profile(data));
+  container.slimScroll().off('slimscroll');
+  container.slimScroll().removeData('events');
 },
 
 getActiveDuration : function(date){
-    var self = this;
-    var oneDay = 24*60*60*1000, // hours * minutes * seconds * milliseconds
-    firstDate = date,
-    secondDate = new Date();
+    var self = this,
+      firstDate = date,
+      secondDate = new Date();
+
     return self.getTimeDuration(firstDate, secondDate);
 },
 

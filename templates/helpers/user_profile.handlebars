@@ -1,0 +1,72 @@
+<div class="profileInfo_main mui-panel mui-z2" data-user-id="{{id}}">
+  <div class="profile_cell_div">
+    <div class="profileDataDiv profile_pic"><img src="{{mugshot_url_template}}"></div>
+    <div class="profileDataDiv full_name">{{full_name}}</div>
+    <div class="profileDataDiv job_title">{{job_title}}</div>
+    <div class="stats">
+      <table width="100%">
+        <tbody>
+          <tr>
+            <td width="33%"><div class="following"><img title="followers" src="../img/followers.png"><span class="statsVal"> {{stats.followers}}</span></div></td>
+            <td width="33%"><div class="followers"><img title="following" src="../img/following.png"> <span class="statsVal"> {{stats.following}}</span></div></td>
+            <td width="33%"><div class="updates"> <img title="updates" src="../img/updates.png"><span class="statsVal"> {{stats.updates}}</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="profile_cell_div profile-summary">
+    <div class="profileDataDiv summary">
+      <div class="profileLabeldiv">Summary </div>
+      <div class="profileBreakDiv"></div>
+      <div class="profileValuediv">{{summary}}</div>
+    </div>
+    <div class="profileDataDiv department">
+      <div class="profileLabeldiv">Department </div>
+      <div class="profileBreakDiv"></div>
+      <div class="profileValuediv">{{department}}</div>
+    </div>
+    <div class="profileDataDiv location">
+      <div class="profileLabeldiv">Location </div>
+      <div class="profileBreakDiv"></div>
+      <div class="profileValuediv">{{location}}</div>
+    </div>
+    <div class="profileDataDiv birth_date">
+      <div class="profileLabeldiv">Birthday </div>
+      <div class="profileBreakDiv"></div>
+      <div class="profileValuediv">{{birth_date}}</div>
+    </div>
+    <div class="profileDataDiv email">
+      <div class="profileLabeldiv">Email </div>
+      <div class="profileBreakDiv"></div>
+      <div class="profileValuediv">{{email}}</div>
+    </div>
+    <div class="profileDataDiv phone">
+      <div class="profileLabeldiv">Phone </div>
+      <div class="profileBreakDiv"></div>
+      <div class="profileValuediv">
+        {{#each contact.phone_numbers}}
+        <div>
+          <div class="phoneType">{{type}}</div><div class="phoneNumber">{{number}}</div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="profileDataDiv interests">
+      <div class="profileLabeldiv">Interests </div>
+      <div class="profileBreakDiv"></div>
+      <div class="profileValuediv">{{interests}}</div>
+    </div>
+    <div class="profileDataDiv expertise">
+      <div class="profileLabeldiv">Expertise </div>
+      <div class="profileBreakDiv"></div>
+      <div class="profileValuediv">{{expertise}}</div>
+    </div>
+    <div class="profileDataDiv active_since">
+      <div class="profileLabeldiv">Active Since </div>
+      <div class="profileBreakDiv"></div>
+      <div class="profileValuediv">{{active_since}}</div>
+    </div>
+  </div>
+</div>

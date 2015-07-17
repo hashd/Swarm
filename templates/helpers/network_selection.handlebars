@@ -1,0 +1,12 @@
+<div class="mui-dropdown">
+  {{#each networks}}
+  {{#if is_primary}}
+  <button class="mui-btn mui-btn-default mui-btn-flat" data-mui-toggle="dropdown" data-network-id="{{id}}">{{name}}<span class="mui-caret"></span></button>
+  {{/if}}
+  {{/each}}
+  <ul class="mui-dropdown-menu mui-dropdown-menu-right">
+  {{#each networks}}
+    <li><a href="#" data-network-id="{{id}}">{{name}}</a></li>
+  {{/each}}
+  </ul>
+</div>
