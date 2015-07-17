@@ -96,8 +96,14 @@
   margin: 0;
 }
 
+.header label i {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
 .header label {
-  top: -4px;
+  top: -6px;
+  font-size: 0.6em;
 }
 
 .header button.mui-btn {

@@ -110,7 +110,7 @@ Swarm.Client.prototype = {
         self.peopleService.init();
         break;
       case "Search":
-        pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label>Search</label></div>');
+        pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label><i class="material-icons">search</i>Search</label></div>');
         pageTitle.find('input').focus();
         break;
       default:
