@@ -5,70 +5,49 @@ Swarm.Feeds = function (){
 Swarm.Feeds.prototype = {
   init: function(){
     var self = this;
-    self.getFeeds();
-    self.attachWindowScrollEvent();
+    self.bindTabEvents();
+
+    $('#content .sw-network-feed-tabs a').first().trigger('click')
   },
-  getFeeds: function(){
+
+  bindTabEvents: function () {
     var self = this;
-    $("#content").empty();
-    Swarm.utils.showLoadingIcon();
-    jQuery.ajax({
-  		type :"GET",
-  		url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
-      data:{
-        "limit":7
-      },
-  		dataType: 'json',
-  		xhrFields: {
-  			withCredentials: false
-  		},
-  		success : function(data){
-        Swarm.utils.hideLoadingIcon();
-        Swarm.utils.buildFeedInfo(data);
-        $('#content').append('<div><button class="mui-z3 mui-btn mui-btn-floating mui-btn-floating-mini post-btn"><i class="material-icons">add</i></button></div>');
-  			$('.post-btn').click(function (event){
-          swarmInstance.postMessageService.init();
-        });
-        //console.log(data);
-  		},
-  		error : function(){
-        Swarm.utils.hideLoadingIcon();
-  			alert("Error, Please login to Yammer");
-  		}
-  	});
+    $('#content .sw-network-feed-tabs a').on('click', function () {
+      var clkd = $(this),
+        channel = clkd.html().toLowerCase();
+
+      $("#content .network-feed").empty();
+      self.getFeeds(channel);
+      self.attachWindowScrollEvent(channel);
+    });
   },
-  attachWindowScrollEvent: function(){
+
+  getFeeds: function (channel) {
     var self = this;
-    var content = $("#content");
-    
+    channel = channel || 'all';
+
+    Swarm.utils.showLoadingIcon('#network-feed-' + channel);
+    Swarm.api.getThreadedMessagesFeed(channel, function (data) {
+      Swarm.utils.hideLoadingIcon();
+      Swarm.utils.buildFeedInfo(data, false, $("#network-feed-" + channel));
+		});
+  },
+
+  attachWindowScrollEvent: function (channel) {
+    var self = this,
+      content = $("#content");
+    channel = channel || 'all';
+
     content.slimScroll().unbind('slimscroll').bind('slimscroll', function (e, pos) {
-      //console.log('At position ' + pos);
-      if(pos == 'bottom') {
-        if($('body').height() != ($(window).height() + window.pageYOffset)){
+      if (pos === 'bottom') {
+        if($('body').height() != ($(window).height() + window.pageYOffset)) {
           return false;
         }
 
-      var lastMsgId = $('div.msg_main:last').attr('data-msg-id');
-
-      jQuery.ajax({
-            type :"GET",
-            url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
-            data:{
-              "limit":7,
-              "older_than": lastMsgId
-            },
-            dataType: 'json',
-            xhrFields: {
-              withCredentials: false
-            },
-            success : function(data){
-                Swarm.utils.buildFeedInfo(data);
-
-            },
-            error : function(){
-              alert("error");
-            }
-        });
+        var lastMsgId = $('.network-feed div.msg_main:last').attr('data-msg-id');
+        Swarm.api.getThreadedMessagesFeed(channel, function (data) {
+          Swarm.utils.buildFeedInfo(data, false, $("#network-feed-" + channel));
+        }, { older_than: lastMsgId });
       }
     });
   }

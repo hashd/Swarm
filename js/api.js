@@ -86,5 +86,23 @@ Swarm.API.prototype = {
       self.setNetworks(data);
       self.setAccessToken(tempAccessToken);
     });
+  },
+
+  getThreadedMessagesFeed: function (channel, cb, additionalOptions) {
+    var self = this,
+      threadedOptions = $.extend({ threaded: 'extended', limit: 10}, additionalOptions),
+      url = 'https://www.yammer.com/api/v1/messages.json/my_feed.json';
+
+    if (channel === 'all') {
+      url = 'https://www.yammer.com/api/v1/messages.json';
+    } else if (channel === 'top') {
+      url = 'https://www.yammer.com/api/v1/messages/algo.json';
+    } else if (channel === 'following') {
+      url = 'https://www.yammer.com/api/v1/messages/following.json';
+    } else {
+      console.log('Unknown message channel: ' + channel);
+    }
+
+    self.ajaxCall('GET', url, threadedOptions, cb);
   }
 }

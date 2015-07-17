@@ -37,7 +37,7 @@
   font-size: 0.8em;
 }
 .msg_body{
-  padding: 0.5em 0.3em 1.2em 0.3em;
+  padding: 0.5em 0.3em 0.5em 0.3em;
   font-size: 0.9em;
   line-height: 1.1em;
   word-break: break-word;
@@ -50,11 +50,21 @@
 }
 .msg_info {
   background-color: #f4f4f4;
-  margin-left: -17.5%;
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  padding: 2px 4px;
+}
+.msg_group_title {
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 0.8em;
+  background-color: #26618C;
+  color: #fff;
+  margin-left: -4px;
 }
 .msg_info > div {
   display: inline-block;
-  width: 50%;
+  width: 48%;
   cursor: pointer;
 }
 .msg_info i {
@@ -80,3 +90,11 @@
   float: right;
 }
 #content img { max-width: 100% }
+
+.msg_actions span {
+  padding: 4px 6px;
+  font-size: 0.9em;
+  display: inline-block;
+  cursor: pointer;
+  color: #26618C;
+}

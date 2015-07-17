@@ -21,12 +21,15 @@ Swarm.People.prototype = {
     var self = this,
       container = $("#content .sw-people-content");
 
+    self.pageNumber = pageNumber || 1;
+    self.initialLetter = initialLetter || 'A';
+
     jQuery.ajax({
       type :"GET",
       url : "https://www.yammer.com/api/v1/users.json?access_token="+yammer.getAccessToken(),
       data:{
-        "page": pageNumber || 1,
-        "letter": initialLetter || 'A'
+        "page": self.pageNumber,
+        "letter": self.initialLetter
       },
       dataType: 'json',
       xhrFields: {
@@ -34,13 +37,10 @@ Swarm.People.prototype = {
       },
       success : function(data){
         Swarm.utils.hideLoadingIcon();
-        if (!(pageNumber > 1 && data.length === 0)) {
-          data.forEach(function (d, i) {
-            d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
-          });
-          container.append(Swarm.templates.persons({ 'users': data }));
-          self.displayPeopleList(pageNumber + 1, initialLetter);
-        }
+        data.forEach(function (d, i) {
+          d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
+        });
+        container.append(Swarm.templates.persons({ 'users': data }));
       },
       error : function(){
         Swarm.utils.hideLoadingIcon();
@@ -90,7 +90,24 @@ Swarm.People.prototype = {
 
       container.find('.sw-people-content').empty();
       Swarm.utils.showLoadingIcon("#content .sw-people-content");
+
+      self.attachWindowScrollEvent();
       self.displayPeopleList(1, alphabet);
+    });
+  },
+
+  attachWindowScrollEvent: function () {
+    var self = this,
+      content = $("#content");
+
+    content.slimScroll().unbind('slimscroll').bind('slimscroll', function (e, pos) {
+      if (pos === 'bottom') {
+        if($('body').height() != ($(window).height() + window.pageYOffset)) {
+          return false;
+        }
+
+        self.displayPeopleList(self.pageNumber + 1, self.initialLetter);
+      }
     });
   }
 };

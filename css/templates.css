@@ -46,3 +46,13 @@
     padding: 1.5em;
     text-align: center;
 }
+
+.mui-tabs.sw-network-feed-tabs {
+    padding-top: 4px;
+    text-align: left;
+}
+
+.mui-tabs.sw-network-feed-tabs li a {
+    line-height: 24px;
+    height: 24px;
+}

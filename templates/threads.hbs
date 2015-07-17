@@ -1,0 +1,35 @@
+{{#each messages}}
+<div class='msg_main mui-panel mui-z2' data-msg-id='{{id}}'>
+	<div class='msg_meta'>
+		<div class='msg_group_title'>{{group.full_name}}</div>
+	</div>
+	<div>
+		<div class='msg_sender_pic'>
+			<a class='senderLinkAnc' data-user-id='{{sender.id}}' href="javascript:{}">
+				<img src='{{sender.mugshot_url}}' />
+			</a>
+		</div>
+		<div class='msg_details_main'>
+			<div class='msg_head'>
+				<div class="msg_sender_name">
+					<a class='senderLinkAnc' data-user-id='{{sender.id}}' href="javascript:{}">{{sender.full_name}}</a>
+				</div>
+				<div class="msg_date_time">{{createdDate}}</div>
+			</div>
+			<div class='msg_body' data-thread-id='{{thread_id}}'>
+				{{{mainBody}}}
+				{{{mainAttachment}}}
+			</div>
+			<div class="msg_actions">
+				<span class="msg_like">Like {{liked_by.count}}</span>
+				<span class="msg_reply">Reply</span>
+			</div>
+			<div class='msg_info'>
+				{{#each likedBy.names}}
+					{{full_name}},
+				{{/each}}{{#if likedBy.count}} and {{likedBy.count}} like this.{{/if}}
+			</div>
+		</div>
+	</div>
+</div>
+{{/each}}

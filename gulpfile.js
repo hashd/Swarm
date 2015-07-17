@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 
 var paths = {
   'swarm:src': ['js/namespace.js', 'js/**/*.js'],
-  'swarm:templates': ['templates/**/*.hbs']
+  'swarm:templates': ['templates/*.hbs']
 };
 
 var options = {

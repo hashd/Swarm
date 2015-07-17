@@ -20,6 +20,7 @@ Swarm.Client = function () {
 Swarm.Client.prototype = {
   init: function () {
     var self = this;
+    self.initBackgroundTasks();
     self.bindUserEvents();
     self.invokeCustomization();
 
@@ -29,41 +30,48 @@ Swarm.Client.prototype = {
     self.navBar.find("i").first().trigger("click", [true]);
   },
 
+  initBackgroundTasks: function () {
+    //chrome.storage.local.set({'newImagePath': '/img/yammerlogo_notifier.png'});
+    // create alarm for polling new messages every 1 minutes
+    chrome.alarms.create('checkNewTasks', {
+        when: 1000,
+        periodInMinutes: 1
+    });
+    chrome.browserAction.setBadgeText({text: ""});
+  },
+
   bindUserEvents: function () {
     var self = this;
     self.bindTabSelectEvent();
     self.bindSearchEvent();
+    self.bindPostMessageEvent();
   },
 
   bindTabSelectEvent: function () {
     var self = this;
-    self.navBar.find('i').click(function(event, isFirst){
+    self.navBar.find('i').click(function(){
       var target = $(this),
         jsVal = target.data("jsval"),
         title = target.attr('title'),
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
-        self.makeActiveTab(jsValCap, title);
 
-
-        //chrome.storage.local.set({'newImagePath': '/img/yammerlogo_notifier.png'});
-        // create alarm for polling new messages every 1 minutes
-        chrome.alarms.create('checkNewTasks', {
-            when: 1000,
-            periodInMinutes: 1
-        });
-
-        chrome.browserAction.setBadgeText({text: ""});
-
-        target.parent().siblings().find('i').removeClass('active');
-        target.addClass('active');
+      target.parent().siblings().find('i').removeClass('active');
+      target.addClass('active');
+      self.makeActiveTab(jsValCap, title);
     });
   },
 
   bindSearchEvent: function () {
     var self = this;
     self.header.on('change', 'input#search', function () {
-      var target = $(this);
-      self.searchService.init(target.val());
+      self.searchService.init($(this).val());
+    });
+  },
+
+  bindPostMessageEvent: function () {
+    var self = this;
+    self.content.on('click', '.post-btn', function (event) {
+      self.postMessageService.init();
     });
   },
 
@@ -72,11 +80,12 @@ Swarm.Client.prototype = {
       pageTitle = self.header.find('.page-title').html(title);
 
     // Update slimscrollbar position for content change
-    self.content.slimScroll().removeData('events');
+    self.content.slimScroll().unbind('slimscroll');
     self.content.parent().find('.slimScrollBar').css('top',0);
 
     switch (jsVal){
       case "Feeds":
+        self.content.html(Swarm.templates.network_feed());
         self.feedsService.init();
         break;
       case "Messages":
@@ -112,12 +121,10 @@ Swarm.Client.prototype = {
 
   invokeCustomization: function () {
     var self = this;
-    self.content.slimScroll({
-      height: '480px',
-      width: '330px'
-    }).bind('slimscroll', function (e, pos) {
-      console.log('At position ' + pos);
-    });
+    self.content.slimScroll({ height: '480px', width: '330px'})
+      .bind('slimscroll', function (e, pos) {
+        console.log('At position ' + pos);
+      });
   },
 
   getCurrentUserMugshot: function () {

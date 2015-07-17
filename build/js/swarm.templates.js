@@ -1,5 +1,8 @@
 this["Swarm"] = this["Swarm"] || {};
 this["Swarm"]["templates"] = this["Swarm"]["templates"] || {};
+this["Swarm"]["templates"]["network_feed"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<ul class=\"mui-tabs sw-network-feed-tabs mui-tabs-justified\">\n  <li class=\"mui-active\"><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-all\">All</a></li>\n  <li><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-top\">Top</a></li>\n  <li><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-following\">Following</a></li>\n</ul>\n<div class=\"mui-tab-content\">\n  <div class=\"mui-tab-pane mui-active network-feed\" id=\"network-feed-all\"></div>\n  <div class=\"mui-tab-pane network-feed\" id=\"network-feed-top\"></div>\n  <div class=\"mui-tab-pane network-feed\" id=\"network-feed-following\"></div>\n</div>\n<div>\n	<button class=\"mui-z3 mui-btn mui-btn-floating mui-btn-floating-mini post-btn\">\n		<i class=\"material-icons\">add</i>\n	</button>\n</div>\n";
+},"useData":true});
 this["Swarm"]["templates"]["network_selection"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var stack1;
 
@@ -43,7 +46,7 @@ this["Swarm"]["templates"]["persons"] = Handlebars.template({"1":function(depth0
     + alias3(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"full_name","hash":{},"data":data}) : helper)))
     + "</div>\n	</div>\n";
 },"3":function(depth0,helpers,partials,data) {
-    return "  <div class=\"mui-col-xs-24 mui-panel sw-no-user-found\">\n    No users found.\n  </div>\n";
+    return "  <div class=\"mui-col-xs-24 mui-panel sw-no-user-found\">\n    You have reached the end.\n  </div>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1;
 
@@ -66,6 +69,52 @@ this["Swarm"]["templates"]["threadedmessage"] = Handlebars.template({"1":functio
   return "<div class=\"mui-panel sw-message-thread\">\n"
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.messages : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</div>\n";
+},"useData":true});
+this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
+
+  return "<div class='msg_main mui-panel mui-z2' data-msg-id='"
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "'>\n	<div class='msg_meta'>\n		<div class='msg_group_title'>"
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.full_name : stack1), depth0))
+    + "</div>\n	</div>\n	<div>\n		<div class='msg_sender_pic'>\n			<a class='senderLinkAnc' data-user-id='"
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.sender : depth0)) != null ? stack1.id : stack1), depth0))
+    + "' href=\"javascript:{}\">\n				<img src='"
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.sender : depth0)) != null ? stack1.mugshot_url : stack1), depth0))
+    + "' />\n			</a>\n		</div>\n		<div class='msg_details_main'>\n			<div class='msg_head'>\n				<div class=\"msg_sender_name\">\n					<a class='senderLinkAnc' data-user-id='"
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.sender : depth0)) != null ? stack1.id : stack1), depth0))
+    + "' href=\"javascript:{}\">"
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.sender : depth0)) != null ? stack1.full_name : stack1), depth0))
+    + "</a>\n				</div>\n				<div class=\"msg_date_time\">"
+    + alias3(((helper = (helper = helpers.createdDate || (depth0 != null ? depth0.createdDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"createdDate","hash":{},"data":data}) : helper)))
+    + "</div>\n			</div>\n			<div class='msg_body' data-thread-id='"
+    + alias3(((helper = (helper = helpers.thread_id || (depth0 != null ? depth0.thread_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"thread_id","hash":{},"data":data}) : helper)))
+    + "'>\n				"
+    + ((stack1 = ((helper = (helper = helpers.mainBody || (depth0 != null ? depth0.mainBody : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainBody","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\n				"
+    + ((stack1 = ((helper = (helper = helpers.mainAttachment || (depth0 != null ? depth0.mainAttachment : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainAttachment","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\n			</div>\n			<div class=\"msg_actions\">\n				<span class=\"msg_like\">Like "
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1), depth0))
+    + "</span>\n				<span class=\"msg_reply\">Reply</span>\n			</div>\n			<div class='msg_info'>\n"
+    + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.names : stack1),{"name":"each","hash":{},"fn":this.program(2, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(4, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "\n			</div>\n		</div>\n	</div>\n</div>\n";
+},"2":function(depth0,helpers,partials,data) {
+    var helper;
+
+  return "					"
+    + this.escapeExpression(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"full_name","hash":{},"data":data}) : helper)))
+    + ",\n				";
+},"4":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return " and "
+    + this.escapeExpression(this.lambda(((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1), depth0))
+    + " like this.";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.messages : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 this["Swarm"]["templates"]["user_profile"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
