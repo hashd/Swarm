@@ -75,13 +75,18 @@ Swarm.Client.prototype = {
     });
   },
 
+  scrollToTop: function () {
+    var self = this;
+    self.content.parent().find('.slimScrollBar').css('top',0);
+  },
+
   makeActiveTab: function (jsVal, title){
     var self = this,
       pageTitle = self.header.find('.page-title').html(title);
 
     // Update slimscrollbar position for content change
     self.content.slimScroll().unbind('slimscroll');
-    self.content.parent().find('.slimScrollBar').css('top',0);
+    self.scrollToTop();
 
     switch (jsVal){
       case "Feeds":

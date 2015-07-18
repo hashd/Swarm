@@ -50,9 +50,17 @@
 .mui-tabs.sw-network-feed-tabs {
     padding-top: 4px;
     text-align: left;
+    background-color: #fff;
+    position: fixed;
+    width: 89%;
+    opacity: 0.96;
 }
 
 .mui-tabs.sw-network-feed-tabs li a {
     line-height: 24px;
     height: 24px;
+}
+
+.network-feed {
+    padding-top: 36px;
 }

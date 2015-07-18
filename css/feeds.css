@@ -64,7 +64,6 @@
 }
 .msg_info > div {
   display: inline-block;
-  width: 48%;
   cursor: pointer;
 }
 .msg_info i {
@@ -80,10 +79,6 @@
 .msg_info > div span {
   margin-top: -8px;
   display: inline-block;
-  vertical-align: middle;
-}
-.msg_info > div:first-child {
-  padding-left: 15%;
 }
 
 .post_button {
@@ -97,4 +92,12 @@
   display: inline-block;
   cursor: pointer;
   color: #26618C;
+}
+
+.msg_liked_by:after {
+  content: ',';
+}
+
+.msg_liked_by:last-child:after {
+  content: '';
 }

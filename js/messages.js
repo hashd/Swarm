@@ -17,7 +17,8 @@ Swarm.Messages.prototype = {
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
         	data:{
-          		"limit":7
+          		"limit":7,
+              "extended": true
         	},
     		dataType: 'json',
     		xhrFields: {
@@ -66,9 +67,9 @@ Swarm.Messages.prototype = {
               },
               error : function(){
                 alert("error");
-              } 
+              }
           });
-       } 
+       }
     });
 
   }

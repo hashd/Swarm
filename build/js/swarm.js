@@ -486,13 +486,18 @@ Swarm.Client.prototype = {
     });
   },
 
+  scrollToTop: function () {
+    var self = this;
+    self.content.parent().find('.slimScrollBar').css('top',0);
+  },
+
   makeActiveTab: function (jsVal, title){
     var self = this,
       pageTitle = self.header.find('.page-title').html(title);
 
     // Update slimscrollbar position for content change
     self.content.slimScroll().unbind('slimscroll');
-    self.content.parent().find('.slimScrollBar').css('top',0);
+    self.scrollToTop();
 
     switch (jsVal){
       case "Feeds":
@@ -578,6 +583,7 @@ Swarm.Feeds.prototype = {
         channel = clkd.html().toLowerCase();
 
       $("#content .network-feed").empty();
+      $('#content').parent().find('.slimScrollBar').css('top',0);
       self.getFeeds(channel);
       self.attachWindowScrollEvent(channel);
     });
@@ -715,7 +721,8 @@ Swarm.Messages.prototype = {
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/messages/received.json?access_token="+yammer.getAccessToken(),
         	data:{
-          		"limit":7
+          		"limit":7,
+              "extended": true
         	},
     		dataType: 'json',
     		xhrFields: {
@@ -764,9 +771,9 @@ Swarm.Messages.prototype = {
               },
               error : function(){
                 alert("error");
-              } 
+              }
           });
-       } 
+       }
     });
 
   }
@@ -1306,24 +1313,53 @@ Swarm.utils = {
     }
 
     $.each(msgs, function (ind, msg) {
-      var senderArrObj = $.grep(references, function (e) { return e.id == msg.sender_id; }),
+      var senderArrObj = $.grep(references, function (e) { return e.type === 'user' && e.id == msg.sender_id; }),
         groupArrObj = $.grep(references, function (e) { return e.type === 'group' && e.id === msg.group_created_id }),
+        threadArrObj = $.grep(references, function (e) { return e.type === 'thread' && e.id === msg.thread_id }),
         sender = (senderArrObj.length > 0) ? senderArrObj[0] : {},
-        group = (groupArrObj.length > 0) ? groupArrObj[0] : {},
+        group = (groupArrObj.length > 0) ? groupArrObj[0] : { full_name: 'All Company'},
+        thread = (threadArrObj.length > 0) ? threadArrObj[0] : {},
         msgCreatedDate = Swarm.utils.getCreatedDate(msg.created_at);
 
       msg.sender = sender;
       msg.createdDate = msgCreatedDate;
-      msg.extendedThread = extendedThread[msg.thread_id];
+      msg.extendedThread = (extendedThread[msg.thread_id] || []).reverse();
       msg.mainBody = msg.body.rich || msg.body.plain;
       msg.mainAttachment = msg.attachments.length ?
         (msg.attachments[0].inline_html || msg.attachments[0].comment || msg.attachments[0].content_excerpt || msg.attachments[0].name) :
         "";
-      msg.group = group || { full_name: 'All Company' };
+      msg.group = group;
+      msg.threadInfo = thread;
       msg.likedBy = {
         count: Math.max(0, msg.liked_by.count - 2),
         names: msg.liked_by.names.slice(0, 2)
-      }
+      };
+      msg.threadInfo.stats.updates--;
+      msg.remainingMessages = msg.threadInfo.stats.updates - msg.extendedThread.length;
+
+      $.each(msg.extendedThread, function (ind, extendedMessage) {
+        var senderArrObj = $.grep(references, function (e) { return e.type === 'user' && e.id == extendedMessage.sender_id; }),
+          groupArrObj = $.grep(references, function (e) { return e.type === 'group' && e.id === extendedMessage.group_created_id }),
+          threadArrObj = $.grep(references, function (e) { return e.type === 'thread' && e.id === extendedMessage.thread_id }),
+          sender = (senderArrObj.length > 0) ? senderArrObj[0] : {},
+          group = (groupArrObj.length > 0) ? groupArrObj[0] : { full_name: 'All Company'},
+          thread = (threadArrObj.length > 0) ? threadArrObj[0] : {},
+          msgCreatedDate = Swarm.utils.getCreatedDate(extendedMessage.created_at);
+
+        extendedMessage.sender = sender;
+        extendedMessage.createdDate = msgCreatedDate;
+        extendedMessage.mainBody = extendedMessage.body.rich || extendedMessage.body.plain;
+        extendedMessage.mainAttachment = extendedMessage.attachments.length ?
+          (extendedMessage.attachments[0].inline_html || extendedMessage.attachments[0].comment || extendedMessage.attachments[0].content_excerpt || extendedMessage.attachments[0].name) :
+          "";
+        extendedMessage.group = group;
+        extendedMessage.threadInfo = thread;
+        extendedMessage.likedBy = {
+          count: Math.max(0, extendedMessage.liked_by.count - 2),
+          names: extendedMessage.liked_by.names.slice(0, 2)
+        }
+        console.log(extendedMessage);
+      });
     });
 
     var feed = Swarm.templates.threads(data);

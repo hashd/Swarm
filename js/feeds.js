@@ -17,6 +17,7 @@ Swarm.Feeds.prototype = {
         channel = clkd.html().toLowerCase();
 
       $("#content .network-feed").empty();
+      $('#content').parent().find('.slimScrollBar').css('top',0);
       self.getFeeds(channel);
       self.attachWindowScrollEvent(channel);
     });
