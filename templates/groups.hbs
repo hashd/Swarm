@@ -1,0 +1,10 @@
+<div class="mui-form-group group_list"
+<label>Groups</label>
+<div class="mui-select">
+<select name="groups" id="slt_groups">
+{{#each groups.group_memberships}}
+<option value="{{id}}"">{{full_name}}</option>
+{{/each}}
+</select>
+</div>
+</div>

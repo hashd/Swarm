@@ -1,5 +1,20 @@
 this["Swarm"] = this["Swarm"] || {};
 this["Swarm"]["templates"] = this["Swarm"]["templates"] || {};
+this["Swarm"]["templates"]["groups"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<option value=\""
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\"\">"
+    + alias3(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"full_name","hash":{},"data":data}) : helper)))
+    + "</option>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div class=\"mui-form-group group_list\"\n<label>Groups</label>\n<div class=\"mui-select\">\n<select name=\"groups\" id=\"slt_groups\">\n"
+    + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.groups : depth0)) != null ? stack1.group_memberships : stack1),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "</select>\n</div>\n</div>";
+},"useData":true});
 this["Swarm"]["templates"]["network_feed"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<ul class=\"mui-tabs sw-network-feed-tabs mui-tabs-justified mui-z3\">\n  <li class=\"mui-active\"><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-all\">All</a></li>\n  <li><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-top\">Top</a></li>\n  <li><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-following\">Following</a></li>\n</ul>\n<div class=\"mui-tab-content\">\n  <div class=\"mui-tab-pane mui-active network-feed\" id=\"network-feed-all\"></div>\n  <div class=\"mui-tab-pane network-feed\" id=\"network-feed-top\"></div>\n  <div class=\"mui-tab-pane network-feed\" id=\"network-feed-following\"></div>\n</div>\n<div>\n	<button class=\"mui-z3 mui-btn mui-btn-floating mui-btn-floating-mini post-btn\">\n		<i class=\"material-icons\">add</i>\n	</button>\n</div>\n";
 },"useData":true});
