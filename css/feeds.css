@@ -84,6 +84,11 @@
 .post_button {
   float: right;
 }
+
+.share_button {
+  float: right;
+}
+
 #content img { max-width: 100% }
 
 .msg_actions span {

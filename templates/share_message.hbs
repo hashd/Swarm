@@ -1,0 +1,11 @@
+<div class="reply_message mui-form-group">
+<div class="mui-select">
+<select name="groups" id="slt_groups">
+{{#each groups.group_memberships}}
+<option value="{{id}}"">{{full_name}}</option>
+{{/each}}
+</select>
+</div>
+<textarea name="message_body" class="mui-form-control" id="reply_body" rows="5" cols="37" autofocus/>
+<button class="share_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat">Share</button>
+</div>

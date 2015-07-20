@@ -1282,12 +1282,13 @@ Swarm.utils = {
         var target = $(this),
         msg_main = target.parents(".msg_details_main"),
         temp = [];
-        if(msg_main.find('.reply_message').length==0) {
-            msg_main.append(Swarm.templates.reply_message({}));
-        }
+        msg_main.find('.reply_message').remove();
+        msg_main.append(Swarm.templates.reply_message({}));
+        
       });
 
-    container.off("click", ".feed_main .reply_message .post_button").on("click", ".feed_main .reply_message .post_button", function(){
+    container.off("click", ".feed_main .reply_message .post_button")
+            .on("click", ".feed_main .reply_message .post_button", function(){
         var target = $(this),
         msg_main = target.parents(".msg_main"),
         msgId = msg_main.data("msg-id"),
@@ -1310,6 +1311,68 @@ Swarm.utils = {
             success : function(data){
                 // show the message thread if the reply is success
                 target.parents(".msg_details_main").find('.msg_body').trigger("click", [true]);
+            },
+            error : function(){
+                alert("error");
+            }
+        });
+
+    });
+    
+    container.off("click", ".feed_main .msg_actions .msg_share")
+                .on("click", ".feed_main .msg_actions .msg_share", function(){
+        var target = $(this),
+        msg_main_details = target.parents(".msg_details_main");
+        
+        jQuery.ajax({
+            type :"GET",
+            url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",
+            data:{
+                "limit":1
+            },
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: false
+            },
+            success : function(data){
+                msg_main_details.find('.reply_message').remove();
+                msg_main_details.append(Swarm.templates.share_message({groups: data}));        
+            },
+            error : function(){
+                alert("error");
+            }
+        });
+    });
+
+    container.off("click", ".feed_main .reply_message .share_button")
+            .on("click", ".feed_main .reply_message .share_button", function(){
+        var target = $(this),
+        msg_main = target.parents(".msg_main"),
+        msgId = msg_main.data("msg-id"),
+        reply_text = target.parent().find('textarea').val(),
+        groupId = $("select#slt_groups").val();
+        
+        jQuery.ajax({
+            type :"POST",
+            beforeSend: function (request)
+            {
+                request.setRequestHeader("Authorization", "Bearer "+yammer.getAccessToken());
+            },
+            url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
+            data:{
+                "shared_message_id":msgId,
+                "group_id":groupId,
+                "body":reply_text
+            },
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: false
+            },
+            success : function(data){
+                var groupService = new Swarm.Groups();
+                groupService.init();
+                // show the message thread if the reply is success
+                //target.parents(".msg_details_main").find('.msg_body').trigger("click", [true]);
             },
             error : function(){
                 alert("error");
