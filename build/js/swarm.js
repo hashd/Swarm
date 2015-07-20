@@ -1374,24 +1374,20 @@ Swarm.utils = {
     container.off("click", ".feed_main a.senderLinkAnc")
       .on("click", ".feed_main a.senderLinkAnc", function(){
         var target = $(this),
-          userId = target.data("userid"),
+          userId = target.data("user-id"),
           profileObj = new Swarm.Profile();
 
         $(window).off("scroll");
         profileObj.init(userId);
       });
 
-    container.off("click", ".feed_main .msg_replies_number")
-      .on("click", ".feed_main .msg_replies_number", function(){
+    container.off("click", ".feed_main .msg_actions .msg_reply")
+      .on("click", ".feed_main .msg_actions .msg_reply", function(){
         var target = $(this),
         msg_main = target.parents(".msg_details_main"),
         temp = [];
         if(msg_main.find('.reply_message').length==0) {
-            temp.push('<div class="reply_message mui-form-group">');
-            temp.push('<textarea name="message_body" class="mui-form-control" id="reply_body" rows="5" cols="37" autofocus/>');
-            temp.push('<button class="post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat">Post</button>');
-            temp.push("</div>");
-            msg_main.append(temp.join(''));
+            msg_main.append(Swarm.templates.reply_message({}));
         }
       });
 
@@ -1426,10 +1422,12 @@ Swarm.utils = {
 
     });
 
-    container.off("click", ".feed_main .msg_like_number").on("click", ".feed_main .msg_like_number", function(){
+    container.off("click", ".feed_main .msg_actions .msg_like")
+            .on("click", ".feed_main .msg_actions .msg_like", function(){
         var target = $(this),
         msg_main = target.parents(".msg_main"),
         msgId = msg_main.data("msg-id");
+
         jQuery.ajax({
             type :"POST",
             beforeSend: function (request)
@@ -1445,8 +1443,8 @@ Swarm.utils = {
                 withCredentials: false
             },
             success : function(data){
-                var like_number = parseInt(target.find('span').text());
-                target.find('span').html(like_number+1);
+                var like_number = parseInt(target.text().slice(6,7));
+                target.html('Like ('+(like_number+1)+')');
 
             },
             error : function(){
