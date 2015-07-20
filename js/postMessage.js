@@ -17,31 +17,36 @@ Swarm.PostMessage.prototype = {
 		var groupId = $("select#slt_groups").val();
 		var body_message = $("textarea#message_body").val();
 
-		//alert(body_message+''+groupId);
-		jQuery.ajax({
-  		type :"POST",
-      beforeSend: function (request)
-      {
-        request.setRequestHeader("Authorization", "Bearer "+yammer.getAccessToken());
-      },
-  		url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
-      data:{
-        "group_id":groupId,
-        "body":body_message
-      },
-  		dataType: 'json',
-  		xhrFields: {
-  			withCredentials: false
-  		},
-  		success : function(data){
-        //alert("post successful") ;
-  		},
-  		error : function(){
-  			alert("error");
-  		}
-  		});
+    var confirmation = confirm("This message will be posted to All Company.");
+    if(confirmation == true){
+        jQuery.ajax({
+        type :"POST",
+        beforeSend: function (request)
+        {
+          request.setRequestHeader("Authorization", "Bearer "+yammer.getAccessToken());
+        },
+        url : "https://www.yammer.com/api/v1/messages.json?access_token="+yammer.getAccessToken(),
+        data:{
+          "group_id":groupId,
+          "body":body_message
+        },
+        dataType: 'json',
+        xhrFields: {
+          withCredentials: false
+        },
+        success : function(data){
+          //alert("post successful") ;
+        },
+        error : function(){
+          alert("error");
+        }
+      });
+    }
 
 	});
+  },
+  addAllCompany : function(){
+    $("#slt_groups").prepend("<option value='' selected='selected'>All Company</option>");
   },
   getGroupList : function(){
   	var self = this;
@@ -59,6 +64,7 @@ Swarm.PostMessage.prototype = {
   		success : function(data){
           
           container.empty().html(Swarm.templates.post_message({ user: data}));
+          self.addAllCompany();
           container.slimScroll().off('slimscroll');
           container.slimScroll().removeData('events');
           container.find('textarea[name="message_body"]').focus();
