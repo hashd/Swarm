@@ -28,7 +28,7 @@ Swarm.Profile.prototype = {
   		},
   		error : function(){
         Swarm.utils.hideLoadingIcon();
-  			alert("error");
+  			alert("profile error");
   		}
   	});
   },

@@ -88,6 +88,9 @@ this["Swarm"]["templates"]["post_message"] = Handlebars.template({"1":function(d
 this["Swarm"]["templates"]["reply_message"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<div class=\"reply_message mui-form-group\">\n<textarea name=\"message_body\" class=\"mui-form-control\" id=\"reply_body\" rows=\"5\" cols=\"37\" autofocus/>\n<button class=\"post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat\">Post</button>\n</div>";
 },"useData":true});
+this["Swarm"]["templates"]["search"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<ul class=\"mui-tabs mui-tabs-justified\">\n<li class=\"mui-active\">\n<a class=\"search_messages\" data-mui-toggle=\"tab\" data-mui-controls=\"search_messages\">Messages</a>\n</li>\n<li>\n<a class=\"search_users\" data-mui-toggle=\"tab\" data-mui-controls=\"search_users\">Users</a>\n</li>\n</ul>\n<div class=\"mui-tab-content\">\n<div class=\"mui-tab-pane mui-active\" id=\"search_messages\"></div>\n<div class=\"mui-tab-pane\" id=\"search_users\"></div>\n</div>";
+},"useData":true});
 this["Swarm"]["templates"]["threadedmessage"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var stack1, alias1=this.lambda, alias2=this.escapeExpression;
 
@@ -261,4 +264,21 @@ this["Swarm"]["templates"]["user_profile"] = Handlebars.template({"1":function(d
     + "</div>\n    </div>\n    <div class=\"profileDataDiv active_since\">\n      <div class=\"profileLabeldiv\">Active Since </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
     + alias3(((helper = (helper = helpers.active_since || (depth0 != null ? depth0.active_since : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"active_since","hash":{},"data":data}) : helper)))
     + "</div>\n    </div>\n  </div>\n</div>\n";
+},"useData":true});
+this["Swarm"]["templates"]["users_list"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<div class='msg_main mui-panel mui-z2'>\n<div class='msg_sender_pic'>\n<a class='senderLinkAnc' data-user-id=\""
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\" href='javascript:{}'>\n<img src=\""
+    + alias3(((helper = (helper = helpers.mugshot_url || (depth0 != null ? depth0.mugshot_url : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mugshot_url","hash":{},"data":data}) : helper)))
+    + "\"/>\n</a>\n</div>\n<div class='msg_details_main'>\n<div class='msg_head'>\n<div class='msg_sender_name'>\n<a class='senderLinkAnc' data-user-id=\""
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\" href='javascript:{}'>"
+    + alias3(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"full_name","hash":{},"data":data}) : helper)))
+    + "</a>\n</div>\n</div>\n<div class='msg_body'>\n</div>\n</div>\n</div>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.user : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});

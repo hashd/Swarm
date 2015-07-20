@@ -7,7 +7,7 @@ Swarm.utils = {
 		$("#loading-icon").remove();
 	},
 
-	buildFeedInfo: function (data, isSearch, feedContainer) {
+	buildFeedInfo: function (data, feedContainer) {
     var self = this,
       container = $("#content"),
       msgs = data.messages,
@@ -73,8 +73,6 @@ Swarm.utils = {
     var feed = Swarm.templates.threads(data);
     if (feedContainer) {
       feedContainer.append(container.find('div.feed_main').append(feed));
-    } else if (isSearch) {
-      return feed;
     } else {
       container.find('div.feed_main').append(feed);
     }
