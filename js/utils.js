@@ -196,27 +196,6 @@ Swarm.utils = {
   });
 },
 
-
-showSearchResults:function(data){
-    var self = this;
-    container = $("#content"),
-    profile = data,
-    str = [];
-    str.push('<div>');
-    str.push('<div>Users '+data.count.users+'</div>');
-    str.push('<div>Messages '+data.count.messages+'</div>');
-    str.push('<div>Groups '+data.count.groups+'</div>');
-    str.push('<div>Pages '+data.count.pages+'</div>');
-    str.push('<div>Topics '+data.count.topics+'</div>');
-
-    //messages
-    str.push('<div>'+Swarm.utils.buildFeedInfo(data.messages)+'</div>');
-    //users
-
-    str.push('</div>');
-    container.empty().html(str.join(''));
-},
-
 showProfile: function(data) {
   var self = this,
     container = $("#content");
