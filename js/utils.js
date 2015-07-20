@@ -66,7 +66,7 @@ Swarm.utils = {
           count: Math.max(0, extendedMessage.liked_by.count - 2),
           names: extendedMessage.liked_by.names.slice(0, 2)
         }
-        console.log(extendedMessage);
+        //console.log(extendedMessage);
       });
     });
 

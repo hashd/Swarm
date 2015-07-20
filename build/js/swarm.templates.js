@@ -47,6 +47,27 @@ this["Swarm"]["templates"]["network_selection"] = Handlebars.template({"1":funct
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.networks : depth0),{"name":"each","hash":{},"fn":this.program(4, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "  </ul>\n</div>\n";
 },"useData":true});
+this["Swarm"]["templates"]["notifications"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<div class='msg_main mui-panel mui-z2'>\n<div class='msg_sender_pic'>\n<a class='senderLinkAnc' data-user-id=\""
+    + alias3(((helper = (helper = helpers.userId || (depth0 != null ? depth0.userId : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"userId","hash":{},"data":data}) : helper)))
+    + "\" href='javascript:{}'>\n<img src=\""
+    + alias3(((helper = (helper = helpers.itemUrl || (depth0 != null ? depth0.itemUrl : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"itemUrl","hash":{},"data":data}) : helper)))
+    + "\"/>\n</a>\n</div>\n<div class='msg_details_main'>\n<div class='msg_head'>\n<div class='msg_sender_name'>\n<a class='senderLinkAnc' data-user-id=\""
+    + alias3(((helper = (helper = helpers.userId || (depth0 != null ? depth0.userId : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"userId","hash":{},"data":data}) : helper)))
+    + "\" href='javascript:{}'>"
+    + alias3(((helper = (helper = helpers.userName || (depth0 != null ? depth0.userName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"userName","hash":{},"data":data}) : helper)))
+    + "</a></div>\n<div class='msg_date_time'>"
+    + alias3(((helper = (helper = helpers.createdDate || (depth0 != null ? depth0.createdDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"createdDate","hash":{},"data":data}) : helper)))
+    + "</div>\n</div>\n<div class='msg_body'>"
+    + alias3(((helper = (helper = helpers.msg_body || (depth0 != null ? depth0.msg_body : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"msg_body","hash":{},"data":data}) : helper)))
+    + "</div>\n</div>\n</div>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.items : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "");
+},"useData":true});
 this["Swarm"]["templates"]["people"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<div class=\"mui-row mui-panel mui-z2 sw-people-alpha-index\">\n	<span class=\"sw-people-alpha\" value=\"A\">A</span>\n	<span class=\"sw-people-alpha\" value=\"B\">B</span>\n	<span class=\"sw-people-alpha\" value=\"C\">C</span>\n	<span class=\"sw-people-alpha\" value=\"D\">D</span>\n	<span class=\"sw-people-alpha\" value=\"E\">E</span>\n	<span class=\"sw-people-alpha\" value=\"F\">F</span>\n	<span class=\"sw-people-alpha\" value=\"G\">G</span>\n	<span class=\"sw-people-alpha\" value=\"H\">H</span>\n	<span class=\"sw-people-alpha\" value=\"I\">I</span>\n	<span class=\"sw-people-alpha\" value=\"J\">J</span>\n	<span class=\"sw-people-alpha\" value=\"K\">K</span>\n	<span class=\"sw-people-alpha\" value=\"L\">L</span>\n	<span class=\"sw-people-alpha\" value=\"M\">M</span>\n	<span class=\"sw-people-alpha\" value=\"N\">N</span>\n	<span class=\"sw-people-alpha\" value=\"O\">O</span>\n	<span class=\"sw-people-alpha\" value=\"P\">P</span>\n	<span class=\"sw-people-alpha\" value=\"Q\">Q</span>\n	<span class=\"sw-people-alpha\" value=\"R\">R</span>\n	<span class=\"sw-people-alpha\" value=\"S\">S</span>\n	<span class=\"sw-people-alpha\" value=\"T\">T</span>\n	<span class=\"sw-people-alpha\" value=\"U\">U</span>\n	<span class=\"sw-people-alpha\" value=\"V\">V</span>\n	<span class=\"sw-people-alpha\" value=\"W\">W</span>\n	<span class=\"sw-people-alpha\" value=\"X\">X</span>\n	<span class=\"sw-people-alpha\" value=\"Y\">Y</span>\n	<span class=\"sw-people-alpha\" value=\"Z\">Z</span>\n</div>\n<div class=\"mui-row sw-people-content\">\n\n</div>\n";
 },"useData":true});

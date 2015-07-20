@@ -1,0 +1,17 @@
+{{#each items}}
+<div class='msg_main mui-panel mui-z2'>
+<div class='msg_sender_pic'>
+<a class='senderLinkAnc' data-user-id="{{userId}}" href='javascript:{}'>
+<img src="{{itemUrl}}"/>
+</a>
+</div>
+<div class='msg_details_main'>
+<div class='msg_head'>
+<div class='msg_sender_name'>
+<a class='senderLinkAnc' data-user-id="{{userId}}" href='javascript:{}'>{{userName}}</a></div>
+<div class='msg_date_time'>{{createdDate}}</div>
+</div>
+<div class='msg_body'>{{msg_body}}</div>
+</div>
+</div>
+{{/each}}

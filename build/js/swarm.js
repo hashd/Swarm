@@ -18,7 +18,7 @@ Swarm.ActivityFeed.prototype = {
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/streams/activities.json?access_token="+yammer.getAccessToken(),
         	data:{
-          		"limit":7
+          		"limit":20
         	},
     		dataType: 'json',
     		xhrFields: {
@@ -46,10 +46,7 @@ Swarm.ActivityFeed.prototype = {
     if(container.find('div.feed_main').length == 0) {
        	container.append('<div class="feed_main"></div>');
     }
-    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
-    var str = [];
+    
     $.each(items, function(ind, item){
 
     	var msg_body = item.message;
@@ -85,40 +82,23 @@ Swarm.ActivityFeed.prototype = {
     		}
     		msgArray.push(item_name);
     	});
-        var msgCreatedDate = item.created_at;
-        msg_body = msgArray.join(' ');
-        var todayDate = new Date();
-        var msgDate = new Date(msgCreatedDate);
-        if(todayDate.getDate() == msgDate.getDate() &&
-            todayDate.getMonth() == msgDate.getMonth() &&
-            todayDate.getFullYear() == msgDate.getFullYear()) {
-            	msgCreatedDate = msgCreatedDate.split(' ')[1];
-         	msgCreatedDate = msgCreatedDate.split(':')[0]+":"+msgCreatedDate.split(':')[1];
-     	}
-     	else {
-        	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
-     	}
+      
+      msg_body = msgArray.join(' ');
+      item.userId = userId;
+      item.userName = userName;
+      item.createdDate = Swarm.utils.getCreatedDate(item.created_at);
+      item.itemUrl = item_url;
+      item.msg_body = msg_body;
 
-     	str.push("<div class='msg_main mui-panel mui-z2' data-msg-id=''>");
-     	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+userId+"' href='javascript:{}'><img src='"+item_url+"'/></a></div>");
-     	str.push("<div class='msg_details_main'>");
-     	str.push("<div class='msg_head'>");
-     	str.push("<div class='msg_sender_name'><a class='senderLinkAnc' data-userid='"+userId+"' href='javascript:{}'>"+userName+"</a></div>");
-     	str.push("<div class='msg_date_time'>"+msgCreatedDate+"</div>");
-     	str.push("</div>");
-     	str.push("<div class='msg_body'>");
-     	str.push(msg_body);
-     	str.push("</div>");
-     	str.push("</div>");
-     	str.push("</div>");
  	});
-	container.find('div.feed_main').append(str.join(''));
+	container.find('div.feed_main').append(Swarm.templates.notifications({items:data.items}));
   
   container.slimScroll().off('slimscroll');
   container.slimScroll().removeData('events');
+  container.off("click", ".feed_main .msg_body");
 	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     	var target = $(this),
-    	userId = target.data("userid"),
+    	userId = target.data("user-id"),
     	profileObj = new Swarm.Profile();
     	$(window).off("scroll");
     	profileObj.init(userId);
@@ -813,7 +793,7 @@ Swarm.Notifications.prototype = {
     		type :"GET",
     		url : "https://www.yammer.com/api/v1/streams/notifications.json?access_token="+yammer.getAccessToken(),
         	data:{
-          		"limit":7
+          		"limit":20
         	},
     		dataType: 'json',
     		xhrFields: {
@@ -840,10 +820,7 @@ Swarm.Notifications.prototype = {
     if(container.find('div.feed_main').length == 0) {
        	container.append('<div class="feed_main"></div>');
     }
-    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
-    var str = [];
+    
     $.each(items, function(ind, item){
 
     	var msg_body = item.message;
@@ -876,43 +853,26 @@ Swarm.Notifications.prototype = {
             item_url = (userArrObj.length > 0) ? userArrObj[0].mugshot_url : "";
             userName = item_name;
       }
-      var msgCreatedDate = item.created_at;
       msg_body = msgArray.join(' ');
-      var todayDate = new Date();
-      var msgDate = new Date(msgCreatedDate);
-      if(todayDate.getDate() == msgDate.getDate() &&
-          todayDate.getMonth() == msgDate.getMonth() &&
-          todayDate.getFullYear() == msgDate.getFullYear()) {
-          msgCreatedDate = msgCreatedDate.split(' ')[1];
-         	msgCreatedDate = msgCreatedDate.split(':')[0]+":"+msgCreatedDate.split(':')[1];
-     	}
-     	else {
-        	msgCreatedDate = monthNames[msgDate.getMonth()] + " " + msgDate.getDate();
-     	}
-
-     	str.push("<div class='msg_main mui-panel mui-z2' data-msg-id=''>");
-     	str.push("<div class='msg_sender_pic'><a class='senderLinkAnc' data-userid='"+userId+"' href='javascript:{}'><img src='"+item_url+"'/></a></div>");
-     	str.push("<div class='msg_details_main'>");
-     	str.push("<div class='msg_head'>");
-     	str.push("<div class='msg_sender_name'><a class='senderLinkAnc' data-userid='"+userId+"' href='javascript:{}'>"+userName+"</a></div>");
-     	str.push("<div class='msg_date_time'>"+msgCreatedDate+"</div>");
-     	str.push("</div>");
-     	str.push("<div class='msg_body'>");
-     	str.push(msg_body);
-     	str.push("</div>");
-     	str.push("</div>");
-     	str.push("</div>");
+      item.userId = userId;
+      item.userName = userName;
+      item.createdDate = Swarm.utils.getCreatedDate(item.created_at);
+      item.itemUrl = item_url;
+      item.msg_body = msg_body;
+     	
  	});
-	container.find('div.feed_main').append(str.join(''));
+	container.find('div.feed_main').append(Swarm.templates.notifications({items:data.items}));
   container.slimScroll().off('slimscroll');
   container.slimScroll().removeData('events');
+  container.off("click", ".feed_main .msg_body");
 	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     	var target = $(this),
-    	userId = target.data("userid"),
+    	userId = target.data("user-id"),
     	profileObj = new Swarm.Profile();
     	$(window).off("scroll");
     	profileObj.init(userId);
 	 });
+
   },
  }
 
@@ -1296,7 +1256,7 @@ Swarm.utils = {
           count: Math.max(0, extendedMessage.liked_by.count - 2),
           names: extendedMessage.liked_by.names.slice(0, 2)
         }
-        console.log(extendedMessage);
+        //console.log(extendedMessage);
       });
     });
 
