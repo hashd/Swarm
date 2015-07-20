@@ -1102,29 +1102,8 @@ Swarm.PostMessage.prototype = {
   			withCredentials: false
   		},
   		success : function(data){
-          str = [];
-        	str.push("<div class='post_form mui-panel mui-z2'>");
-        	str.push("<form>");
-          str.push('<div class="mui-form-group">');
-          str.push('<label>Groups</label>');
-        	//str.push('<label style="font-size:12px">Groups:</label>');
-          str.push('<div class="mui-select">');
-        	str.push('<select name="groups" id="slt_groups">');
-
-          $.each(data.group_memberships, function(i,val){
-				    str.push('<option value='+'"'+val.id+'"'+'>'+val.full_name+'</option>')	;
-          });
-          str.push('</select>');
-          str.push("</div>");
-          str.push("</div>");
-          str.push('<div class="mui-form-group">');
-          str.push('<textarea name="message_body" class="mui-form-control" id="message_body" rows="10" cols="37"/>');
-          str.push('<label class="mui-form-floating-label">Write Message Here</label>');
-          str.push("</div>");
-          str.push('<input class="post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat" type="submit" ></input>');
-          str.push("</form>");
-          str.push("</div>");
-          container.empty().html(str.join(''));
+          
+          container.empty().html(Swarm.templates.post_message({ user: data}));
           container.slimScroll().off('slimscroll');
           container.slimScroll().removeData('events');
           container.find('textarea[name="message_body"]').focus();

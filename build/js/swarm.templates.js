@@ -55,6 +55,21 @@ this["Swarm"]["templates"]["persons"] = Handlebars.template({"1":function(depth0
     + ((stack1 = helpers.unless.call(depth0,((stack1 = (depth0 != null ? depth0.users : depth0)) != null ? stack1.length : stack1),{"name":"unless","hash":{},"fn":this.program(3, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</div>\n";
 },"useData":true});
+this["Swarm"]["templates"]["post_message"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<option value=\""
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"full_name","hash":{},"data":data}) : helper)))
+    + "</option>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div class='post_form mui-panel mui-z2'>\n<form>\n<div class=\"mui-form-group\">\n<label>Groups</label>\n<div class=\"mui-select\">\n<select name=\"groups\" id=\"slt_groups\">\n"
+    + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.group_memberships : stack1),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "</select>\n</div>\n</div>\n<div class=\"mui-form-group\">\n<textarea name=\"message_body\" class=\"mui-form-control\" id=\"message_body\" rows=\"10\" cols=\"37\"/>\n<label class=\"mui-form-floating-label\">Write Message Here</label>\n</div>\n<input class=\"post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat\" type=\"submit\" ></input>\n</form>\n</div>";
+},"useData":true});
 this["Swarm"]["templates"]["reply_message"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<div class=\"reply_message mui-form-group\">\n<textarea name=\"message_body\" class=\"mui-form-control\" id=\"reply_body\" rows=\"5\" cols=\"37\" autofocus/>\n<button class=\"post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat\">Post</button>\n</div>";
 },"useData":true});

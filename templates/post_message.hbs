@@ -1,0 +1,19 @@
+<div class='post_form mui-panel mui-z2'>
+<form>
+<div class="mui-form-group">
+<label>Groups</label>
+<div class="mui-select">
+<select name="groups" id="slt_groups">
+{{#each user.group_memberships}}
+<option value="{{id}}">{{full_name}}</option>
+{{/each}}          
+</select>
+</div>
+</div>
+<div class="mui-form-group">
+<textarea name="message_body" class="mui-form-control" id="message_body" rows="10" cols="37"/>
+<label class="mui-form-floating-label">Write Message Here</label>
+</div>
+<input class="post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat" type="submit" ></input>
+</form>
+</div>
