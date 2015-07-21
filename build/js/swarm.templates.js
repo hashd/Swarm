@@ -133,6 +133,9 @@ this["Swarm"]["templates"]["share_message"] = Handlebars.template({"1":function(
     + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.groups : depth0)) != null ? stack1.group_memberships : stack1),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</select>\n</div>\n<textarea name=\"message_body\" class=\"mui-form-control\" id=\"reply_body\" rows=\"5\" cols=\"37\" autofocus/>\n<button class=\"share_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat\">Share</button>\n</div>";
 },"useData":true});
+this["Swarm"]["templates"]["signin_yammer"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<div class='post_form mui-panel mui-z2'>\n<a class=\"signin_button\"><img style=\"cursor: pointer;\" src=\"img/Sign_In_with_Yammer.png\"></a>\n</div>";
+},"useData":true});
 this["Swarm"]["templates"]["threadedmessage"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var stack1, alias1=this.lambda, alias2=this.escapeExpression;
 
