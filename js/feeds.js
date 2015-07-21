@@ -30,7 +30,7 @@ Swarm.Feeds.prototype = {
     Swarm.utils.showLoadingIcon('#network-feed-' + channel);
     Swarm.api.getThreadedMessagesFeed(channel, function (data) {
       Swarm.utils.hideLoadingIcon();
-      Swarm.utils.buildFeedInfo(data, $("#network-feed-" + channel));
+      Swarm.utils.buildFeedInfo(false, data, $("#network-feed-" + channel));
 		});
   },
 
@@ -47,7 +47,7 @@ Swarm.Feeds.prototype = {
 
         var lastMsgId = $('.network-feed div.msg_main:last').attr('data-msg-id');
         Swarm.api.getThreadedMessagesFeed(channel, function (data) {
-          Swarm.utils.buildFeedInfo(data, $("#network-feed-" + channel));
+          Swarm.utils.buildFeedInfo(false, data, $("#network-feed-" + channel));
         }, { older_than: lastMsgId });
       }
     });

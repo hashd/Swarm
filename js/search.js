@@ -33,11 +33,11 @@ Swarm.Search.prototype = {
   		success : function(data){
         Swarm.utils.hideLoadingIcon();
         container.html(Swarm.templates.search());
-        Swarm.utils.buildFeedInfo(data.messages,$("#search_messages"));
-        self.buildUserList(data.users, $("#search_users"));        
+        Swarm.utils.buildFeedInfo(false, data.messages,$("#search_messages"));
+        self.buildUserList(data.users, $("#search_users"));
         container.slimScroll().off('slimscroll');
         container.slimScroll().removeData('events');
-        
+
   		},
   		error : function(){
         Swarm.utils.hideLoadingIcon();
@@ -57,7 +57,7 @@ Swarm.Search.prototype = {
         $(window).off("scroll");
         profileObj.init(userId);
         });
-    
+
   },
 
 }

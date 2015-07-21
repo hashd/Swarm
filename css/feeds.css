@@ -106,3 +106,16 @@
 .msg_liked_by:last-child:after {
   content: '';
 }
+
+.msg_extended_actions {
+  background-color: #eee;
+  font-size: 0.9em;
+  margin-top: 4px;
+  cursor: pointer;
+  padding: 2px 4px;
+  color: #39628E;
+}
+.msg_liked_by {
+  color: #39628E;
+  cursor: pointer;
+}

@@ -36,12 +36,12 @@
 				</div>
 				{{/if}}
 			</div>
+			{{#if remainingMessages}}
+			<div class="msg_extended_actions">
+				<span class="msg_thread_view" data-thread-id="{{thread_id}}">More messages</span>
+			</div>
+			{{/if}}
 			<div class="msg_extended" style="padding: 2px 8px;">
-				{{#if remainingMessages}}
-				<div class="msg_extended_actions">
-					<span class="msg_thread_view">More messages</span>
-				</div>
-				{{/if}}
 				{{#each extendedThread}}
 				<div class='msg_main' data-msg-id='{{id}}'>
 					<div>

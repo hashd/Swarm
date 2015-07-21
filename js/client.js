@@ -1,6 +1,8 @@
 Swarm.Client = function () {
   var self = this;
+  self.leftPane = $('.left-pane');
   self.navBar = $('.nav-bar');
+  self.appBar = $('.app-bar');
   self.header = $('.header');
   self.content = $('#content');
 
@@ -49,7 +51,7 @@ Swarm.Client.prototype = {
 
   bindTabSelectEvent: function () {
     var self = this;
-    self.navBar.find('i').click(function(){
+    self.leftPane.find('i').click(function(){
       var target = $(this),
         jsVal = target.data("jsval"),
         title = target.attr('title'),
@@ -117,6 +119,12 @@ Swarm.Client.prototype = {
       case "Search":
         pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label><i class="material-icons">search</i>Search</label></div>');
         pageTitle.find('input').focus();
+        break;
+      case "Settings":
+        self.content.html(Swarm.templates.settings());
+        break;
+      case "About":
+        self.content.html(Swarm.templates.about());
         break;
       default:
         console.log('Unregistered service: ' + jsVal);
