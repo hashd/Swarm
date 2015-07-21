@@ -395,12 +395,22 @@ Swarm.API.prototype = {
     }
 
     self.ajaxCall('GET', url, threadedOptions, cb);
+  },
+
+  getThread: function (threadId, cb, additionalOptions) {
+    var self = this,
+      threadOptions = $.extend({limit:10}, additionalOptions),
+      url = 'https://www.yammer.com/api/v1/messages/in_thread/' + threadId + '.json';
+
+    self.ajaxCall('GET', url, threadOptions, cb);
   }
 }
 
 Swarm.Client = function () {
   var self = this;
+  self.leftPane = $('.left-pane');
   self.navBar = $('.nav-bar');
+  self.appBar = $('.app-bar');
   self.header = $('.header');
   self.content = $('#content');
 
@@ -449,7 +459,7 @@ Swarm.Client.prototype = {
 
   bindTabSelectEvent: function () {
     var self = this;
-    self.navBar.find('i').click(function(){
+    self.leftPane.find('i').click(function(){
       var target = $(this),
         jsVal = target.data("jsval"),
         title = target.attr('title'),
@@ -517,6 +527,12 @@ Swarm.Client.prototype = {
       case "Search":
         pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label><i class="material-icons">search</i>Search</label></div>');
         pageTitle.find('input').focus();
+        break;
+      case "Settings":
+        self.content.html(Swarm.templates.settings());
+        break;
+      case "About":
+        self.content.html(Swarm.templates.about());
         break;
       default:
         console.log('Unregistered service: ' + jsVal);
@@ -586,7 +602,7 @@ Swarm.Feeds.prototype = {
     Swarm.utils.showLoadingIcon('#network-feed-' + channel);
     Swarm.api.getThreadedMessagesFeed(channel, function (data) {
       Swarm.utils.hideLoadingIcon();
-      Swarm.utils.buildFeedInfo(data, $("#network-feed-" + channel));
+      Swarm.utils.buildFeedInfo(false, data, $("#network-feed-" + channel));
 		});
   },
 
@@ -603,7 +619,7 @@ Swarm.Feeds.prototype = {
 
         var lastMsgId = $('.network-feed div.msg_main:last').attr('data-msg-id');
         Swarm.api.getThreadedMessagesFeed(channel, function (data) {
-          Swarm.utils.buildFeedInfo(data, $("#network-feed-" + channel));
+          Swarm.utils.buildFeedInfo(false, data, $("#network-feed-" + channel));
         }, { older_than: lastMsgId });
       }
     });
@@ -1183,11 +1199,11 @@ Swarm.Search.prototype = {
   		success : function(data){
         Swarm.utils.hideLoadingIcon();
         container.html(Swarm.templates.search());
-        Swarm.utils.buildFeedInfo(data.messages,$("#search_messages"));
-        self.buildUserList(data.users, $("#search_users"));        
+        Swarm.utils.buildFeedInfo(false, data.messages,$("#search_messages"));
+        self.buildUserList(data.users, $("#search_users"));
         container.slimScroll().off('slimscroll');
         container.slimScroll().removeData('events');
-        
+
   		},
   		error : function(){
         Swarm.utils.hideLoadingIcon();
@@ -1207,7 +1223,7 @@ Swarm.Search.prototype = {
         $(window).off("scroll");
         profileObj.init(userId);
         });
-    
+
   },
 
 }
@@ -1221,7 +1237,7 @@ Swarm.utils = {
 		$("#loading-icon").remove();
 	},
 
-	buildFeedInfo: function (data, feedContainer) {
+	buildFeedInfo: function (threadView, data, feedContainer) {
     var self = this,
       container = $("#content"),
       msgs = data.messages,
@@ -1265,7 +1281,7 @@ Swarm.utils = {
       msg.like_text = (msgLikedByObj.length>0)?"Unlike":"Like";  
       
       msg.threadInfo.stats.updates--;
-      msg.remainingMessages = msg.threadInfo.stats.updates - msg.extendedThread.length;
+      msg.remainingMessages = !threadView ? msg.threadInfo.stats.updates - msg.extendedThread.length : 0;
 
       $.each(msg.extendedThread, function (ind, extendedMessage) {
         var senderArrObj = $.grep(references, function (e) { return e.type === 'user' && e.id == extendedMessage.sender_id; }),
@@ -1320,7 +1336,7 @@ Swarm.utils = {
         temp = [];
         msg_main.find('.reply_message').remove();
         msg_main.append(Swarm.templates.reply_message({}));
-        
+
       });
 
     container.off("click", ".feed_main .reply_message .post_button")
@@ -1354,12 +1370,12 @@ Swarm.utils = {
         });
 
     });
-    
+
     container.off("click", ".feed_main .msg_actions .msg_share")
                 .on("click", ".feed_main .msg_actions .msg_share", function(){
         var target = $(this),
         msg_main_details = target.parents(".msg_details_main");
-        
+
         jQuery.ajax({
             type :"GET",
             url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",
@@ -1372,7 +1388,7 @@ Swarm.utils = {
             },
             success : function(data){
                 msg_main_details.find('.reply_message').remove();
-                msg_main_details.append(Swarm.templates.share_message({groups: data}));        
+                msg_main_details.append(Swarm.templates.share_message({groups: data}));
             },
             error : function(){
                 alert("error");
@@ -1387,7 +1403,7 @@ Swarm.utils = {
         msgId = msg_main.data("msg-id"),
         reply_text = target.parent().find('textarea').val(),
         groupId = $("select#slt_groups").val();
-        
+
         jQuery.ajax({
             type :"POST",
             beforeSend: function (request)
@@ -1461,39 +1477,25 @@ Swarm.utils = {
         });
     });
 
-    container.off("click", ".feed_main .msg_body").on("click", ".feed_main .msg_body", function(){
-        var self = this;
-        var target = $(this),
-        threadId = target.data("thread-id");
-        jQuery.ajax({
-            type :"GET",
-            url : 'https://www.yammer.com/api/v1/messages/in_thread/'+threadId+'.json?access_token='+yammer.getAccessToken(),
-            data:{
-                "limit":10
-            },
-            dataType: 'json',
-            xhrFields: {
-                withCredentials: false
-            },
-            success : function(data){
+    container.off("click", ".feed_main .msg_body, .feed_main .msg_thread_view")
+      .on("click", ".feed_main .msg_body, .feed_main .msg_thread_view", function(){
+        var self = this,
+          target = $(this),
+          threadId = target.data("thread-id");
 
-                container.empty();
-                container.slimScroll().off('slimscroll');
-                container.slimScroll().removeData('events');
-                Swarm.utils.hideLoadingIcon();
-                data.messages.reverse();
-                Swarm.utils.buildFeedInfo(data);
-                $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
-                                                'border-left': '3px solid #71a6f6',
-                                                'background': '#f3f5f8'});
+        Swarm.api.getThread(threadId, function (data) {
+          container.empty();
+          container.slimScroll().off('slimscroll');
+          container.slimScroll().removeData('events');
+          Swarm.utils.hideLoadingIcon();
 
-            },
-            error : function(){
-                Swarm.utils.hideLoadingIcon();
-                alert("error");
-        }
-    });
+          data.messages.reverse();
+          Swarm.utils.buildFeedInfo(true, data);
+          $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
+                                          'border-left': '3px solid #71a6f6',
+                                          'background': '#f3f5f8'});
 
+        });
   });
 },
 

@@ -1,5 +1,8 @@
 this["Swarm"] = this["Swarm"] || {};
 this["Swarm"]["templates"] = this["Swarm"]["templates"] || {};
+this["Swarm"]["templates"]["about"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<div class=\"mui-panel mui-z2\">\n  <div class=\"sw-about-jumbotron\">\n    <div style=\"sw-about-logo\"><img src=\"/img/yammerlogo.png\" title=\"Logo\"/></div>\n    <h3>Yammer plugin for Chrome</h3>\n  </div>\n  <div class=\"sw-about-tabs-container\">\n    <ul class=\"mui-tabs sw-about-tabs\">\n      <li class=\"mui-active\"><a data-mui-toggle=\"tab\" data-mui-controls=\"about-plugin\">About</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-contributors\">Contributors</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-technology\">Release notes</a></li>\n    </ul>\n    <div class=\"mui-tab-content\">\n      <div class=\"mui-tab-pane mui-active sw-about-tab\" id=\"about-plugin\">\n        <p>Yammer plugin for Chrome began as a Team LeanTaaS hackathon project on July 3rd. At the end of the hackathon, the POC showcased the potential of bringing the Yammer experience in the form of a plugin to Chrome.</p>\n        <p>Over the course, we have decided that the plugin should only enrich the experience rather than be a direct replacement for the website. However, we are trying to address all the important use cases of Yammer with this plugin.</p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-contributors\">\n        <p>The development team comprises of:</p>\n        <ul>\n          <li>Manoj Kumar Padala</li><li>\n          Krishnamraj Goud</li><li>\n          Kiran Danduprolu</li><li>\n          Mohanraj T</li><li>\n          Rishav Kumar Verma</li>\n        </ul>\n        <p>If you want to contribute to the plugin, you could contact one of the current development team to get started.</p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-technology\">\n        <p>Coming Soon</p>\n      </div>\n    </div>\n  </div>\n</div>\n";
+},"useData":true});
 this["Swarm"]["templates"]["groups"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
@@ -112,6 +115,9 @@ this["Swarm"]["templates"]["reply_message"] = Handlebars.template({"compiler":[6
 this["Swarm"]["templates"]["search"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<ul class=\"mui-tabs mui-tabs-justified\">\n<li class=\"mui-active\">\n<a class=\"search_messages\" data-mui-toggle=\"tab\" data-mui-controls=\"search_messages\">Messages</a>\n</li>\n<li>\n<a class=\"search_users\" data-mui-toggle=\"tab\" data-mui-controls=\"search_users\">Users</a>\n</li>\n</ul>\n<div class=\"mui-tab-content\">\n<div class=\"mui-tab-pane mui-active\" id=\"search_messages\"></div>\n<div class=\"mui-tab-pane\" id=\"search_users\"></div>\n</div>";
 },"useData":true});
+this["Swarm"]["templates"]["settings"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<div class=\"mui-panel mui-z2 sw-settings-pane\">\n <p>Coming soon!</p>\n\n <p>Settings will help you customize your experience from within the plugin</p>\n</div>\n";
+},"useData":true});
 this["Swarm"]["templates"]["share_message"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
@@ -177,8 +183,9 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + alias3(alias4(((stack1 = ((stack1 = (depth0 != null ? depth0.threadInfo : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.shares : stack1), depth0))
     + ")</span>\n			</div>\n			<div class='msg_info'>\n"
     + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(2, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "			</div>\n			<div class=\"msg_extended\" style=\"padding: 2px 8px;\">\n"
+    + "			</div>\n"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.remainingMessages : depth0),{"name":"if","hash":{},"fn":this.program(9, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "			<div class=\"msg_extended\" style=\"padding: 2px 8px;\">\n"
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.extendedThread : depth0),{"name":"each","hash":{},"fn":this.program(11, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "			</div>\n		</div>\n	</div>\n</div>\n";
 },"2":function(depth0,helpers,partials,data) {
@@ -208,7 +215,11 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
 },"7":function(depth0,helpers,partials,data) {
     return " likes this.";
 },"9":function(depth0,helpers,partials,data) {
-    return "				<div class=\"msg_extended_actions\">\n					<span class=\"msg_thread_view\">More messages</span>\n				</div>\n";
+    var helper;
+
+  return "			<div class=\"msg_extended_actions\">\n				<span class=\"msg_thread_view\" data-thread-id=\""
+    + this.escapeExpression(((helper = (helper = helpers.thread_id || (depth0 != null ? depth0.thread_id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"thread_id","hash":{},"data":data}) : helper)))
+    + "\">More messages</span>\n			</div>\n";
 },"11":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
 
