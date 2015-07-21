@@ -3,7 +3,7 @@ Swarm.API = function (accessToken) {
   self.networks = {};
   self.primaryAccessToken = accessToken;
   self.accessToken = accessToken;
-
+  self.currentUserId = '';
   self.init();
 };
 
@@ -45,6 +45,15 @@ Swarm.API.prototype = {
   getAccessToken: function () {
     return this.accessToken;
   },
+
+  setCurrentUserId: function (userId) {
+    this.currentUserId = userId;
+  },
+
+  getCurrentUserId : function() {
+    return this.currentUserId;
+  },
+
 
   setNetworks: function (networks) {
     var self = this;

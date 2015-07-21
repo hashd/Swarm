@@ -139,6 +139,7 @@ Swarm.Client.prototype = {
 
     Swarm.api.getCurrentUserProfile(function (data) {
       mugshotContainer.html($('<img />').attr('src', data.mugshot_url));
+      Swarm.api.setCurrentUserId(data.id);
       mugshotContainer.find('img').on('click', function () {
         Swarm.utils.showProfile(data);
       });
