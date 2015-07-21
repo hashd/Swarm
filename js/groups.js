@@ -59,7 +59,7 @@ Swarm.Groups.prototype = {
       },
       success : function(data){
         content.find('div.feed_main').remove();
-          Swarm.utils.buildFeedInfo(data);
+          Swarm.utils.buildFeedInfo(false,data);
       },
       error : function(){
         alert("error");

@@ -48,7 +48,7 @@ Swarm.Analytics.prototype = {
   			},
   			success : function(data){
   				$('#content').find('div.feed_main').remove();
-        		Swarm.utils.buildFeedInfo(data);
+        		Swarm.utils.buildFeedInfo(false,data);
   				//console.log(data);
   			},
   			error : function(){
