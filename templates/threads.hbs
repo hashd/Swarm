@@ -21,7 +21,7 @@
 				{{{mainAttachment}}}
 			</div>
 			<div class="msg_actions">
-				<span class="msg_like">Like ({{liked_by.count}})</span>
+				<span class="msg_like">{{like_text}} ({{liked_by.count}})</span>
 				<span class="msg_reply">Reply ({{threadInfo.stats.updates}})</span>
 				<span class="msg_share">Share ({{threadInfo.stats.shares}})</span>
 			</div>
@@ -62,7 +62,7 @@
 								{{{mainAttachment}}}
 							</div>
 							<div class="msg_actions">
-								<span class="msg_like">Like ({{liked_by.count}})</span>
+								<span class="msg_like">{{like_text}} ({{liked_by.count}})</span>
 							</div>
 							<div class='msg_info'>
 								{{#if liked_by.count}}

@@ -285,7 +285,7 @@ Swarm.API = function (accessToken) {
   self.networks = {};
   self.primaryAccessToken = accessToken;
   self.accessToken = accessToken;
-
+  self.currentUserId = '';
   self.init();
 };
 
@@ -327,6 +327,15 @@ Swarm.API.prototype = {
   getAccessToken: function () {
     return this.accessToken;
   },
+
+  setCurrentUserId: function (userId) {
+    this.currentUserId = userId;
+  },
+
+  getCurrentUserId : function() {
+    return this.currentUserId;
+  },
+
 
   setNetworks: function (networks) {
     var self = this;
@@ -530,6 +539,7 @@ Swarm.Client.prototype = {
 
     Swarm.api.getCurrentUserProfile(function (data) {
       mugshotContainer.html($('<img />').attr('src', data.mugshot_url));
+      Swarm.api.setCurrentUserId(data.id);
       mugshotContainer.find('img').on('click', function () {
         Swarm.utils.showProfile(data);
       });
@@ -1223,7 +1233,9 @@ Swarm.utils = {
     if (container.find('div.feed_main').length === 0) {
     	container.append('<div class="feed_main" />');
     }
-
+    
+    var currentUserId = Swarm.api.getCurrentUserId();
+    
     $.each(msgs, function (ind, msg) {
       var senderArrObj = $.grep(references, function (e) { return e.type === 'user' && e.id == msg.sender_id; }),
         groupArrObj = $.grep(references, function (e) { return e.type === 'group' && e.id === msg.group_created_id }),
@@ -1246,6 +1258,12 @@ Swarm.utils = {
         count: Math.max(0, msg.liked_by.count - 2),
         names: msg.liked_by.names.slice(0, 2)
       };
+      
+              
+      var msgLikedByObj = $.grep(msg.liked_by.names, function (e) 
+                              { return e.user_id == currentUserId; });
+      msg.like_text = (msgLikedByObj.length>0)?"Unlike":"Like";  
+      
       msg.threadInfo.stats.updates--;
       msg.remainingMessages = msg.threadInfo.stats.updates - msg.extendedThread.length;
 
@@ -1270,9 +1288,13 @@ Swarm.utils = {
           count: Math.max(0, extendedMessage.liked_by.count - 2),
           names: extendedMessage.liked_by.names.slice(0, 2)
         }
+        var extMsgLikedByObj = $.grep(extendedMessage.liked_by.names, function (e) 
+                                { return e.user_id == currentUserId; });
+        extendedMessage.like_text = (extMsgLikedByObj.length>0)?"Unlike":"Like";
         //console.log(extendedMessage);
       });
     });
+
 
     var feed = Swarm.templates.threads(data);
     if (feedContainer) {
@@ -1400,9 +1422,15 @@ Swarm.utils = {
         var target = $(this),
         msg_main = target.parents(".msg_main"),
         msgId = msg_main.data("msg-id");
+        var reqType;
+        if(target.text().indexOf('Like') != -1) {
+            reqType = "POST";
+        } else {
+            reqType = "DELETE"
+        }
 
         jQuery.ajax({
-            type :"POST",
+            type : reqType,
             beforeSend: function (request)
             {
                 request.setRequestHeader("Authorization", "Bearer "+yammer.getAccessToken());
@@ -1416,8 +1444,14 @@ Swarm.utils = {
                 withCredentials: false
             },
             success : function(data){
-                var like_number = parseInt(target.text().slice(6,7));
-                target.html('Like ('+(like_number+1)+')');
+                var like_number;
+                if(target.text().indexOf('Like') != -1) {
+                    like_number = parseInt(target.text().slice(6,7));
+                    target.html('Unlike ('+(like_number+1)+')');
+                } else {
+                    like_number = parseInt(target.text().slice(8,9));
+                    target.html('Like ('+(like_number-1)+')');
+                }
 
             },
             error : function(){

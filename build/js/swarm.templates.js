@@ -167,7 +167,9 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + ((stack1 = ((helper = (helper = helpers.mainBody || (depth0 != null ? depth0.mainBody : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainBody","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n				"
     + ((stack1 = ((helper = (helper = helpers.mainAttachment || (depth0 != null ? depth0.mainAttachment : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainAttachment","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n			</div>\n			<div class=\"msg_actions\">\n				<span class=\"msg_like\">Like ("
+    + "\n			</div>\n			<div class=\"msg_actions\">\n				<span class=\"msg_like\">"
+    + alias3(((helper = (helper = helpers.like_text || (depth0 != null ? depth0.like_text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"like_text","hash":{},"data":data}) : helper)))
+    + " ("
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1), depth0))
     + ")</span>\n				<span class=\"msg_reply\">Reply ("
     + alias3(alias4(((stack1 = ((stack1 = (depth0 != null ? depth0.threadInfo : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.updates : stack1), depth0))
@@ -228,7 +230,9 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + ((stack1 = ((helper = (helper = helpers.mainBody || (depth0 != null ? depth0.mainBody : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainBody","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n								"
     + ((stack1 = ((helper = (helper = helpers.mainAttachment || (depth0 != null ? depth0.mainAttachment : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainAttachment","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n							</div>\n							<div class=\"msg_actions\">\n								<span class=\"msg_like\">Like ("
+    + "\n							</div>\n							<div class=\"msg_actions\">\n								<span class=\"msg_like\">"
+    + alias3(((helper = (helper = helpers.like_text || (depth0 != null ? depth0.like_text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"like_text","hash":{},"data":data}) : helper)))
+    + " ("
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1), depth0))
     + ")</span>\n							</div>\n							<div class='msg_info'>\n"
     + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(12, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
