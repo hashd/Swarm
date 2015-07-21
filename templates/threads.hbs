@@ -1,7 +1,7 @@
 {{#each messages}}
 <div class='msg_main msg_thread_main mui-panel mui-z2' data-msg-id='{{id}}' data-thread-id="{{thread_id}}">
 	<div class='msg_meta'>
-		<div class='msg_group_title'>{{group.full_name}}</div>
+		<div class='msg_group_title' data-group-id='{{group.id}}'>{{group.full_name}}</div>
 	</div>
 	<div>
 		<div class='msg_sender_pic'>
@@ -25,8 +25,8 @@
 				<span class="msg_reply">Reply ({{threadInfo.stats.updates}})</span>
 				<span class="msg_share">Share ({{threadInfo.stats.shares}})</span>
 			</div>
+			{{#if liked_by.count}}
 			<div class='msg_info'>
-				{{#if liked_by.count}}
 				<div class='msg_likes'>
 					{{#each likedBy.names}}
 						<span class="msg_liked_by" data-user-id="{{user_id}}">{{full_name}}</span>
@@ -34,13 +34,14 @@
 					{{#if likedBy.count}} and {{likedBy.count}} like this.{{/if}}
 					{{#unless likedBy.count}} likes this.{{/unless}}
 				</div>
-				{{/if}}
 			</div>
+			{{/if}}
 			{{#if remainingMessages}}
 			<div class="msg_extended_actions">
 				<span class="msg_thread_view" data-thread-id="{{thread_id}}">More messages</span>
 			</div>
 			{{/if}}
+			{{#if extendedThread.length}}
 			<div class="msg_extended" style="padding: 2px 8px;">
 				{{#each extendedThread}}
 				<div class='msg_main' data-msg-id='{{id}}'>
@@ -63,6 +64,7 @@
 							</div>
 							<div class="msg_actions">
 								<span class="msg_like">{{like_text}} ({{liked_by.count}})</span>
+								<span class="msg_reply">Reply</span>
 							</div>
 							<div class='msg_info'>
 								{{#if liked_by.count}}
@@ -80,6 +82,7 @@
 				</div>
 				{{/each}}
 			</div>
+			{{/if}}
 		</div>
 	</div>
 </div>

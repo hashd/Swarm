@@ -19,9 +19,9 @@ Swarm.utils = {
     if (container.find('div.feed_main').length === 0) {
     	container.append('<div class="feed_main" />');
     }
-    
+
     var currentUserId = Swarm.api.getCurrentUserId();
-    
+
     $.each(msgs, function (ind, msg) {
       var senderArrObj = $.grep(references, function (e) { return e.type === 'user' && e.id == msg.sender_id; }),
         groupArrObj = $.grep(references, function (e) { return e.type === 'group' && e.id === msg.group_created_id }),
@@ -44,12 +44,12 @@ Swarm.utils = {
         count: Math.max(0, msg.liked_by.count - 2),
         names: msg.liked_by.names.slice(0, 2)
       };
-      
-              
-      var msgLikedByObj = $.grep(msg.liked_by.names, function (e) 
+
+
+      var msgLikedByObj = $.grep(msg.liked_by.names, function (e)
                               { return e.user_id == currentUserId; });
-      msg.like_text = (msgLikedByObj.length>0)?"Unlike":"Like";  
-      
+      msg.like_text = (msgLikedByObj.length>0)?"Unlike":"Like";
+
       msg.threadInfo.stats.updates--;
       msg.remainingMessages = !threadView ? msg.threadInfo.stats.updates - msg.extendedThread.length : 0;
 
@@ -74,7 +74,7 @@ Swarm.utils = {
           count: Math.max(0, extendedMessage.liked_by.count - 2),
           names: extendedMessage.liked_by.names.slice(0, 2)
         }
-        var extMsgLikedByObj = $.grep(extendedMessage.liked_by.names, function (e) 
+        var extMsgLikedByObj = $.grep(extendedMessage.liked_by.names, function (e)
                                 { return e.user_id == currentUserId; });
         extendedMessage.like_text = (extMsgLikedByObj.length>0)?"Unlike":"Like";
         //console.log(extendedMessage);
@@ -263,13 +263,48 @@ Swarm.utils = {
           Swarm.utils.buildFeedInfo(true, data);
           $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
                                           'border-left': '3px solid #71a6f6',
-                                          'background': '#f3f5f8'});
+                                          'background': '#f3f5f8'})
+            .find('.msg_meta').remove();
 
         });
   });
+
+  container.off('click', '.feed_main .msg_group_title')
+    .on('click', '.feed_main .msg_group_title', function () {
+      var groupId = $(this).data('group-id');
+
+      if (groupId) {
+        Swarm.utils.showLoadingIcon();
+        Swarm.api.getGroupThreads(groupId, function (data) {
+          container.empty();
+          container.slimScroll().off('slimscroll');
+          container.slimScroll().removeData('events');
+          Swarm.utils.hideLoadingIcon();
+
+          Swarm.utils.buildFeedInfo(false, data);
+        });
+      }
+    });
+
+  container.off('click', '.feed_main .msg_liked_by')
+    .on('click', '.feed_main .msg_liked_by', function () {
+      var userId = $(this).data('user-id');
+
+      if (userId) {
+        Swarm.utils.showLoadingIcon();
+        Swarm.api.getUserProfile(userId, function (data) {
+          container.empty();
+          container.slimScroll().off('slimscroll');
+          container.slimScroll().removeData('events');
+          Swarm.utils.hideLoadingIcon();
+
+          Swarm.utils.showProfile(data);
+        });
+      }
+    });
 },
 
-showProfile: function(data) {
+showProfile: function (data) {
   var self = this,
     container = $("#content");
 

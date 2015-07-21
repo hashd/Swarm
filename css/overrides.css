@@ -72,7 +72,6 @@
 
 .header {
   display: table;
-  border-bottom: 1px solid #ddd;
   width: 100%;
   margin: 0;
 }
@@ -157,7 +156,6 @@
 }
 
 .material-icons.separator {
-  border-top: 1px solid #CCC;
   margin-top: 12px;
   padding-top: 12px;
 }

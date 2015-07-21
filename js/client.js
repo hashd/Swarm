@@ -57,7 +57,7 @@ Swarm.Client.prototype = {
         title = target.attr('title'),
         jsValCap = jsVal.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
 
-      target.parent().siblings().find('i').removeClass('active');
+      self.leftPane.find('i').removeClass('active');
       target.addClass('active');
       self.makeActiveTab(jsValCap, title);
     });

@@ -1,7 +1,7 @@
 this["Swarm"] = this["Swarm"] || {};
 this["Swarm"]["templates"] = this["Swarm"]["templates"] || {};
 this["Swarm"]["templates"]["about"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<div class=\"mui-panel mui-z2\">\n  <div class=\"sw-about-jumbotron\">\n    <div style=\"sw-about-logo\"><img src=\"/img/yammerlogo.png\" title=\"Logo\"/></div>\n    <h3>Yammer plugin for Chrome</h3>\n  </div>\n  <div class=\"sw-about-tabs-container\">\n    <ul class=\"mui-tabs sw-about-tabs\">\n      <li class=\"mui-active\"><a data-mui-toggle=\"tab\" data-mui-controls=\"about-plugin\">About</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-contributors\">Contributors</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-technology\">Release notes</a></li>\n    </ul>\n    <div class=\"mui-tab-content\">\n      <div class=\"mui-tab-pane mui-active sw-about-tab\" id=\"about-plugin\">\n        <p>Yammer plugin for Chrome began as a Team LeanTaaS hackathon project on July 3rd. At the end of the hackathon, the POC showcased the potential of bringing the Yammer experience in the form of a plugin to Chrome.</p>\n        <p>Over the course, we have decided that the plugin should only enrich the experience rather than be a direct replacement for the website. However, we are trying to address all the important use cases of Yammer with this plugin.</p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-contributors\">\n        <p>The development team comprises of:</p>\n        <ul>\n          <li>Manoj Kumar Padala</li><li>\n          Krishnamraj Goud</li><li>\n          Kiran Danduprolu</li><li>\n          Mohanraj T</li><li>\n          Rishav Kumar Verma</li>\n        </ul>\n        <p>If you want to contribute to the plugin, you could contact one of the current development team to get started.</p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-technology\">\n        <p>Coming Soon</p>\n      </div>\n    </div>\n  </div>\n</div>\n";
+    return "<div class=\"mui-panel mui-z2\">\n  <div class=\"sw-about-jumbotron\">\n    <div style=\"sw-about-logo\"><img src=\"/img/yammerlogo.png\" title=\"Logo\"/></div>\n    <h3>Yammer plugin for Chrome</h3>\n    <h5>v 0.1.2</h5>\n  </div>\n  <div class=\"sw-about-tabs-container\">\n    <ul class=\"mui-tabs sw-about-tabs\">\n      <li class=\"mui-active\"><a data-mui-toggle=\"tab\" data-mui-controls=\"about-plugin\">About</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-technology\">What's new</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-contributors\">Contributors</a></li>\n    </ul>\n    <div class=\"mui-tab-content\">\n      <div class=\"mui-tab-pane mui-active sw-about-tab\" id=\"about-plugin\">\n        <p>Yammer plugin for Chrome began as a Team LeanTaaS hackathon project on July 3rd. At the end of the hackathon, the POC showcased the potential of bringing the Yammer experience in the form of a plugin to Chrome.</p>\n        <p>Over the course, we have decided that the plugin should only enrich the experience rather than be a direct replacement for the website. However, we are trying to address most of the use cases of Yammer with this plugin.</p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-contributors\">\n        <p>The current development team comprises of:</p>\n        <ul>\n          <li>Manoj Kumar Padala</li><li>\n          Krishnamraj Goud</li><li>\n          Kiran Danduprolu</li><li>\n          Mohanraj T</li><li>\n          Rishav Kumar Verma</li>\n        </ul>\n        <p>If you want to contribute to this plugin, you could contact one of the current development team members</p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-technology\">\n        <p>Coming Soon</p>\n      </div>\n    </div>\n  </div>\n</div>\n";
 },"useData":true});
 this["Swarm"]["templates"]["groups"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
@@ -158,7 +158,9 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
     + "' data-thread-id=\""
     + alias3(((helper = (helper = helpers.thread_id || (depth0 != null ? depth0.thread_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"thread_id","hash":{},"data":data}) : helper)))
-    + "\">\n	<div class='msg_meta'>\n		<div class='msg_group_title'>"
+    + "\">\n	<div class='msg_meta'>\n		<div class='msg_group_title' data-group-id='"
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.id : stack1), depth0))
+    + "'>"
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.group : depth0)) != null ? stack1.full_name : stack1), depth0))
     + "</div>\n	</div>\n	<div>\n		<div class='msg_sender_pic'>\n			<a class='senderLinkAnc' data-user-id='"
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.sender : depth0)) != null ? stack1.id : stack1), depth0))
@@ -184,23 +186,21 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + alias3(alias4(((stack1 = ((stack1 = (depth0 != null ? depth0.threadInfo : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.updates : stack1), depth0))
     + ")</span>\n				<span class=\"msg_share\">Share ("
     + alias3(alias4(((stack1 = ((stack1 = (depth0 != null ? depth0.threadInfo : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.shares : stack1), depth0))
-    + ")</span>\n			</div>\n			<div class='msg_info'>\n"
+    + ")</span>\n			</div>\n"
     + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(2, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "			</div>\n"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.remainingMessages : depth0),{"name":"if","hash":{},"fn":this.program(9, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "			<div class=\"msg_extended\" style=\"padding: 2px 8px;\">\n"
-    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.extendedThread : depth0),{"name":"each","hash":{},"fn":this.program(11, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "			</div>\n		</div>\n	</div>\n</div>\n";
+    + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.extendedThread : depth0)) != null ? stack1.length : stack1),{"name":"if","hash":{},"fn":this.program(11, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "		</div>\n	</div>\n</div>\n";
 },"2":function(depth0,helpers,partials,data) {
     var stack1;
 
-  return "				<div class='msg_likes'>\n"
+  return "			<div class='msg_info'>\n				<div class='msg_likes'>\n"
     + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.names : stack1),{"name":"each","hash":{},"fn":this.program(3, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "					"
     + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(5, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "\n					"
     + ((stack1 = helpers.unless.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"unless","hash":{},"fn":this.program(7, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "\n				</div>\n";
+    + "\n				</div>\n			</div>\n";
 },"3":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
@@ -224,6 +224,12 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + this.escapeExpression(((helper = (helper = helpers.thread_id || (depth0 != null ? depth0.thread_id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"thread_id","hash":{},"data":data}) : helper)))
     + "\">More messages</span>\n			</div>\n";
 },"11":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return "			<div class=\"msg_extended\" style=\"padding: 2px 8px;\">\n"
+    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.extendedThread : depth0),{"name":"each","hash":{},"fn":this.program(12, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "			</div>\n";
+},"12":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression, alias4=this.lambda;
 
   return "				<div class='msg_main' data-msg-id='"
@@ -248,20 +254,20 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + alias3(((helper = (helper = helpers.like_text || (depth0 != null ? depth0.like_text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"like_text","hash":{},"data":data}) : helper)))
     + " ("
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1), depth0))
-    + ")</span>\n							</div>\n							<div class='msg_info'>\n"
-    + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(12, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + ")</span>\n								<span class=\"msg_reply\">Reply</span>\n							</div>\n							<div class='msg_info'>\n"
+    + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(13, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "							</div>\n						</div>\n					</div>\n				</div>\n";
-},"12":function(depth0,helpers,partials,data) {
+},"13":function(depth0,helpers,partials,data) {
     var stack1;
 
   return "								<div class='msg_likes'>\n"
-    + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.names : stack1),{"name":"each","hash":{},"fn":this.program(13, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.names : stack1),{"name":"each","hash":{},"fn":this.program(14, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "									"
     + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(5, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "\n									"
     + ((stack1 = helpers.unless.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"unless","hash":{},"fn":this.program(7, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "\n								</div>\n";
-},"13":function(depth0,helpers,partials,data) {
+},"14":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
   return "										<span class=\"msg_liked_by\" data-user-id=\""

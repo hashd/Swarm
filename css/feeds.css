@@ -61,6 +61,7 @@
   background-color: #26618C;
   color: #fff;
   margin-left: -4px;
+  cursor: pointer;
 }
 .msg_info > div {
   display: inline-block;

@@ -121,5 +121,21 @@ Swarm.API.prototype = {
       url = 'https://www.yammer.com/api/v1/messages/in_thread/' + threadId + '.json';
 
     self.ajaxCall('GET', url, threadOptions, cb);
+  },
+
+  getGroupThreads: function (groupId, cb, additionalOptions) {
+    var self = this,
+      threadOptions = $.extend({limit: 20}, additionalOptions),
+      url = 'https://www.yammer.com/api/v1/messages/in_group/' + groupId;
+
+    self.ajaxCall('GET', url, threadOptions, cb);
+  },
+
+  getUserProfile: function (userId, cb, additionalOptions) {
+    var self = this,
+      profileOptions = $.extend({limit: 1}, additionalOptions),
+      url = 'https://www.yammer.com/api/v1/users/' + userId;
+
+    self.ajaxCall('GET', url, profileOptions, cb);
   }
 }
