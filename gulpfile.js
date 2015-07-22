@@ -16,7 +16,7 @@ var paths = {
   'swarm:js:src': ['js/namespace.js', 'js/**/*.js'],
   'swarm:templates:src': ['templates/*.hbs'],
   'swarm:css:src': ['css/feeds.css', 'css/profile.css', 'css/overrides.css', 'css/loading.css', 'css/templates.css'],
-  'swarm:plugin:src': ['build/**/*', 'img/**/*', 'libs/**/*', 'oauth2/**/*', 'background.js', 'popup.js', 'manifest.json', 'home.html']
+  'swarm:plugin:src': ['build/**/*', 'img/**/*', 'libs/css/**/*', 'libs/js/**/*', 'oauth2/**/*', 'background.js', 'popup.js', 'manifest.json', 'home.html']
 };
 
 var options = {
