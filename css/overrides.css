@@ -196,3 +196,8 @@
 #content img {
   max-width: 100%;
 }
+
+#search {
+  font-size: 0.9em;
+  color: #555;
+}

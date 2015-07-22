@@ -1363,7 +1363,7 @@ Swarm.utils = {
         temp = [];
         msg_main.find('.reply_message').remove();
         msg_main.append(Swarm.templates.reply_message({}));
-
+        msg_main.find('.reply_message textarea, .reply_message select').focus();
       });
 
     container.off("click", ".feed_main .reply_message .post_button")
@@ -1416,6 +1416,7 @@ Swarm.utils = {
             success : function(data){
                 msg_main_details.find('.reply_message').remove();
                 msg_main_details.append(Swarm.templates.share_message({groups: data}));
+                msg_main_details.find('.reply_message textarea, .reply_message select').focus();
             },
             error : function(){
                 alert("error");
