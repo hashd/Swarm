@@ -16,10 +16,8 @@ Swarm.PostMessage.prototype = {
 	$('.post_form').submit(function() {
 		var groupId = $("select#slt_groups").val();
 		var body_message = $("textarea#message_body").val();
-
-    var confirmation = confirm("This message will be posted to All Company.");
-    if(confirmation == true){
-        jQuery.ajax({
+    
+    jQuery.ajax({
         type :"POST",
         beforeSend: function (request)
         {
@@ -40,14 +38,11 @@ Swarm.PostMessage.prototype = {
         error : function(){
           alert("error");
         }
-      });
-    }
+    });
 
 	});
   },
-  addAllCompany : function(){
-    $("#slt_groups").prepend("<option value='' selected='selected'>All Company</option>");
-  },
+  
   getGroupList : function(){
   	var self = this;
   	container = $("#content"),
@@ -64,7 +59,6 @@ Swarm.PostMessage.prototype = {
   		success : function(data){
           
           container.empty().html(Swarm.templates.post_message({ user: data}));
-          self.addAllCompany();
           container.slimScroll().off('slimscroll');
           container.slimScroll().removeData('events');
           container.find('textarea[name="message_body"]').focus();

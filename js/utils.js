@@ -194,8 +194,6 @@ Swarm.utils = {
             success : function(data){
                 var groupService = new Swarm.Groups();
                 groupService.init();
-                // show the message thread if the reply is success
-                //target.parents(".msg_details_main").find('.msg_body').trigger("click", [true]);
             },
             error : function(){
                 alert("error");
@@ -302,6 +300,18 @@ Swarm.utils = {
           Swarm.utils.showProfile(data);
         });
       }
+    });
+   container.off('click','.feed_main .msg_body .yammer-object').
+            on('click','.feed_main .msg_body .yammer-object', function(e){
+        e.stopPropagation();
+        var target = $(this);
+        if(target.data('resource-model') == 'user') {
+            var userId = target.data('yammer-object').slice(5),
+            profileObj = new Swarm.Profile();
+            $(window).off("scroll");
+            profileObj.init(userId);
+        }
+            
     });
 },
 

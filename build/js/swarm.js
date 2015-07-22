@@ -668,7 +668,6 @@ Swarm.Groups.prototype = {
       },
       success : function(data){
         container.empty().html(Swarm.templates.groups({ groups: data}));
-        self.addAllCompany();
         self.displayGroupMessages();
         $('#slt_groups').trigger('change');
       },
@@ -676,10 +675,6 @@ Swarm.Groups.prototype = {
         alert("error");
       }
     });
-  },
-
-  addAllCompany : function(){
-    $("#slt_groups").prepend("<option value='all' selected='selected'>All Company</option>");
   },
 
   displayGroupMessages :function() {
@@ -1080,10 +1075,8 @@ Swarm.PostMessage.prototype = {
 	$('.post_form').submit(function() {
 		var groupId = $("select#slt_groups").val();
 		var body_message = $("textarea#message_body").val();
-
-    var confirmation = confirm("This message will be posted to All Company.");
-    if(confirmation == true){
-        jQuery.ajax({
+    
+    jQuery.ajax({
         type :"POST",
         beforeSend: function (request)
         {
@@ -1104,14 +1097,11 @@ Swarm.PostMessage.prototype = {
         error : function(){
           alert("error");
         }
-      });
-    }
+    });
 
 	});
   },
-  addAllCompany : function(){
-    $("#slt_groups").prepend("<option value='' selected='selected'>All Company</option>");
-  },
+  
   getGroupList : function(){
   	var self = this;
   	container = $("#content"),
@@ -1128,7 +1118,6 @@ Swarm.PostMessage.prototype = {
   		success : function(data){
           
           container.empty().html(Swarm.templates.post_message({ user: data}));
-          self.addAllCompany();
           container.slimScroll().off('slimscroll');
           container.slimScroll().removeData('events');
           container.find('textarea[name="message_body"]').focus();
@@ -1461,8 +1450,6 @@ Swarm.utils = {
             success : function(data){
                 var groupService = new Swarm.Groups();
                 groupService.init();
-                // show the message thread if the reply is success
-                //target.parents(".msg_details_main").find('.msg_body').trigger("click", [true]);
             },
             error : function(){
                 alert("error");
@@ -1569,6 +1556,18 @@ Swarm.utils = {
           Swarm.utils.showProfile(data);
         });
       }
+    });
+   container.off('click','.feed_main .msg_body .yammer-object').
+            on('click','.feed_main .msg_body .yammer-object', function(e){
+        e.stopPropagation();
+        var target = $(this);
+        if(target.data('resource-model') == 'user') {
+            var userId = target.data('yammer-object').slice(5),
+            profileObj = new Swarm.Profile();
+            $(window).off("scroll");
+            profileObj.init(userId);
+        }
+            
     });
 },
 

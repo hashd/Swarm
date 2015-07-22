@@ -23,7 +23,6 @@ Swarm.Groups.prototype = {
       },
       success : function(data){
         container.empty().html(Swarm.templates.groups({ groups: data}));
-        self.addAllCompany();
         self.displayGroupMessages();
         $('#slt_groups').trigger('change');
       },
@@ -31,10 +30,6 @@ Swarm.Groups.prototype = {
         alert("error");
       }
     });
-  },
-
-  addAllCompany : function(){
-    $("#slt_groups").prepend("<option value='all' selected='selected'>All Company</option>");
   },
 
   displayGroupMessages :function() {
