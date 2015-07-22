@@ -14,7 +14,7 @@ this["Swarm"]["templates"]["groups"] = Handlebars.template({"1":function(depth0,
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div class=\"mui-form-group group_list\"\n<label>Groups</label>\n<div class=\"mui-select\">\n<select name=\"groups\" id=\"slt_groups\">\n"
+  return "<div class=\"mui-form-group group_list\"\n<label>Groups</label>\n<div class=\"mui-select\">\n<select name=\"groups\" id=\"slt_groups\">\n<option value='all' selected='selected'>All Company</option>\n"
     + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.groups : depth0)) != null ? stack1.group_memberships : stack1),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</select>\n</div>\n</div>";
 },"useData":true});
@@ -105,7 +105,7 @@ this["Swarm"]["templates"]["post_message"] = Handlebars.template({"1":function(d
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div class='post_form mui-panel mui-z2'>\n<form>\n<div class=\"mui-form-group\">\n<label>Groups</label>\n<div class=\"mui-select\">\n<select name=\"groups\" id=\"slt_groups\">\n"
+  return "<div class='post_form mui-panel mui-z2'>\n<form>\n<div class=\"mui-form-group\">\n<label>Groups</label>\n<div class=\"mui-select\">\n<select name=\"groups\" id=\"slt_groups\">\n<option value='' selected='selected'>All Company</option>\n"
     + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.group_memberships : stack1),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</select>\n</div>\n</div>\n<div class=\"mui-form-group\">\n<textarea name=\"message_body\" class=\"mui-form-control\" id=\"message_body\" rows=\"10\" cols=\"37\"/>\n<label class=\"mui-form-floating-label\">Write Message Here</label>\n</div>\n<input class=\"post_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat\" type=\"submit\" ></input>\n</form>\n</div>";
 },"useData":true});
@@ -129,7 +129,7 @@ this["Swarm"]["templates"]["share_message"] = Handlebars.template({"1":function(
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div class=\"reply_message mui-form-group\">\n<div class=\"mui-select\">\n<select name=\"groups\" id=\"slt_groups\">\n"
+  return "<div class=\"reply_message mui-form-group\">\n<div class=\"mui-select\">\n<select name=\"groups\" id=\"slt_groups\">\n<option value='' selected='selected'>All Company</option>\n"
     + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.groups : depth0)) != null ? stack1.group_memberships : stack1),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</select>\n</div>\n<textarea name=\"message_body\" class=\"mui-form-control\" id=\"reply_body\" rows=\"5\" cols=\"37\" autofocus/>\n<button class=\"share_button mui-btn mui-btn-primary mui-btn-raised mui-btn-flat\">Share</button>\n</div>";
 },"useData":true});
@@ -305,7 +305,7 @@ this["Swarm"]["templates"]["user_profile"] = Handlebars.template({"1":function(d
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.stats : depth0)) != null ? stack1.following : stack1), depth0))
     + "</span></div></td>\n            <td width=\"25%\"><div class=\"updates\"> <img title=\"updates\" src=\"../img/updates.png\"><span class=\"statsVal\"> "
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.stats : depth0)) != null ? stack1.updates : stack1), depth0))
-    + "</span></div></td>\n            <td width=\"25%\"><div class=\"hierarchy\"><i class=\"material-icons sw-hierarchy-icon\">people_outline</i></div></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n\n  <div class=\"profile_cell_div profile-summary\">\n    <div class=\"profileDataDiv summary\">\n      <div class=\"profileLabeldiv\">Summary </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
+    + "</span></div></td>\n            <!-- <td width=\"25%\"><div class=\"hierarchy\"><i class=\"material-icons sw-hierarchy-icon\">people_outline</i></div></td> -->\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n\n  <div class=\"profile_cell_div profile-summary\">\n    <div class=\"profileDataDiv summary\">\n      <div class=\"profileLabeldiv\">Summary </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
     + alias3(((helper = (helper = helpers.summary || (depth0 != null ? depth0.summary : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"summary","hash":{},"data":data}) : helper)))
     + "</div>\n    </div>\n    <div class=\"profileDataDiv department\">\n      <div class=\"profileLabeldiv\">Department </div>\n      <div class=\"profileBreakDiv\"></div>\n      <div class=\"profileValuediv\">"
     + alias3(((helper = (helper = helpers.department || (depth0 != null ? depth0.department : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"department","hash":{},"data":data}) : helper)))

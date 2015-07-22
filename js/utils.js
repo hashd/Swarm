@@ -193,8 +193,6 @@ Swarm.utils = {
             success : function(data){
                 var groupService = new Swarm.Groups();
                 groupService.init();
-                // show the message thread if the reply is success
-                //target.parents(".msg_details_main").find('.msg_body').trigger("click", [true]);
             },
             error : function(){
                 alert("error");

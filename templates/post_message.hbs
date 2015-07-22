@@ -4,6 +4,7 @@
 <label>Groups</label>
 <div class="mui-select">
 <select name="groups" id="slt_groups">
+<option value='' selected='selected'>All Company</option>
 {{#each user.group_memberships}}
 <option value="{{id}}">{{full_name}}</option>
 {{/each}}          
