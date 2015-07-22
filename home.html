@@ -7,12 +7,7 @@
 
   <!-- Stylesheets here -->
   <link rel="stylesheet" href="./libs/css/mui.css">
- <!--  <link rel="stylesheet" type="text/css" href="./libs/css/enscroll.css"> -->
-  <link rel="stylesheet" href="./css/feeds.css">
-  <link rel="stylesheet" href="./css/profile.css">
-  <link rel="stylesheet" href="./css/overrides.css">
-  <link rel="stylesheet" href="./css/loading.css">
-  <link rel="stylesheet" href="./css/templates.css">
+  <link rel="stylesheet" href="./build/css/swarm.min.css">
 
   <!-- Scripts here -->
   <script type="text/javascript" src="libs/js/jquery-2.1.1.js"></script>
@@ -22,7 +17,6 @@
   <script type="text/javascript" src="libs/js/mui.min.js"></script>
   <script type="text/javascript" src="libs/js/handlebars.runtime-v3.0.3.js"></script>
   <script type="text/javascript" src="oauth2/oauth2.js"></script>
-  <script type="text/javascript" src="build/js/swarm.js"></script>
   <script type="text/javascript" src="popup.js"></script>
 </head>
 <body class="mui-container plugin-container">
@@ -63,7 +57,7 @@
         <li>
           <i class="material-icons" data-jsval="settings" title="Settings">settings</i>
         </li><li>
-          <a href="https://www.github.com/imaginea" target="_blank"><i class="material-icons separator" data-jsval="code" title="Github Link">code</i></a>
+          <a href="http://gitlab.pramati.com/leantaas/yammerpluginforchrome" target="_blank"><i class="material-icons separator" data-jsval="code" title="Github Link">code</i></a>
         </li><li>
           <i class="material-icons" data-jsval="about" title="About">info</i>
         </li>
@@ -73,7 +67,8 @@
   </div>
   <div class="mui-row footer" style="display:none;"></div>
 
-  <!-- Load any precompiled handlebar templates here -->
+  <!-- Load any application script here -->
+  <script type="text/javascript" src="build/js/swarm.min.js"></script>
   <script type="text/javascript" src="build/js/swarm.templates.js"></script>
 </body>
 </html>

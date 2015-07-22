@@ -1,18 +1,21 @@
 {
   "name": "Swarm-for-Yammer",
-  "version": "0.0.1",
+  "version": "0.1.5",
   "description": "Yammer plugin for Chrome",
   "main": "background.js",
   "dependencies": {},
   "devDependencies": {
     "gulp": "^3.9.0",
-    "handlebars": "^3.0.3",
     "gulp-concat": "^2.6.0",
+    "gulp-crx": "git+https://github.com/PavelVanecek/gulp-crx.git",
     "gulp-declare": "^0.3.0",
     "gulp-handlebars": "^4.0.0",
+    "gulp-minify-css": "^1.2.0",
+    "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "gulp-watch": "^4.2.4",
-    "gulp-wrap": "^0.11.0"
+    "gulp-wrap": "^0.11.0",
+    "handlebars": "^3.0.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
