@@ -37,7 +37,7 @@
   font-size: 0.8em;
 }
 .msg_body{
-  padding: 0.5em 0.3em 0.5em 0.3em;
+  padding: 0.5em;
   font-size: 0.9em;
   line-height: 1.1em;
   word-break: break-word;
@@ -119,4 +119,15 @@
 .msg_liked_by {
   color: #39628E;
   cursor: pointer;
+}
+.msg_header {
+  display: table;
+}
+.msg_content {
+  width: 100%;
+  display: block;
+}
+.reply_message,
+.share_message {
+  padding: 1em;
 }

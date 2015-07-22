@@ -3,7 +3,7 @@
 	<div class='msg_meta'>
 		<div class='msg_group_title' data-group-id='{{group.id}}'>{{group.full_name}}</div>
 	</div>
-	<div>
+	<div class="msg_header">
 		<div class='msg_sender_pic'>
 			<a class='senderLinkAnc' data-user-id='{{sender.id}}' href="javascript:{}">
 				<img src='{{sender.mugshot_url}}' />
@@ -16,74 +16,76 @@
 				</div>
 				<div class="msg_date_time">{{createdDate}}</div>
 			</div>
-			<div class='msg_body' data-thread-id='{{thread_id}}'>
-				{{{mainBody}}}
-				{{{mainAttachment}}}
+		</div>
+	</div>
+	<div class="msg_content msg_details_main">
+		<div class='msg_body' data-thread-id='{{thread_id}}'>
+			{{{mainBody}}}
+			{{{mainAttachment}}}
+		</div>
+		<div class="msg_actions">
+			<span class="msg_like">{{like_text}} ({{liked_by.count}})</span>
+			<span class="msg_reply">Reply ({{threadInfo.stats.updates}})</span>
+			<span class="msg_share">Share ({{threadInfo.stats.shares}})</span>
+		</div>
+		{{#if liked_by.count}}
+		<div class='msg_info'>
+			<div class='msg_likes'>
+				{{#each likedBy.names}}
+					<span class="msg_liked_by" data-user-id="{{user_id}}">{{full_name}}</span>
+				{{/each}}
+				{{#if likedBy.count}} and {{likedBy.count}} like this.{{/if}}
+				{{#unless likedBy.count}} likes this.{{/unless}}
 			</div>
-			<div class="msg_actions">
-				<span class="msg_like">{{like_text}} ({{liked_by.count}})</span>
-				<span class="msg_reply">Reply ({{threadInfo.stats.updates}})</span>
-				<span class="msg_share">Share ({{threadInfo.stats.shares}})</span>
-			</div>
-			{{#if liked_by.count}}
-			<div class='msg_info'>
-				<div class='msg_likes'>
-					{{#each likedBy.names}}
-						<span class="msg_liked_by" data-user-id="{{user_id}}">{{full_name}}</span>
-					{{/each}}
-					{{#if likedBy.count}} and {{likedBy.count}} like this.{{/if}}
-					{{#unless likedBy.count}} likes this.{{/unless}}
-				</div>
-			</div>
-			{{/if}}
-			{{#if remainingMessages}}
-			<div class="msg_extended_actions">
-				<span class="msg_thread_view" data-thread-id="{{thread_id}}">More messages</span>
-			</div>
-			{{/if}}
-			{{#if extendedThread.length}}
-			<div class="msg_extended" style="padding: 2px 8px;">
-				{{#each extendedThread}}
-				<div class='msg_main' data-msg-id='{{id}}'>
-					<div>
-						<div class='msg_sender_pic'>
-							<a class='senderLinkAnc' data-user-id='{{sender.id}}' href="javascript:{}">
-								<img src='{{sender.mugshot_url}}' />
-							</a>
+		</div>
+		{{/if}}
+		{{#if remainingMessages}}
+		<div class="msg_extended_actions">
+			<span class="msg_thread_view" data-thread-id="{{thread_id}}">More messages</span>
+		</div>
+		{{/if}}
+		{{#if extendedThread.length}}
+		<div class="msg_extended" style="padding: 2px 8px;">
+			{{#each extendedThread}}
+			<div class='msg_main' data-msg-id='{{id}}'>
+				<div class="msg_header">
+					<div class='msg_sender_pic'>
+						<a class='senderLinkAnc' data-user-id='{{sender.id}}' href="javascript:{}">
+							<img src='{{sender.mugshot_url}}' />
+						</a>
+					</div>
+					<div class='msg_details_main'>
+						<div class='msg_head'>
+							<div class="msg_sender_name">
+								<a class='senderLinkAnc' data-user-id='{{sender.id}}' href="javascript:{}">{{sender.full_name}}</a>
+							</div>
+							<div class="msg_date_time">{{createdDate}}</div>
 						</div>
-						<div class='msg_details_main'>
-							<div class='msg_head'>
-								<div class="msg_sender_name">
-									<a class='senderLinkAnc' data-user-id='{{sender.id}}' href="javascript:{}">{{sender.full_name}}</a>
-								</div>
-								<div class="msg_date_time">{{createdDate}}</div>
+						<div class='msg_body' data-thread-id='{{thread_id}}'>
+							{{{mainBody}}}
+							{{{mainAttachment}}}
+						</div>
+						<div class="msg_actions">
+							<span class="msg_like">{{like_text}} ({{liked_by.count}})</span>
+							<span class="msg_reply">Reply</span>
+						</div>
+						<div class='msg_info'>
+							{{#if liked_by.count}}
+							<div class='msg_likes'>
+								{{#each likedBy.names}}
+									<span class="msg_liked_by" data-user-id="{{user_id}}">{{full_name}}</span>
+								{{/each}}
+								{{#if likedBy.count}} and {{likedBy.count}} like this.{{/if}}
+								{{#unless likedBy.count}} likes this.{{/unless}}
 							</div>
-							<div class='msg_body' data-thread-id='{{thread_id}}'>
-								{{{mainBody}}}
-								{{{mainAttachment}}}
-							</div>
-							<div class="msg_actions">
-								<span class="msg_like">{{like_text}} ({{liked_by.count}})</span>
-								<span class="msg_reply">Reply</span>
-							</div>
-							<div class='msg_info'>
-								{{#if liked_by.count}}
-								<div class='msg_likes'>
-									{{#each likedBy.names}}
-										<span class="msg_liked_by" data-user-id="{{user_id}}">{{full_name}}</span>
-									{{/each}}
-									{{#if likedBy.count}} and {{likedBy.count}} like this.{{/if}}
-									{{#unless likedBy.count}} likes this.{{/unless}}
-								</div>
-								{{/if}}
-							</div>
+							{{/if}}
 						</div>
 					</div>
 				</div>
-				{{/each}}
 			</div>
-			{{/if}}
+			{{/each}}
 		</div>
+		{{/if}}
 	</div>
 </div>
 {{/each}}
