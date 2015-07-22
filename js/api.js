@@ -117,7 +117,7 @@ Swarm.API.prototype = {
 
   getThread: function (threadId, cb, additionalOptions) {
     var self = this,
-      threadOptions = $.extend({limit:10}, additionalOptions),
+      threadOptions = $.extend({limit:20}, additionalOptions),
       url = 'https://www.yammer.com/api/v1/messages/in_thread/' + threadId + '.json';
 
     self.ajaxCall('GET', url, threadOptions, cb);
