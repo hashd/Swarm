@@ -22,6 +22,8 @@
 		<div class='msg_body' data-thread-id='{{thread_id}}'>
 			{{{mainBody}}}
 			{{{mainAttachment}}}
+			<a target="_blank" href="{{attachment_src}}"><img src="{{attachment_src}}"/></a>
+			<a target="_blank" href="{{file_src}}">{{file_name}}</a>
 		</div>
 		<div class="msg_actions">
 			<span class="msg_like">{{like_text}} ({{liked_by.count}})</span>
@@ -64,6 +66,8 @@
 						<div class='msg_body' data-thread-id='{{thread_id}}'>
 							{{{mainBody}}}
 							{{{mainAttachment}}}
+							<a target="_blank" href="{{attachment_src}}"><img src="{{attachment_src}}"/></a>
+							<a target="_blank" href="{{file_src}}">{{file_name}}</a>
 						</div>
 						<div class="msg_actions">
 							<span class="msg_like">{{like_text}} ({{liked_by.count}})</span>

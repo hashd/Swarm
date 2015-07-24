@@ -95,7 +95,6 @@ Swarm.ActivityFeed.prototype = {
   
   container.slimScroll().off('slimscroll');
   container.slimScroll().removeData('events');
-  container.off("click", ".feed_main .msg_body");
 	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     	var target = $(this),
     	userId = target.data("user-id"),
@@ -928,10 +927,10 @@ Swarm.Notifications.prototype = {
       item.msg_body = msg_body;
      	
  	});
+  
 	container.find('div.feed_main').append(Swarm.templates.notifications({items:data.items}));
   container.slimScroll().off('slimscroll');
   container.slimScroll().removeData('events');
-  container.off("click", ".feed_main .msg_body");
 	container.off("click", ".feed_main a.senderLinkAnc").on("click", ".feed_main a.senderLinkAnc", function(){
     	var target = $(this),
     	userId = target.data("user-id"),
@@ -1293,8 +1292,11 @@ Swarm.utils = {
       msg.extendedThread = (extendedThread[msg.thread_id] || []).reverse();
       msg.mainBody = msg.body.rich || msg.body.plain;
       msg.mainAttachment = msg.attachments.length ?
-        (msg.attachments[0].inline_html || msg.attachments[0].comment || msg.attachments[0].content_excerpt || msg.attachments[0].name) :
+        (msg.attachments[0].inline_html || msg.attachments[0].comment || msg.attachments[0].content_excerpt ) :
         "";
+      msg.attachment_src = msg.attachments.length && msg.attachments[0].image ? msg.attachments[0].image.url : "";
+      msg.file_src = msg.attachments.length && msg.attachments[0].file ? msg.attachments[0].file.url : "";
+      msg.file_name = msg.attachments.length && msg.attachments[0].file ? msg.attachments[0].name : "";
       msg.group = group;
       msg.threadInfo = thread;
       msg.likedBy = {
@@ -1323,8 +1325,11 @@ Swarm.utils = {
         extendedMessage.createdDate = msgCreatedDate;
         extendedMessage.mainBody = extendedMessage.body.rich || extendedMessage.body.plain;
         extendedMessage.mainAttachment = extendedMessage.attachments.length ?
-          (extendedMessage.attachments[0].inline_html || extendedMessage.attachments[0].comment || extendedMessage.attachments[0].content_excerpt || extendedMessage.attachments[0].name) :
+          (extendedMessage.attachments[0].inline_html || extendedMessage.attachments[0].comment || extendedMessage.attachments[0].content_excerpt) :
           "";
+        extendedMessage.attachment_src = extendedMessage.attachments.length && extendedMessage.attachments[0].image ? extendedMessage.attachments[0].image.url : "";
+        extendedMessage.file_src = extendedMessage.attachments.length && extendedMessage.attachments[0].file ? extendedMessage.attachments[0].file.url : "";
+        extendedMessage.file_name = extendedMessage.attachments.length && extendedMessage.attachments[0].file ? extendedMessage.attachments[0].name : "";
         extendedMessage.group = group;
         extendedMessage.threadInfo = thread;
         extendedMessage.likedBy = {
@@ -1570,6 +1575,7 @@ Swarm.utils = {
         }
             
     });
+   
 },
 
 showProfile: function (data) {

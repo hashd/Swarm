@@ -36,7 +36,7 @@
   color: #68717f;
   font-size: 0.8em;
 }
-.msg_body{
+.msg_body ,.msg_body_notifications{
   padding: 0.5em;
   font-size: 0.9em;
   line-height: 1.1em;

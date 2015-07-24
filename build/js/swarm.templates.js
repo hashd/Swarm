@@ -63,7 +63,7 @@ this["Swarm"]["templates"]["notifications"] = Handlebars.template({"1":function(
     + alias3(((helper = (helper = helpers.userName || (depth0 != null ? depth0.userName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"userName","hash":{},"data":data}) : helper)))
     + "</a></div>\n<div class='msg_date_time'>"
     + alias3(((helper = (helper = helpers.createdDate || (depth0 != null ? depth0.createdDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"createdDate","hash":{},"data":data}) : helper)))
-    + "</div>\n</div>\n<div class='msg_body'>"
+    + "</div>\n</div>\n<div class='msg_body_notifications'>"
     + alias3(((helper = (helper = helpers.msg_body || (depth0 != null ? depth0.msg_body : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"msg_body","hash":{},"data":data}) : helper)))
     + "</div>\n</div>\n</div>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -178,7 +178,15 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + ((stack1 = ((helper = (helper = helpers.mainBody || (depth0 != null ? depth0.mainBody : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainBody","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n			"
     + ((stack1 = ((helper = (helper = helpers.mainAttachment || (depth0 != null ? depth0.mainAttachment : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainAttachment","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n		</div>\n		<div class=\"msg_actions\">\n			<span class=\"msg_like\">"
+    + "\n			<a target=\"_blank\" href=\""
+    + alias3(((helper = (helper = helpers.attachment_src || (depth0 != null ? depth0.attachment_src : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"attachment_src","hash":{},"data":data}) : helper)))
+    + "\"><img src=\""
+    + alias3(((helper = (helper = helpers.attachment_src || (depth0 != null ? depth0.attachment_src : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"attachment_src","hash":{},"data":data}) : helper)))
+    + "\"/></a>\n			<a target=\"_blank\" href=\""
+    + alias3(((helper = (helper = helpers.file_src || (depth0 != null ? depth0.file_src : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"file_src","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.file_name || (depth0 != null ? depth0.file_name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"file_name","hash":{},"data":data}) : helper)))
+    + "</a>\n		</div>\n		<div class=\"msg_actions\">\n			<span class=\"msg_like\">"
     + alias3(((helper = (helper = helpers.like_text || (depth0 != null ? depth0.like_text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"like_text","hash":{},"data":data}) : helper)))
     + " ("
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1), depth0))
@@ -250,7 +258,15 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + ((stack1 = ((helper = (helper = helpers.mainBody || (depth0 != null ? depth0.mainBody : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainBody","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n							"
     + ((stack1 = ((helper = (helper = helpers.mainAttachment || (depth0 != null ? depth0.mainAttachment : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mainAttachment","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n						</div>\n						<div class=\"msg_actions\">\n							<span class=\"msg_like\">"
+    + "\n							<a target=\"_blank\" href=\""
+    + alias3(((helper = (helper = helpers.attachment_src || (depth0 != null ? depth0.attachment_src : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"attachment_src","hash":{},"data":data}) : helper)))
+    + "\"><img src=\""
+    + alias3(((helper = (helper = helpers.attachment_src || (depth0 != null ? depth0.attachment_src : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"attachment_src","hash":{},"data":data}) : helper)))
+    + "\"/></a>\n							<a target=\"_blank\" href=\""
+    + alias3(((helper = (helper = helpers.file_src || (depth0 != null ? depth0.file_src : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"file_src","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.file_name || (depth0 != null ? depth0.file_name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"file_name","hash":{},"data":data}) : helper)))
+    + "</a>\n						</div>\n						<div class=\"msg_actions\">\n							<span class=\"msg_like\">"
     + alias3(((helper = (helper = helpers.like_text || (depth0 != null ? depth0.like_text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"like_text","hash":{},"data":data}) : helper)))
     + " ("
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1), depth0))
