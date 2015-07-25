@@ -1,0 +1,23 @@
+html {
+	font-family: 'Alegreya Sans', 'Helvetica Neue', 'Arial', Sans;
+	font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Rubik', 'Helvetica', 'Verdana', 'Sans-Serif';
+	font-weight: 500;
+}
+
+body {
+	display: table;
+	height: 100vh;
+	width: 100vw;
+}
+
+.table-row {
+	display: table-row;
+}
+
+.table-col {
+	display: table-column;
+}
