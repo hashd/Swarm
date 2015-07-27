@@ -127,9 +127,11 @@
   width: 100%;
   display: block;
 }
-.reply_message,
-.share_message {
+.reply_message textarea,
+.share_message textarea {
   padding: 1em;
+  font-size: 0.9em;
+  background-color: #fafafa;
 }
 
 div.profileInfo_main {
@@ -285,6 +287,13 @@ html, body {
 
 .mui-tabs > li > a {
   font-size: 0.9em;
+}
+
+.mui-select > select,
+.mui-select-menu div {
+  font-size: 0.9em;
+  height: 2.4em;
+  line-height: 2.4em;
 }
 
 .plugin-container {
