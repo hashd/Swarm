@@ -233,6 +233,10 @@ div.profileInfo_main {
   box-sizing: border-box;
 }
 
+html, body {
+  font-family: 'Arimo', "Helvetica Neue", Helvetica, Arial, Verdana, "Trebuchet MS";
+}
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -277,6 +281,10 @@ div.profileInfo_main {
 .mui-panel {
   padding: 0;
   margin-bottom: 1em;
+}
+
+.mui-tabs > li > a {
+  font-size: 0.9em;
 }
 
 .plugin-container {
