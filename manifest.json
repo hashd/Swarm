@@ -30,5 +30,5 @@
   "background": {
     "scripts": ["libs/js/jquery-2.1.1.js", "background.js"]
   },
-  "content_security_policy": "object-src 'self'"
+  "content_security_policy": "script-src 'self'; object-src 'self'"
 }
