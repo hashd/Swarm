@@ -22,6 +22,6 @@ Now your yammer feed plugin is installed.
 + Click on yammer feed plugin now to see your feed.
 
 
-### Developer information
+### contributors listed in alphabetical order
 
-Manoj, Krishnam, Mohan, Risav, Kiran.
+Kiran D, Krishnam G, Manoj P, Mohan T, Risav V.
