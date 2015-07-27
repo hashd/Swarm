@@ -53,7 +53,14 @@ Swarm.utils = {
                               { return e.user_id == currentUserId; });
       msg.like_text = (msgLikedByObj.length>0)?"Unlike":"Like";
 
-      msg.threadInfo.stats.updates--;
+      if(threadView) {
+       var msgReplyObj = $.grep(references, function (e) { return e.type === 'thread' && e.id === msg.id }); 
+       msg.reply_count = (msgReplyObj.length>0 && msgReplyObj[0].stats)?
+                                          --msgReplyObj[0].stats.updates:0;
+      } else {
+        msg.reply_count = --msg.threadInfo.stats.updates;  
+      } 
+      
       msg.remainingMessages = !threadView ? msg.threadInfo.stats.updates - msg.extendedThread.length : 0;
 
       $.each(msg.extendedThread, function (ind, extendedMessage) {
@@ -105,11 +112,18 @@ Swarm.utils = {
         profileObj.init(userId);
       });
 
-    container.off("click", ".feed_main .msg_actions .msg_reply")
-      .on("click", ".feed_main .msg_actions .msg_reply", function(){
+    container.off("click", ".feed_main .msg_details_main .msg_actions .msg_reply")
+      .on("click", ".feed_main .msg_details_main .msg_actions .msg_reply", function(e){
+
         var target = $(this),
-        msg_main = target.parents(".msg_details_main"),
-        temp = [];
+        msg_main = '';
+        if($(e.target).is('.feed_main .msg_content .msg_details_main .msg_actions .msg_reply')) {
+          msg_main = target.parents(".msg_content .msg_details_main");
+        }
+        else {
+          msg_main = target.parents(".msg_details_main");
+        }
+        
         msg_main.find('.reply_message').remove();
         msg_main.append(Swarm.templates.reply_message({}));
         msg_main.find('.reply_message textarea, .reply_message select').focus();

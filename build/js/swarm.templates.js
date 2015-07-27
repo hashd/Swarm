@@ -191,7 +191,7 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + " ("
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1), depth0))
     + ")</span>\n			<span class=\"msg_reply\">Reply ("
-    + alias3(alias4(((stack1 = ((stack1 = (depth0 != null ? depth0.threadInfo : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.updates : stack1), depth0))
+    + alias3(((helper = (helper = helpers.reply_count || (depth0 != null ? depth0.reply_count : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"reply_count","hash":{},"data":data}) : helper)))
     + ")</span>\n			<span class=\"msg_share\">Share ("
     + alias3(alias4(((stack1 = ((stack1 = (depth0 != null ? depth0.threadInfo : depth0)) != null ? stack1.stats : stack1)) != null ? stack1.shares : stack1), depth0))
     + ")</span>\n		</div>\n"
