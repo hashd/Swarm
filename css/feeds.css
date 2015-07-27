@@ -127,7 +127,9 @@
   width: 100%;
   display: block;
 }
-.reply_message,
-.share_message {
+.reply_message textarea,
+.share_message textarea {
   padding: 1em;
+  font-size: 0.9em;
+  background-color: #fafafa;
 }

@@ -56,6 +56,13 @@ html, body {
   font-size: 0.9em;
 }
 
+.mui-select > select,
+.mui-select-menu div {
+  font-size: 0.9em;
+  height: 2.4em;
+  line-height: 2.4em;
+}
+
 .plugin-container {
   width: 360px;
   margin: 0;
