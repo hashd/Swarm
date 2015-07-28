@@ -138,4 +138,8 @@
   padding: 2px 8px;
   background-color: #f0f0f0;
   border-top: 1px solid #0072c6;
+  box-shadow: inset 0 2px 4px #aaa;
+}
+.msg_extended .msg_main {
+  border: 1px solid #ccc;
 }

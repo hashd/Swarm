@@ -108,3 +108,14 @@
     width: 25%;
     margin-top: 1em;
 }
+
+.sw-group-card {
+    padding: 12px;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+}
+
+.sw-group-card:hover {
+    cursor: pointer;
+    color: #0072C6;
+}

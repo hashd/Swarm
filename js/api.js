@@ -99,7 +99,7 @@ Swarm.API.prototype = {
 
   getThreadedMessagesFeed: function (channel, cb, additionalOptions) {
     var self = this,
-      threadedOptions = $.extend({ threaded: 'extended', limit: 10}, additionalOptions),
+      threadedOptions = $.extend({ threaded: 'extended', limit: 20}, additionalOptions),
       url = 'https://www.yammer.com/api/v1/messages.json/my_feed.json';
 
     if (channel === 'all') {
@@ -125,8 +125,12 @@ Swarm.API.prototype = {
 
   getGroupThreads: function (groupId, cb, additionalOptions) {
     var self = this,
-      threadOptions = $.extend({limit: 20}, additionalOptions),
+      threadOptions = $.extend({ threaded: 'extended', limit: 20}, additionalOptions),
       url = 'https://www.yammer.com/api/v1/messages/in_group/' + groupId;
+
+    if (groupId === 'all') {
+      url = "https://www.yammer.com/api/v1/messages/general.json";
+    }
 
     self.ajaxCall('GET', url, threadOptions, cb);
   },
@@ -145,5 +149,13 @@ Swarm.API.prototype = {
       url = 'https://www.yammer.com/api/v1/search.json';
 
     self.ajaxCall('GET', url, searchOptions, cb);
+  },
+
+  getGroupsList: function (cb, additionalOptions) {
+    var self = this,
+      groupsListOptions = $.extend({limit: 1}, additionalOptions),
+      url = "https://www.yammer.com/api/v1/users/current.json?include_group_memberships=true";
+
+    self.ajaxCall('GET', url, groupsListOptions, cb);
   }
 }
