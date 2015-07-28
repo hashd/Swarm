@@ -1,11 +1,7 @@
-<div class="mui-form-group group_list"
-<label>Groups</label>
-<div class="mui-select">
-<select name="groups" id="slt_groups">
-<option value='all' selected='selected'>All Company</option>
-{{#each groups.group_memberships}}
-<option value="{{id}}"">{{full_name}}</option>
-{{/each}}
-</select>
-</div>
+<div class="mui-form-group group_list">
+	<div class="mui-panel mui-z2 sw-group-card" data-group-id="all">All Company</div>
+
+	{{#each groups.group_memberships}}
+	<div class="mui-panel mui-z2 sw-group-card" data-group-id="{{id}}"">{{full_name}}</div>
+	{{/each}}
 </div>

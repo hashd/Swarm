@@ -58,9 +58,9 @@ Swarm.utils = {
        msg.reply_count = (msgReplyObj.length>0 && msgReplyObj[0].stats)?
                                           --msgReplyObj[0].stats.updates:0;
       } else {
-        msg.reply_count = --msg.threadInfo.stats.updates;  
-      } 
-      
+        msg.reply_count = --msg.threadInfo.stats.updates;
+      }
+
       if(msg.shared_message_id) {
         msg.isShared = true;
         msg.shared_id = msg.shared_message_id;
@@ -294,8 +294,7 @@ Swarm.utils = {
           data.messages.reverse();
           Swarm.utils.buildFeedInfo(true, data);
           $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
-                                          'border-left': '3px solid #71a6f6',
-                                          'background': '#f3f5f8'})
+                                          'border-left': '3px solid #71a6f6'})
             .find('.msg_meta').remove();
 
         });
