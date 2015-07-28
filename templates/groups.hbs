@@ -1,7 +1,11 @@
 <div class="mui-form-group group_list">
-	<div class="mui-panel mui-z2 sw-group-card" data-group-id="all">All Company</div>
+	<div class="mui-panel mui-z2 sw-group-card" data-group-id="all">
+		<img class="sw-group-mugshot" src="https://mug0.assets-yammer.com/mugshot/images/48x48/group_profile.png" />All Company
+	</div>
 
 	{{#each groups.group_memberships}}
-	<div class="mui-panel mui-z2 sw-group-card" data-group-id="{{id}}"">{{full_name}}</div>
+	<div class="mui-panel mui-z2 sw-group-card" data-group-id="{{id}}">
+		<img class="sw-group-mugshot" src="{{mugshot_url}}" />{{full_name}}
+	</div>
 	{{/each}}
 </div>
