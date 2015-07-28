@@ -110,7 +110,7 @@
 }
 
 .sw-group-card {
-    padding: 12px;
+    padding: 6px;
     font-size: 0.9em;
     border: 1px solid #ccc;
 }
@@ -118,4 +118,9 @@
 .sw-group-card:hover {
     cursor: pointer;
     color: #0072C6;
+}
+
+.sw-group-mugshot {
+    margin-right: 12px;
+    height: 36px;
 }
