@@ -1,4 +1,4 @@
-.msg_main{
+.msg_main ,.msg_shared_main{
   border: 1px solid #DADADA;
   margin: 5px 0px;
   font-size: 1em;
