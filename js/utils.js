@@ -36,7 +36,7 @@ Swarm.utils = {
       msg.extendedThread = (extendedThread[msg.thread_id] || []).reverse();
       msg.mainBody = msg.body.rich || msg.body.plain;
       msg.mainAttachment = msg.attachments.length ?
-        (msg.attachments[0].inline_html || msg.attachments[0].comment || msg.attachments[0].content_excerpt ) :
+        (msg.attachments[0].inline_html || msg.attachments[0].comment) :
         "";
       msg.attachment_src = msg.attachments.length && msg.attachments[0].image ? msg.attachments[0].image.url : "";
       msg.file_src = msg.attachments.length && msg.attachments[0].file ? msg.attachments[0].file.url : "";
@@ -61,6 +61,16 @@ Swarm.utils = {
         msg.reply_count = --msg.threadInfo.stats.updates;  
       } 
       
+      if(msg.shared_message_id) {
+        msg.isShared = true;
+        msg.shared_id = msg.shared_message_id;
+        msg.shared_thread_id = msg.attachments[0].thread_id;
+        msg.shared_sender_id = msg.attachments[0].sender_id;
+        msg.shared_createdDate = Swarm.utils.getCreatedDate(msg.attachments[0].created_at);
+        var senderArrObj = $.grep(references, function (e) { return e.type === 'user' && e.id == msg.shared_sender_id ; });
+        msg.shared_sender = (senderArrObj.length > 0) ? senderArrObj[0] : {};
+        msg.shared_mainBody = msg.attachments[0].content_excerpt;
+      }
       msg.remainingMessages = !threadView ? msg.threadInfo.stats.updates - msg.extendedThread.length : 0;
 
       $.each(msg.extendedThread, function (ind, extendedMessage) {
@@ -103,7 +113,8 @@ Swarm.utils = {
     }
 
     container.off("click", ".feed_main a.senderLinkAnc")
-      .on("click", ".feed_main a.senderLinkAnc", function(){
+      .on("click", ".feed_main a.senderLinkAnc", function(e){
+        e.stopPropagation();
         var target = $(this),
           userId = target.data("user-id"),
           profileObj = new Swarm.Profile();
@@ -266,8 +277,9 @@ Swarm.utils = {
         });
     });
 
-    container.off("click", ".feed_main .msg_body, .feed_main .msg_thread_view")
-      .on("click", ".feed_main .msg_body, .feed_main .msg_thread_view", function(){
+    container.off("click", ".feed_main .msg_body, .feed_main .msg_thread_view, .feed_main .msg_shared .msg_body")
+      .on("click", ".feed_main .msg_body, .feed_main .msg_thread_view, .feed_main .msg_shared .msg_body", function(e){
+        e.stopPropagation();
         var self = this,
           target = $(this),
           threadId = target.data("thread-id");

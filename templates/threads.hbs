@@ -22,6 +22,30 @@
 		<div class='msg_body' data-thread-id='{{thread_id}}'>
 			{{{mainBody}}}
 			{{{mainAttachment}}}
+			{{#if isShared}}
+				<div class="msg_shared" data-thread-id='{{shared_thread_id}}' style="padding: 2px 8px;background:#f3f5f8;">
+					<div class='msg_main' data-msg-id='{{shared_id}}' >
+					<div class="msg_header">
+						<div class='msg_sender_pic'>
+						<a class='senderLinkAnc' data-user-id='{{shared_sender_id}}' href="javascript:{}">
+							<img src='{{shared_sender.mugshot_url}}' />
+						</a>
+						</div>
+						<div class='msg_details_main'>
+						<div class='msg_head'>
+							<div class="msg_sender_name">
+								<a class='senderLinkAnc' data-user-id='{{shared_sender_id}}' href="javascript:{}">{{shared_sender.full_name}}</a>
+							</div>
+							<div class="msg_date_time">{{shared_createdDate}}</div>
+						</div>
+						<div class='msg_body' data-thread-id='{{shared_thread_id}}'>
+							{{{shared_mainBody}}}
+						</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			{{/if}}
 			<a target="_blank" href="{{attachment_src}}"><img src="{{attachment_src}}"/></a>
 			<a target="_blank" href="{{file_src}}">{{file_name}}</a>
 		</div>
