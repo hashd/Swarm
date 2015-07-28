@@ -137,5 +137,13 @@ Swarm.API.prototype = {
       url = 'https://www.yammer.com/api/v1/users/' + userId;
 
     self.ajaxCall('GET', url, profileOptions, cb);
+  },
+
+  getSearchResults: function (query, cb, additionalOptions) {
+    var self = this,
+      searchOptions = $.extend({page:1, search:query}, additionalOptions),
+      url = 'https://www.yammer.com/api/v1/search.json';
+
+    self.ajaxCall('GET', url, searchOptions, cb);
   }
 }
