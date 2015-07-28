@@ -6,6 +6,8 @@ Swarm.Search.prototype = {
   init: function(query){
   	var self = this;
     if(query.length > 0){
+      Swarm.api.initCurrentView();
+      Swarm.api.pushCurrentView('search:'+query);
       container = $("#content"),
       container.empty();
       self.getSearchQueryResults(query);

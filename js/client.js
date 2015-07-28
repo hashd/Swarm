@@ -47,6 +47,111 @@ Swarm.Client.prototype = {
     self.bindTabSelectEvent();
     self.bindSearchEvent();
     self.bindPostMessageEvent();
+    //self.bindBackButtonEvent();
+  },
+
+  bindBackButtonEvent : function() {
+    
+    var self = this,
+    container = $('#content'),
+    mugshotContainer = $('.header .current-mugshot');
+    mugshotContainer.find('i').on('click', function () {
+      Swarm.api.popCurrentView();
+      var previousView = Swarm.api.getCurrentView();
+      var threadId,query,groupId;
+      if(previousView.indexOf('thread') != -1) {
+        threadId = previousView.slice(7);
+        previousView = 'thread';
+      }
+      else if(previousView.indexOf('search') != -1) {
+        query = previousView.slice(7);
+        previousView = 'search'; 
+      }
+      else if(previousView.indexOf('groups:') != -1) {
+       groupId = previousView.slice(7);
+       previousView = 'groups';  
+      }
+      switch (previousView){
+        case "feeds" :
+          $('.header .left-pane').text("NETWORK FEED");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.feedsService.init();  
+          break;
+        case "messages" :
+          $('.header .left-pane').text("MESSAGES");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.messagesService.init();   
+          break;
+        case "analytics":
+          $('.header .left-pane').text("ANALYTICS");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.analyticsService.init();
+          break;
+        case "Postmessage":
+          self.postMessageService.init();
+          break;
+        case "activityfeed":
+          $('.header .left-pane').text("RECENT ACTIVITY");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.activityFeedService.init();
+          break;
+        case "notifications":
+          $('.header .left-pane').text("NOTIFICATIONS");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.notificationsService.init();
+          break;
+        case "groups":
+          if(typeof groupId === 'undefined') {
+            $('.header .left-pane').text("GROUPS");
+            self.getCurrentUserMugshot();
+            self.content.html(Swarm.templates.network_feed());
+            self.groupsService.init();
+          }
+          else {
+            Swarm.api.getGroupThreads(groupId, function (data) {
+            container.empty().parent().find('.slimScrollBar').css('top',0);
+            $('.header').find('.page-title').html(data.meta.feed_name);
+            Swarm.utils.buildFeedInfo(true, data);
+            });
+          }
+          
+          break;
+        case "people":
+          $('.header .left-pane').text("PEOPLE");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.peopleService.init();
+          break;
+        case "thread":
+          Swarm.api.getThread(threadId, function (data) {
+            $('.header .left-pane').text(Swarm.api.currentViewStack[0]);
+            container.empty();
+            container.slimScroll().off('slimscroll');
+            container.slimScroll().removeData('events');
+            Swarm.utils.hideLoadingIcon();
+            data.messages.reverse();
+            Swarm.utils.buildFeedInfo(true, data);
+            $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
+                                          'border-left': '3px solid #71a6f6'})
+              .find('.msg_meta').remove();
+            });
+            break;
+        case "search":
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          var pageTitle = self.header.find('.page-title').html('Search');
+          pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label><i class="material-icons">search</i>Search</label></div>');
+          pageTitle.find('input').focus();
+          self.searchService.init(query);
+        }
+      
+    });
+    
   },
 
   bindTabSelectEvent: function () {
@@ -146,6 +251,7 @@ Swarm.Client.prototype = {
       content = $('#content');
 
     Swarm.api.getCurrentUserProfile(function (data) {
+      mugshotContainer.empty();
       mugshotContainer.html($('<img />').attr('src', data.mugshot_url));
       Swarm.api.setCurrentUserId(data.id);
       mugshotContainer.find('img').on('click', function () {

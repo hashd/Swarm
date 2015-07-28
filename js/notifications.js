@@ -5,6 +5,8 @@ Swarm.Notifications = function (){
 Swarm.Notifications.prototype = {
   init: function(){
   	var self = this;
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('notifications');
   	self.displayNotifications();
   },
 

@@ -4,7 +4,9 @@ Swarm.API = function (accessToken) {
   self.primaryAccessToken = accessToken;
   self.accessToken = accessToken;
   self.currentUserId = '';
+  self.currentViewStack = [];
   self.init();
+
 };
 
 Swarm.API.prototype = {
@@ -73,7 +75,30 @@ Swarm.API.prototype = {
     self.setAccessToken(self.activeNetwork.token);
   },
 
-
+  getCurrentView : function() {
+    var self = this;
+    return self.currentViewStack[self.currentViewStack.length-1];
+  },
+  pushCurrentView : function(currentView) {
+    var self =this;
+    if(self.currentViewStack.indexOf(currentView) == -1) {
+      self.currentViewStack.push(currentView);
+    }
+  },
+  popCurrentView : function() {
+    var self = this;
+    self.currentViewStack.pop();
+  },
+  initCurrentView : function() {
+    var self = this;
+    self.currentViewStack.splice(0, self.currentViewStack.length);
+  },
+  displayBackButton : function() {
+    var self = this,
+    mugshotContainer = $('.header .current-mugshot'),
+    content = $('#content');
+    mugshotContainer.html('<i class="material-icons" style="font-size:2.5em;cursor:pointer">arrow_back</i>');
+  },
 
   /** All Yammer API Calls below */
   getCurrentUserProfile: function (cb) {

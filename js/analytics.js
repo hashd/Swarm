@@ -7,6 +7,8 @@ Swarm.Analytics.prototype = {
 		var self = this;
 		$(window).off('scroll');
 		Swarm.utils.showLoadingIcon();
+		Swarm.api.initCurrentView();
+		Swarm.api.pushCurrentView('analytics');
 	    jQuery.ajax({
 			type :"GET",
 			url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",

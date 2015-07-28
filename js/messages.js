@@ -5,6 +5,8 @@ Swarm.Messages = function (){
 Swarm.Messages.prototype = {
   init: function(){
   	var self = this;
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('messages');
   	self.getReceivedMessages();
     self.attachWindowScrollEvent();
   },

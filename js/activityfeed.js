@@ -5,6 +5,8 @@ Swarm.ActivityFeed = function (){
 Swarm.ActivityFeed.prototype = {
   init: function(){
   	var self = this;
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('activityfeed');
   	self.displayActivityFeed();
   },
 

@@ -5,6 +5,8 @@ Swarm.Groups = function (){
 Swarm.Groups.prototype = {
   init: function(){
     var self = this;
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('groups');
     self.buildGroupMessageFeed();
   },
 
@@ -30,6 +32,9 @@ Swarm.Groups.prototype = {
 
       Swarm.utils.showLoadingIcon();
       Swarm.api.getGroupThreads(groupId, function (data) {
+        Swarm.api.pushCurrentView('groups:'+groupId);
+        Swarm.api.displayBackButton();
+        swarmInstance.bindBackButtonEvent();
         container.empty().parent().find('.slimScrollBar').css('top',0);
         $('.header').find('.page-title').html(groupName);
 

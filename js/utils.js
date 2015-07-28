@@ -282,20 +282,22 @@ Swarm.utils = {
       .on("click", ".feed_main .msg_body, .feed_main .msg_thread_view, .feed_main .msg_shared .msg_body", function(e){
         e.stopPropagation();
         var self = this,
-          target = $(this),
-          threadId = target.data("thread-id");
-
+        target = $(this),
+        threadId = target.data("thread-id");
+        Swarm.api.pushCurrentView('thread:'+threadId);
+        Swarm.api.displayBackButton();
+        swarmInstance.bindBackButtonEvent();
         Swarm.api.getThread(threadId, function (data) {
-          container.empty();
-          container.slimScroll().off('slimscroll');
-          container.slimScroll().removeData('events');
-          Swarm.utils.hideLoadingIcon();
+        container.empty();
+        container.slimScroll().off('slimscroll');
+        container.slimScroll().removeData('events');
+        Swarm.utils.hideLoadingIcon();
 
-          data.messages.reverse();
-          Swarm.utils.buildFeedInfo(true, data);
-          $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
+        data.messages.reverse();
+        Swarm.utils.buildFeedInfo(true, data);
+        $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
                                           'border-left': '3px solid #71a6f6'})
-            .find('.msg_meta').remove();
+          .find('.msg_meta').remove();
 
         });
   });
@@ -328,7 +330,9 @@ Swarm.utils = {
           container.slimScroll().off('slimscroll');
           container.slimScroll().removeData('events');
           Swarm.utils.hideLoadingIcon();
-
+          Swarm.api.pushCurrentView('profile');
+          Swarm.api.displayBackButton();
+          swarmInstance.bindBackButtonEvent();
           Swarm.utils.showProfile(data);
         });
       }

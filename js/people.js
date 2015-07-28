@@ -4,6 +4,8 @@ Swarm.People = function (){
 
 Swarm.People.prototype = {
   init: function () {
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('people');
     this.bindPersonLiveEvent();
     this.bindIndexLiveEvent();
     this.bindSearchLiveEvent();

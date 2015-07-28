@@ -5,6 +5,9 @@ Swarm.Profile = function (){
 Swarm.Profile.prototype = {
   init: function(userId){
   	var self = this;
+    Swarm.api.pushCurrentView('profile');
+    Swarm.api.displayBackButton();
+    swarmInstance.bindBackButtonEvent();
   	self.getProfileInformation(userId);
   },
   getProfileInformation : function(userId){

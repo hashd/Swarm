@@ -6,6 +6,8 @@ Swarm.ActivityFeed = function (){
 Swarm.ActivityFeed.prototype = {
   init: function(){
   	var self = this;
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('activityfeed');
   	self.displayActivityFeed();
   },
 
@@ -114,6 +116,8 @@ Swarm.Analytics.prototype = {
 		var self = this;
 		$(window).off('scroll');
 		Swarm.utils.showLoadingIcon();
+		Swarm.api.initCurrentView();
+		Swarm.api.pushCurrentView('analytics');
 	    jQuery.ajax({
 			type :"GET",
 			url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",
@@ -285,7 +289,9 @@ Swarm.API = function (accessToken) {
   self.primaryAccessToken = accessToken;
   self.accessToken = accessToken;
   self.currentUserId = '';
+  self.currentViewStack = [];
   self.init();
+
 };
 
 Swarm.API.prototype = {
@@ -354,7 +360,30 @@ Swarm.API.prototype = {
     self.setAccessToken(self.activeNetwork.token);
   },
 
-
+  getCurrentView : function() {
+    var self = this;
+    return self.currentViewStack[self.currentViewStack.length-1];
+  },
+  pushCurrentView : function(currentView) {
+    var self =this;
+    if(self.currentViewStack.indexOf(currentView) == -1) {
+      self.currentViewStack.push(currentView);
+    }
+  },
+  popCurrentView : function() {
+    var self = this;
+    self.currentViewStack.pop();
+  },
+  initCurrentView : function() {
+    var self = this;
+    self.currentViewStack.splice(0, self.currentViewStack.length);
+  },
+  displayBackButton : function() {
+    var self = this,
+    mugshotContainer = $('.header .current-mugshot'),
+    content = $('#content');
+    mugshotContainer.html('<i class="material-icons" style="font-size:2.5em;cursor:pointer">arrow_back</i>');
+  },
 
   /** All Yammer API Calls below */
   getCurrentUserProfile: function (cb) {
@@ -380,7 +409,7 @@ Swarm.API.prototype = {
 
   getThreadedMessagesFeed: function (channel, cb, additionalOptions) {
     var self = this,
-      threadedOptions = $.extend({ threaded: 'extended', limit: 10}, additionalOptions),
+      threadedOptions = $.extend({ threaded: 'extended', limit: 20}, additionalOptions),
       url = 'https://www.yammer.com/api/v1/messages.json/my_feed.json';
 
     if (channel === 'all') {
@@ -406,8 +435,12 @@ Swarm.API.prototype = {
 
   getGroupThreads: function (groupId, cb, additionalOptions) {
     var self = this,
-      threadOptions = $.extend({limit: 20}, additionalOptions),
+      threadOptions = $.extend({ threaded: 'extended', limit: 20}, additionalOptions),
       url = 'https://www.yammer.com/api/v1/messages/in_group/' + groupId;
+
+    if (groupId === 'all') {
+      url = "https://www.yammer.com/api/v1/messages/general.json";
+    }
 
     self.ajaxCall('GET', url, threadOptions, cb);
   },
@@ -426,6 +459,14 @@ Swarm.API.prototype = {
       url = 'https://www.yammer.com/api/v1/search.json';
 
     self.ajaxCall('GET', url, searchOptions, cb);
+  },
+
+  getGroupsList: function (cb, additionalOptions) {
+    var self = this,
+      groupsListOptions = $.extend({limit: 1}, additionalOptions),
+      url = "https://www.yammer.com/api/v1/users/current.json?include_group_memberships=true";
+
+    self.ajaxCall('GET', url, groupsListOptions, cb);
   }
 }
 
@@ -478,6 +519,111 @@ Swarm.Client.prototype = {
     self.bindTabSelectEvent();
     self.bindSearchEvent();
     self.bindPostMessageEvent();
+    //self.bindBackButtonEvent();
+  },
+
+  bindBackButtonEvent : function() {
+    
+    var self = this,
+    container = $('#content'),
+    mugshotContainer = $('.header .current-mugshot');
+    mugshotContainer.find('i').on('click', function () {
+      Swarm.api.popCurrentView();
+      var previousView = Swarm.api.getCurrentView();
+      var threadId,query,groupId;
+      if(previousView.indexOf('thread') != -1) {
+        threadId = previousView.slice(7);
+        previousView = 'thread';
+      }
+      else if(previousView.indexOf('search') != -1) {
+        query = previousView.slice(7);
+        previousView = 'search'; 
+      }
+      else if(previousView.indexOf('groups:') != -1) {
+       groupId = previousView.slice(7);
+       previousView = 'groups';  
+      }
+      switch (previousView){
+        case "feeds" :
+          $('.header .left-pane').text("NETWORK FEED");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.feedsService.init();  
+          break;
+        case "messages" :
+          $('.header .left-pane').text("MESSAGES");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.messagesService.init();   
+          break;
+        case "analytics":
+          $('.header .left-pane').text("ANALYTICS");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.analyticsService.init();
+          break;
+        case "Postmessage":
+          self.postMessageService.init();
+          break;
+        case "activityfeed":
+          $('.header .left-pane').text("RECENT ACTIVITY");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.activityFeedService.init();
+          break;
+        case "notifications":
+          $('.header .left-pane').text("NOTIFICATIONS");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.notificationsService.init();
+          break;
+        case "groups":
+          if(typeof groupId === 'undefined') {
+            $('.header .left-pane').text("GROUPS");
+            self.getCurrentUserMugshot();
+            self.content.html(Swarm.templates.network_feed());
+            self.groupsService.init();
+          }
+          else {
+            Swarm.api.getGroupThreads(groupId, function (data) {
+            container.empty().parent().find('.slimScrollBar').css('top',0);
+            $('.header').find('.page-title').html(data.meta.feed_name);
+            Swarm.utils.buildFeedInfo(true, data);
+            });
+          }
+          
+          break;
+        case "people":
+          $('.header .left-pane').text("PEOPLE");
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          self.peopleService.init();
+          break;
+        case "thread":
+          Swarm.api.getThread(threadId, function (data) {
+            $('.header .left-pane').text(Swarm.api.currentViewStack[0]);
+            container.empty();
+            container.slimScroll().off('slimscroll');
+            container.slimScroll().removeData('events');
+            Swarm.utils.hideLoadingIcon();
+            data.messages.reverse();
+            Swarm.utils.buildFeedInfo(true, data);
+            $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
+                                          'border-left': '3px solid #71a6f6'})
+              .find('.msg_meta').remove();
+            });
+            break;
+        case "search":
+          self.getCurrentUserMugshot();
+          self.content.html(Swarm.templates.network_feed());
+          var pageTitle = self.header.find('.page-title').html('Search');
+          pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label><i class="material-icons">search</i>Search</label></div>');
+          pageTitle.find('input').focus();
+          self.searchService.init(query);
+        }
+      
+    });
+    
   },
 
   bindTabSelectEvent: function () {
@@ -577,6 +723,7 @@ Swarm.Client.prototype = {
       content = $('#content');
 
     Swarm.api.getCurrentUserProfile(function (data) {
+      mugshotContainer.empty();
       mugshotContainer.html($('<img />').attr('src', data.mugshot_url));
       Swarm.api.setCurrentUserId(data.id);
       mugshotContainer.find('img').on('click', function () {
@@ -601,7 +748,7 @@ Swarm.Feeds.prototype = {
   init: function(){
     var self = this;
     self.bindTabEvents();
-
+    Swarm.api.pushCurrentView('feeds');
     $('#content .sw-network-feed-tabs a').first().trigger('click')
   },
 
@@ -657,65 +804,46 @@ Swarm.Groups = function (){
 Swarm.Groups.prototype = {
   init: function(){
     var self = this;
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('groups');
     self.buildGroupMessageFeed();
   },
 
   buildGroupMessageFeed : function(){
-    var self = this;
-    container = $("#content"),
-    jQuery.ajax({
-      type :"GET",
-      url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",
-        data:{
-          "limit":1
-        },
-      dataType: 'json',
-      xhrFields: {
-        withCredentials: false
-      },
-      success : function(data){
-        container.empty().html(Swarm.templates.groups({ groups: data}));
-        self.displayGroupMessages();
-        $('#slt_groups').trigger('change');
-      },
-      error : function(){
-        alert("error");
-      }
+    var self = this,
+      container = $("#content");
+
+    Swarm.utils.showLoadingIcon();
+    Swarm.api.getGroupsList(function (data) {
+      Swarm.utils.hideLoadingIcon();
+      container.empty().html(Swarm.templates.groups({ groups: data}));
+      self.bindDisplayGroupEvent();
     });
   },
 
-  displayGroupMessages :function() {
-    var self = this;
-    $('#slt_groups').change(function() {
-    var content = $("#content");
-    var groupId = $("select#slt_groups").val();
-    var allCompanyUrl = "https://www.yammer.com/api/v1/messages/general.json";
-    var url = 'https://www.yammer.com/api/v1/messages/in_group/'+groupId+'.json?access_token='+yammer.getAccessToken();
-    if(groupId == "all"){
-      url = allCompanyUrl;
-    }
-    jQuery.ajax({
-      type :"GET",
-      url : url,
-        data:{
-          "limit":20
-        },
-      dataType: 'json',
-      xhrFields: {
-        withCredentials: false
-      },
-      success : function(data){
-        content.find('div.feed_main').remove();
-          Swarm.utils.buildFeedInfo(false,data);
-      },
-      error : function(){
-        alert("error");
-      }
-      });
+  bindDisplayGroupEvent: function() {
+    var self = this,
+      container = $("#content");
 
-  });
+    container.find('.sw-group-card').off('click').on('click', function() {
+      var groupId = $(this).data('group-id'),
+        groupName = $(this).text();
+
+      Swarm.utils.showLoadingIcon();
+      Swarm.api.getGroupThreads(groupId, function (data) {
+        Swarm.api.pushCurrentView('groups:'+groupId);
+        Swarm.api.displayBackButton();
+        swarmInstance.bindBackButtonEvent();
+        container.empty().parent().find('.slimScrollBar').css('top',0);
+        $('.header').find('.page-title').html(groupName);
+
+        Swarm.utils.hideLoadingIcon();
+        Swarm.utils.buildFeedInfo(true, data);
+      });
+    });
   },
 }
+
 $(document).ready(function() {
  	var container = $("#content");
 	jQuery.ajax({
@@ -750,6 +878,8 @@ Swarm.Messages = function (){
 Swarm.Messages.prototype = {
   init: function(){
   	var self = this;
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('messages');
   	self.getReceivedMessages();
     self.attachWindowScrollEvent();
   },
@@ -856,6 +986,8 @@ Swarm.Notifications = function (){
 Swarm.Notifications.prototype = {
   init: function(){
   	var self = this;
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('notifications');
   	self.displayNotifications();
   },
 
@@ -956,6 +1088,8 @@ Swarm.People = function (){
 
 Swarm.People.prototype = {
   init: function () {
+    Swarm.api.initCurrentView();
+    Swarm.api.pushCurrentView('people');
     this.bindPersonLiveEvent();
     this.bindIndexLiveEvent();
     this.bindSearchLiveEvent();
@@ -1177,6 +1311,9 @@ Swarm.Profile = function (){
 Swarm.Profile.prototype = {
   init: function(userId){
   	var self = this;
+    Swarm.api.pushCurrentView('profile');
+    Swarm.api.displayBackButton();
+    swarmInstance.bindBackButtonEvent();
   	self.getProfileInformation(userId);
   },
   getProfileInformation : function(userId){
@@ -1239,6 +1376,8 @@ Swarm.Search.prototype = {
   init: function(query){
   	var self = this;
     if(query.length > 0){
+      Swarm.api.initCurrentView();
+      Swarm.api.pushCurrentView('search:'+query);
       container = $("#content"),
       container.empty();
       self.getSearchQueryResults(query);
@@ -1355,9 +1494,9 @@ Swarm.utils = {
        msg.reply_count = (msgReplyObj.length>0 && msgReplyObj[0].stats)?
                                           --msgReplyObj[0].stats.updates:0;
       } else {
-        msg.reply_count = --msg.threadInfo.stats.updates;  
-      } 
-      
+        msg.reply_count = --msg.threadInfo.stats.updates;
+      }
+
       if(msg.shared_message_id) {
         msg.isShared = true;
         msg.shared_id = msg.shared_message_id;
@@ -1579,21 +1718,22 @@ Swarm.utils = {
       .on("click", ".feed_main .msg_body, .feed_main .msg_thread_view, .feed_main .msg_shared .msg_body", function(e){
         e.stopPropagation();
         var self = this,
-          target = $(this),
-          threadId = target.data("thread-id");
-
+        target = $(this),
+        threadId = target.data("thread-id");
+        Swarm.api.pushCurrentView('thread:'+threadId);
+        Swarm.api.displayBackButton();
+        swarmInstance.bindBackButtonEvent();
         Swarm.api.getThread(threadId, function (data) {
-          container.empty();
-          container.slimScroll().off('slimscroll');
-          container.slimScroll().removeData('events');
-          Swarm.utils.hideLoadingIcon();
+        container.empty();
+        container.slimScroll().off('slimscroll');
+        container.slimScroll().removeData('events');
+        Swarm.utils.hideLoadingIcon();
 
-          data.messages.reverse();
-          Swarm.utils.buildFeedInfo(true, data);
-          $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
-                                          'border-left': '3px solid #71a6f6',
-                                          'background': '#f3f5f8'})
-            .find('.msg_meta').remove();
+        data.messages.reverse();
+        Swarm.utils.buildFeedInfo(true, data);
+        $('div.msg_main').slice(1).css({'width': '300px','float': 'right',
+                                          'border-left': '3px solid #71a6f6'})
+          .find('.msg_meta').remove();
 
         });
   });
@@ -1626,7 +1766,9 @@ Swarm.utils = {
           container.slimScroll().off('slimscroll');
           container.slimScroll().removeData('events');
           Swarm.utils.hideLoadingIcon();
-
+          Swarm.api.pushCurrentView('profile');
+          Swarm.api.displayBackButton();
+          swarmInstance.bindBackButtonEvent();
           Swarm.utils.showProfile(data);
         });
       }
