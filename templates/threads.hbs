@@ -60,14 +60,14 @@
 				{{#each likedBy.names}}
 					<span class="msg_liked_by" data-user-id="{{user_id}}">{{full_name}}</span>
 				{{/each}}
-				{{#if likedBy.count}} and {{likedBy.count}} like this.{{/if}}
+				{{#if likedBy.count}} and {{likedBy.count}} others like this.{{/if}}
 				{{#unless likedBy.count}} likes this.{{/unless}}
 			</div>
 		</div>
 		{{/if}}
 		{{#if remainingMessages}}
 		<div class="msg_extended_actions">
-			<span class="msg_thread_view" data-thread-id="{{thread_id}}">More messages</span>
+			<span class="msg_thread_view" data-thread-id="{{thread_id}}">Show more messages</span>
 		</div>
 		{{/if}}
 		{{#if extendedThread.length}}

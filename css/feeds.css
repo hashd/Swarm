@@ -113,7 +113,7 @@
   font-size: 0.9em;
   margin-top: 4px;
   cursor: pointer;
-  padding: 2px 4px;
+  padding: 3px 8px;
   color: #39628E;
 }
 .msg_liked_by {
@@ -132,4 +132,12 @@
   padding: 1em;
   font-size: 0.9em;
   background-color: #fafafa;
+  box-shadow: inset 0 0 6px #aaa;
+}
+.msg_extended {
+  padding: 2px 8px;
+}
+.msg_extended .msg_main {
+  border: 1px solid #ccc;
+  border-left: 3px solid #bbb;
 }
