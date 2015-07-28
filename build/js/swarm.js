@@ -418,6 +418,14 @@ Swarm.API.prototype = {
       url = 'https://www.yammer.com/api/v1/users/' + userId;
 
     self.ajaxCall('GET', url, profileOptions, cb);
+  },
+
+  getSearchResults: function (query, cb, additionalOptions) {
+    var self = this,
+      searchOptions = $.extend({page:1, search:query}, additionalOptions),
+      url = 'https://www.yammer.com/api/v1/search.json';
+
+    self.ajaxCall('GET', url, searchOptions, cb);
   }
 }
 
@@ -950,7 +958,24 @@ Swarm.People.prototype = {
   init: function () {
     this.bindPersonLiveEvent();
     this.bindIndexLiveEvent();
+    this.bindSearchLiveEvent();
     this.displayPeopleFeed();
+  },
+
+  bindSearchLiveEvent: function () {
+    var self = this,
+      pageTitle = $('.header').find('.page-title'),
+      content = $('#content');
+
+    content.off('click', '.sw-search').on('click', '.sw-search', function () {
+      pageTitle.html('<div class="mui-form-group"><input type="text" id="search-people" class="mui-form-control mui-empty mui-dirty" /><label><i class="material-icons">search</i>Search People</label></div>');
+      pageTitle.find('input').focus();
+
+      pageTitle.off('change', 'input#search-people').on('change', 'input#search-people', function () {
+        self.displaySearchResults($(this).val());
+      });
+    });
+
   },
 
   displayPeopleFeed: function () {
@@ -993,11 +1018,27 @@ Swarm.People.prototype = {
     });
   },
 
+  displaySearchResults: function (query) {
+    var self = this,
+      container = $("#content .sw-people-content");
+
+    $('#content').slimScroll().unbind('slimscroll');
+
+    Swarm.utils.showLoadingIcon(container);
+    Swarm.api.getSearchResults(query, function (data) {
+      Swarm.utils.hideLoadingIcon();
+      data.users.forEach(function (d, i) {
+        d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
+      });
+      container.append(Swarm.templates.persons({ 'users': data.users }));
+    });
+  },
+
   bindPersonLiveEvent: function () {
     var self = this,
       container = $("#content");
 
-    container.on('click', '.sw-person', function () {
+    container.off('click', '.sw-person').on('click', '.sw-person', function () {
       var clkd = $(this),
         userId = clkd.attr('data-user-id');
 
@@ -1310,13 +1351,13 @@ Swarm.utils = {
       msg.like_text = (msgLikedByObj.length>0)?"Unlike":"Like";
 
       if(threadView) {
-       var msgReplyObj = $.grep(references, function (e) { return e.type === 'thread' && e.id === msg.id }); 
+       var msgReplyObj = $.grep(references, function (e) { return e.type === 'thread' && e.id === msg.id });
        msg.reply_count = (msgReplyObj.length>0 && msgReplyObj[0].stats)?
                                           --msgReplyObj[0].stats.updates:0;
       } else {
-        msg.reply_count = --msg.threadInfo.stats.updates;  
-      } 
-      
+        msg.reply_count = --msg.threadInfo.stats.updates;
+      }
+
       msg.remainingMessages = !threadView ? msg.threadInfo.stats.updates - msg.extendedThread.length : 0;
 
       $.each(msg.extendedThread, function (ind, extendedMessage) {
@@ -1379,7 +1420,7 @@ Swarm.utils = {
         else {
           msg_main = target.parents(".msg_details_main");
         }
-        
+
         msg_main.find('.reply_message').remove();
         msg_main.append(Swarm.templates.reply_message({}));
         msg_main.find('.reply_message textarea, .reply_message select').focus();
@@ -1587,14 +1628,15 @@ Swarm.utils = {
             $(window).off("scroll");
             profileObj.init(userId);
         }
-            
+
     });
-   
+
 },
 
 showProfile: function (data) {
   var self = this,
-    container = $("#content");
+    container = $("#content"),
+    header = $('.header').find('.page-title').html('User');
 
   data.mugshot_url_template = data.mugshot_url_template.replace("{width}x{height}","100x100"),
   data.active_since = self.getActiveDuration(new Date(data.activated_at.toString()));
