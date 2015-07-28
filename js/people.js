@@ -6,7 +6,24 @@ Swarm.People.prototype = {
   init: function () {
     this.bindPersonLiveEvent();
     this.bindIndexLiveEvent();
+    this.bindSearchLiveEvent();
     this.displayPeopleFeed();
+  },
+
+  bindSearchLiveEvent: function () {
+    var self = this,
+      pageTitle = $('.header').find('.page-title'),
+      content = $('#content');
+
+    content.off('click', '.sw-search').on('click', '.sw-search', function () {
+      pageTitle.html('<div class="mui-form-group"><input type="text" id="search-people" class="mui-form-control mui-empty mui-dirty" /><label><i class="material-icons">search</i>Search People</label></div>');
+      pageTitle.find('input').focus();
+
+      pageTitle.off('change', 'input#search-people').on('change', 'input#search-people', function () {
+        self.displaySearchResults($(this).val());
+      });
+    });
+
   },
 
   displayPeopleFeed: function () {
@@ -49,11 +66,27 @@ Swarm.People.prototype = {
     });
   },
 
+  displaySearchResults: function (query) {
+    var self = this,
+      container = $("#content .sw-people-content");
+
+    $('#content').slimScroll().unbind('slimscroll');
+
+    Swarm.utils.showLoadingIcon(container);
+    Swarm.api.getSearchResults(query, function (data) {
+      Swarm.utils.hideLoadingIcon();
+      data.users.forEach(function (d, i) {
+        d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
+      });
+      container.append(Swarm.templates.persons({ 'users': data.users }));
+    });
+  },
+
   bindPersonLiveEvent: function () {
     var self = this,
       container = $("#content");
 
-    container.on('click', '.sw-person', function () {
+    container.off('click', '.sw-person').on('click', '.sw-person', function () {
       var clkd = $(this),
         userId = clkd.attr('data-user-id');
 

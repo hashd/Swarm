@@ -445,7 +445,8 @@ html, body {
   max-width: 100%;
 }
 
-#search {
+#search,
+#search-people {
   font-size: 0.9em;
   color: #555;
 }
@@ -817,6 +818,18 @@ html, body {
 .sw-no-user-found {
     padding: 1.5em;
     text-align: center;
+}
+
+.sw-search {
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 1em;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.sw-search:hover {
+    color: #0072C6;
 }
 
 .mui-tabs.sw-network-feed-tabs {

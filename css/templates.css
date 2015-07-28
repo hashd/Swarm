@@ -47,6 +47,18 @@
     text-align: center;
 }
 
+.sw-search {
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 1em;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.sw-search:hover {
+    color: #0072C6;
+}
+
 .mui-tabs.sw-network-feed-tabs {
     padding-top: 4px;
     text-align: left;
