@@ -12,7 +12,9 @@ Swarm.Groups.prototype = {
     var self = this,
       container = $("#content");
 
+    Swarm.utils.showLoadingIcon();
     Swarm.api.getGroupsList(function (data) {
+      Swarm.utils.hideLoadingIcon();
       container.empty().html(Swarm.templates.groups({ groups: data}));
       self.bindDisplayGroupEvent();
     });
