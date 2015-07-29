@@ -6,7 +6,9 @@ Swarm.Feeds.prototype = {
   init: function(){
     var self = this;
     self.bindTabEvents();
+    Swarm.api.initCurrentView();
     Swarm.api.pushCurrentView('feeds');
+    //swarmInstance.getCurrentUserMugshot();
     $('#content .sw-network-feed-tabs a').first().trigger('click')
   },
 

@@ -248,7 +248,7 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
 
   return " and "
     + this.escapeExpression(this.lambda(((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1), depth0))
-    + " like this.";
+    + " others like this.";
 },"9":function(depth0,helpers,partials,data) {
     return " likes this.";
 },"11":function(depth0,helpers,partials,data) {
@@ -256,7 +256,7 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
 
   return "		<div class=\"msg_extended_actions\">\n			<span class=\"msg_thread_view\" data-thread-id=\""
     + this.escapeExpression(((helper = (helper = helpers.thread_id || (depth0 != null ? depth0.thread_id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"thread_id","hash":{},"data":data}) : helper)))
-    + "\">More messages</span>\n		</div>\n";
+    + "\">Show more messages</span>\n		</div>\n";
 },"13":function(depth0,helpers,partials,data) {
     var stack1;
 
@@ -305,7 +305,7 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
   return "							<div class='msg_likes'>\n"
     + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.names : stack1),{"name":"each","hash":{},"fn":this.program(16, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "								"
-    + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(7, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(18, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "\n								"
     + ((stack1 = helpers.unless.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"unless","hash":{},"fn":this.program(9, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "\n							</div>\n";
@@ -317,6 +317,12 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + "\">"
     + alias3(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"full_name","hash":{},"data":data}) : helper)))
     + "</span>\n";
+},"18":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return " and "
+    + this.escapeExpression(this.lambda(((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1), depth0))
+    + " like this.";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1;
 

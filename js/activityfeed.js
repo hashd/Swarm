@@ -7,6 +7,7 @@ Swarm.ActivityFeed.prototype = {
   	var self = this;
     Swarm.api.initCurrentView();
     Swarm.api.pushCurrentView('activityfeed');
+    swarmInstance.getCurrentUserMugshot();
   	self.displayActivityFeed();
   },
 

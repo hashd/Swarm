@@ -7,6 +7,7 @@ Swarm.Messages.prototype = {
   	var self = this;
     Swarm.api.initCurrentView();
     Swarm.api.pushCurrentView('messages');
+    swarmInstance.getCurrentUserMugshot();
   	self.getReceivedMessages();
     self.attachWindowScrollEvent();
   },

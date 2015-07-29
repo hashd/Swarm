@@ -12,7 +12,8 @@ Swarm.PostMessage.prototype = {
   	self.getGroupList();
   },
   postMessage :function() {
-  	var self = this;
+  	var self = this,
+    container = $('#content');
 	$('.post_form').submit(function() {
 		var groupId = $("select#slt_groups").val();
 		var body_message = $("textarea#message_body").val();
@@ -33,7 +34,15 @@ Swarm.PostMessage.prototype = {
           withCredentials: false
         },
         success : function(data){
-          //alert("post successful") ;
+          /*Swarm.api.getGroupThreads(groupId, function (data) {
+                Swarm.api.pushCurrentView('groups:'+groupId);
+                Swarm.api.displayBackButton();
+                swarmInstance.bindBackButtonEvent();
+                container.empty().parent().find('.slimScrollBar').css('top',0);
+                $('.header').find('.page-title').html(data.meta.feed_name);
+                Swarm.utils.hideLoadingIcon();
+                Swarm.utils.buildFeedInfo(true, data);
+              });*/
         },
         error : function(){
           alert("error");

@@ -9,6 +9,7 @@ Swarm.Analytics.prototype = {
 		Swarm.utils.showLoadingIcon();
 		Swarm.api.initCurrentView();
 		Swarm.api.pushCurrentView('analytics');
+		swarmInstance.getCurrentUserMugshot();
 	    jQuery.ajax({
 			type :"GET",
 			url : "https://www.yammer.com/api/v1/users/current.json?access_token="+yammer.getAccessToken()+"&include_group_memberships=true",

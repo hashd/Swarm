@@ -7,6 +7,7 @@ Swarm.Groups.prototype = {
     var self = this;
     Swarm.api.initCurrentView();
     Swarm.api.pushCurrentView('groups');
+    swarmInstance.getCurrentUserMugshot();
     self.buildGroupMessageFeed();
   },
 

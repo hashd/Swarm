@@ -47,7 +47,6 @@ Swarm.Client.prototype = {
     self.bindTabSelectEvent();
     self.bindSearchEvent();
     self.bindPostMessageEvent();
-    //self.bindBackButtonEvent();
   },
 
   bindBackButtonEvent : function() {
@@ -73,44 +72,26 @@ Swarm.Client.prototype = {
       }
       switch (previousView){
         case "feeds" :
-          $('.header .left-pane').text("NETWORK FEED");
-          self.getCurrentUserMugshot();
-          self.content.html(Swarm.templates.network_feed());
-          self.feedsService.init();  
+          self.makeActiveTab('Feeds', 'Feeds');
           break;
-        case "messages" :
-          $('.header .left-pane').text("MESSAGES");
-          self.getCurrentUserMugshot();
-          self.content.html(Swarm.templates.network_feed());
-          self.messagesService.init();   
+        case "messages" :  
+          self.makeActiveTab('Messages', 'Messages');
           break;
         case "analytics":
-          $('.header .left-pane').text("ANALYTICS");
-          self.getCurrentUserMugshot();
-          self.content.html(Swarm.templates.network_feed());
-          self.analyticsService.init();
+          self.makeActiveTab('Analytics', 'Analytics');
           break;
         case "Postmessage":
           self.postMessageService.init();
           break;
         case "activityfeed":
-          $('.header .left-pane').text("RECENT ACTIVITY");
-          self.getCurrentUserMugshot();
-          self.content.html(Swarm.templates.network_feed());
-          self.activityFeedService.init();
+          self.makeActiveTab('Activityfeed', 'Recent Activity');
           break;
         case "notifications":
-          $('.header .left-pane').text("NOTIFICATIONS");
-          self.getCurrentUserMugshot();
-          self.content.html(Swarm.templates.network_feed());
-          self.notificationsService.init();
+          self.makeActiveTab('Notifications', 'Notifications');
           break;
         case "groups":
           if(typeof groupId === 'undefined') {
-            $('.header .left-pane').text("GROUPS");
-            self.getCurrentUserMugshot();
-            self.content.html(Swarm.templates.network_feed());
-            self.groupsService.init();
+            self.makeActiveTab('Groups', 'Groups');
           }
           else {
             Swarm.api.getGroupThreads(groupId, function (data) {
@@ -122,10 +103,7 @@ Swarm.Client.prototype = {
           
           break;
         case "people":
-          $('.header .left-pane').text("PEOPLE");
-          self.getCurrentUserMugshot();
-          self.content.html(Swarm.templates.network_feed());
-          self.peopleService.init();
+          self.makeActiveTab('People', 'People');
           break;
         case "thread":
           Swarm.api.getThread(threadId, function (data) {
@@ -145,7 +123,7 @@ Swarm.Client.prototype = {
           self.getCurrentUserMugshot();
           self.content.html(Swarm.templates.network_feed());
           var pageTitle = self.header.find('.page-title').html('Search');
-          pageTitle.html('<div class="mui-form-group"><input type="text" id="search" class="mui-form-control mui-empty mui-dirty" /><label><i class="material-icons">search</i>Search</label></div>');
+          pageTitle.html('<div class="mui-form-group"><input type="text" id="search" value="'+query+'" class="mui-form-control mui-empty mui-dirty" /><label><i class="material-icons">search</i>Search</label></div>');
           pageTitle.find('input').focus();
           self.searchService.init(query);
         }
@@ -198,6 +176,7 @@ Swarm.Client.prototype = {
     switch (jsVal){
       case "Feeds":
         self.content.html(Swarm.templates.network_feed());
+        self.getCurrentUserMugshot();
         self.feedsService.init();
         break;
       case "Messages":
@@ -249,15 +228,17 @@ Swarm.Client.prototype = {
     var self = this,
       mugshotContainer = $('.header .current-mugshot'),
       content = $('#content');
-
-    Swarm.api.getCurrentUserProfile(function (data) {
-      mugshotContainer.empty();
-      mugshotContainer.html($('<img />').attr('src', data.mugshot_url));
-      Swarm.api.setCurrentUserId(data.id);
-      mugshotContainer.find('img').on('click', function () {
+      
+    if(mugshotContainer.find('img').length == 0) {
+      Swarm.api.getCurrentUserProfile(function (data) {
+        mugshotContainer.empty();
+        mugshotContainer.html($('<img />').attr('src', data.mugshot_url));
+        Swarm.api.setCurrentUserId(data.id);
+        mugshotContainer.find('img').on('click', function () {
         Swarm.utils.showProfile(data);
+        });
       });
-    });
+    }
   },
 
   getCurrentUserNetworks: function () {

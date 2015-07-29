@@ -7,6 +7,7 @@ Swarm.Notifications.prototype = {
   	var self = this;
     Swarm.api.initCurrentView();
     Swarm.api.pushCurrentView('notifications');
+    swarmInstance.getCurrentUserMugshot();
   	self.displayNotifications();
   },
 

@@ -6,6 +6,7 @@ Swarm.People.prototype = {
   init: function () {
     Swarm.api.initCurrentView();
     Swarm.api.pushCurrentView('people');
+    swarmInstance.getCurrentUserMugshot();
     this.bindPersonLiveEvent();
     this.bindIndexLiveEvent();
     this.bindSearchLiveEvent();
@@ -103,6 +104,9 @@ Swarm.People.prototype = {
           withCredentials: false
         },
         success: function(data){
+          Swarm.api.pushCurrentView('profile');
+          Swarm.api.displayBackButton();
+          swarmInstance.bindBackButtonEvent();
           Swarm.utils.showProfile(data);
         },
         error: function(){
