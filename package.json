@@ -1,6 +1,6 @@
 {
   "name": "Swarm-for-Yammer",
-  "version": "0.1.5",
+  "version": "0.2.1",
   "description": "Yammer plugin for Chrome",
   "main": "background.js",
   "dependencies": {},

@@ -81,7 +81,7 @@ gulp.task('create:crx', ['create:dist'], function() {
   return gulp.src('./dist')
     .pipe(crx({
       privateKey: fs.readFileSync('./dist.pem', 'utf8'),
-      filename: manifest.name + '-' + project.version + '.crx',
+      filename: manifest.name + '-' + manifest.version + '.crx',
       codebase: '.',
       updateXmlFilename: 'update.xml'
     }))
