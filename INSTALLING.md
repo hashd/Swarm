@@ -4,7 +4,7 @@ Installation steps would vary based on the medium of installation:
 This is the easiest way to install the extension but we're not yet on the web store so choose the next medium of installation.
 
 ### CRX file
-Get the latest CRX file from the [releases](https://github.com/manoj535/Swarm/releases) section and drag it into the [extensions](chrome://extensions/) list on your chrome browser.
+Get the latest CRX file from the [releases](https://github.com/manoj535/Swarm/releases) section and drag it into the [extensions](chrome://extensions/) list on your chrome browser (chrome://extensions/).
 
 ### Developer Mode
 Want to stay at the cutting edge of things, follow these steps:
