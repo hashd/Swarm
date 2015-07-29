@@ -12,3 +12,6 @@ Want to stay at the cutting edge of things, follow these steps:
 - Open Chrome Settings page, click on Extensions
 - Check Developer mode check box.
 - Click on Load unpacked extension and navigate to the extracted folder.
+
+### Supported Chrome version
+Make sure you have chrome version > 42 for better experience
