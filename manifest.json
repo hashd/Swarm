@@ -1,6 +1,6 @@
 {
   "name": "Yammer Plugin",
-  "version": "0.1.5",
+  "version": "0.2.1",
   "description": "Chrome Plugin for Yammer",
   "icons": {
     "128": "./img/yammerlogo.png"
