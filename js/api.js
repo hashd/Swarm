@@ -97,7 +97,7 @@ Swarm.API.prototype = {
     var self = this,
     mugshotContainer = $('.header .current-mugshot'),
     content = $('#content');
-    mugshotContainer.html('<i class="material-icons" style="font-size:1.5em;cursor:pointer">arrow_back</i>');
+    mugshotContainer.html('<i class="material-icons" style="font-size:1.5em;cursor:pointer;padding:6px 3px;">arrow_back</i>');
   },
 
   /** All Yammer API Calls below */
