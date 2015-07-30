@@ -42,6 +42,7 @@
   line-height: 1.5em;
   word-break: break-word;
   cursor: pointer;
+  color: #333;
 }
 .senderLinkAnc{
   text-decoration: initial;
@@ -52,7 +53,7 @@
   background-color: #f4f4f4;
   margin-top: 0.5em;
   font-size: 0.9em;
-  padding: 2px 4px;
+  padding: 2px 8px;
 }
 .msg_group_title {
   display: inline-block;
@@ -119,6 +120,7 @@
 .msg_liked_by {
   color: #39628E;
   cursor: pointer;
+  text-transform: capitalize;
 }
 .msg_header {
   display: table;
