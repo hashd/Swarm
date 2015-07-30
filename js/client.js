@@ -219,8 +219,11 @@ Swarm.Client.prototype = {
 
   invokeCustomization: function () {
     var self = this;
-    self.content.slimScroll({ height: '480px', width: '330px'})
-      .bind('slimscroll', function (e, pos) {
+    self.content.slimScroll({
+      height: '480px',
+      width: '330px',
+      wheelStep: 5
+    }).bind('slimscroll', function (e, pos) {
         console.log('At position ' + pos);
       });
   },
