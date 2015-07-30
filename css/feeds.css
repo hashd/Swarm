@@ -12,30 +12,36 @@
   overflow: auto;
   padding: 0.3em;
 }
+
 .msg_sender_pic{
   display: table-cell;
   width: 15%;
   vertical-align: top;
 }
+
 .msg_sender_pic img{
   padding: 6px;
   width: 48px;
 }
+
 .msg_details_main{
   display: table-cell;
   width: 85%;
 }
+
 .msg_sender_name{
   float: left;
   color: #386cbb;
   font-weight: bold;
   font-size: 0.9em;
 }
+
 .msg_date_time{
   float: right;
   color: #68717f;
   font-size: 0.8em;
 }
+
 .msg_body ,.msg_body_notifications{
   padding: 0.5em;
   font-size: 0.9em;
@@ -44,17 +50,20 @@
   cursor: pointer;
   color: #333;
 }
+
 .senderLinkAnc{
   text-decoration: initial;
   color: #386cbb;
   text-transform: capitalize;
 }
+
 .msg_info {
   background-color: #f4f4f4;
   margin-top: 0.5em;
   font-size: 0.9em;
   padding: 2px 8px;
 }
+
 .msg_group_title {
   display: inline-block;
   padding: 2px 4px;
@@ -64,10 +73,12 @@
   margin-left: -4px;
   cursor: pointer;
 }
+
 .msg_info > div {
   display: inline-block;
   cursor: pointer;
 }
+
 .msg_info i {
   font-size: 1.1em;
   margin: 0 0.5em;
@@ -75,9 +86,11 @@
   padding: 6px 0 2px 0;
   cursor: pointer;
 }
+
 .msg_info i:hover {
   color: #0072C6;
 }
+
 .msg_info > div span {
   margin-top: -8px;
   display: inline-block;
@@ -117,18 +130,22 @@
   padding: 3px 8px;
   color: #39628E;
 }
+
 .msg_liked_by {
   color: #39628E;
   cursor: pointer;
   text-transform: capitalize;
 }
+
 .msg_header {
   display: table;
 }
+
 .msg_content {
   width: 100%;
   display: block;
 }
+
 .reply_message textarea,
 .share_message textarea {
   padding: 1em;
@@ -136,9 +153,13 @@
   background-color: #fafafa;
   box-shadow: inset 0 0 6px #aaa;
 }
+
 .msg_extended {
   padding: 2px 8px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #ddd;
 }
+
 .msg_extended .msg_main {
   border: 1px solid #ccc;
   border-left: 3px solid #bbb;
