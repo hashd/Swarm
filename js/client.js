@@ -50,7 +50,7 @@ Swarm.Client.prototype = {
   },
 
   bindBackButtonEvent : function() {
-    
+
     var self = this,
     container = $('#content'),
     mugshotContainer = $('.header .current-mugshot');
@@ -64,17 +64,17 @@ Swarm.Client.prototype = {
       }
       else if(previousView.indexOf('search') != -1) {
         query = previousView.slice(7);
-        previousView = 'search'; 
+        previousView = 'search';
       }
       else if(previousView.indexOf('groups:') != -1) {
        groupId = previousView.slice(7);
-       previousView = 'groups';  
+       previousView = 'groups';
       }
       switch (previousView){
         case "feeds" :
           self.makeActiveTab('Feeds', 'Feeds');
           break;
-        case "messages" :  
+        case "messages" :
           self.makeActiveTab('Messages', 'Messages');
           break;
         case "analytics":
@@ -90,17 +90,18 @@ Swarm.Client.prototype = {
           self.makeActiveTab('Notifications', 'Notifications');
           break;
         case "groups":
-          if(typeof groupId === 'undefined') {
+          if (typeof groupId === 'undefined') {
             self.makeActiveTab('Groups', 'Groups');
-          }
-          else {
+          } else {
+            Swarm.utils.showLoadingIcon();
             Swarm.api.getGroupThreads(groupId, function (data) {
-            container.empty().parent().find('.slimScrollBar').css('top',0);
-            $('.header').find('.page-title').html(data.meta.feed_name);
-            Swarm.utils.buildFeedInfo(true, data);
+              Swarm.utils.hideLoadingIcon();
+              container.empty().parent().find('.slimScrollBar').css('top',0);
+              $('.header').find('.page-title').html(data.meta.feed_name);
+              Swarm.utils.buildFeedInfo(true, data);
             });
           }
-          
+
           break;
         case "people":
           self.makeActiveTab('People', 'People');
@@ -127,9 +128,9 @@ Swarm.Client.prototype = {
           pageTitle.find('input').focus();
           self.searchService.init(query);
         }
-      
+
     });
-    
+
   },
 
   bindTabSelectEvent: function () {
@@ -228,7 +229,7 @@ Swarm.Client.prototype = {
     var self = this,
       mugshotContainer = $('.header .current-mugshot'),
       content = $('#content');
-      
+
     if(mugshotContainer.find('img').length == 0) {
       Swarm.api.getCurrentUserProfile(function (data) {
         mugshotContainer.empty();

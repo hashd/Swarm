@@ -39,7 +39,7 @@
 .msg_body ,.msg_body_notifications{
   padding: 0.5em;
   font-size: 0.9em;
-  line-height: 1.1em;
+  line-height: 1.5em;
   word-break: break-word;
   cursor: pointer;
 }
