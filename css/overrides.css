@@ -220,13 +220,11 @@ html, body {
 
 .ymodule-instance {
   padding: 12px 8px;
-  background-color: #f5f5f5;
-  margin: 8px 0;
+  background-color: #f3f5f8;
 }
 
-.msg_body img {
-  padding: 8px;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
+.ymodule-instance,
+.msg_body img,
+.msg_shared {
   margin: 8px 0;
 }
