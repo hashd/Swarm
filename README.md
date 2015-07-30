@@ -1,4 +1,4 @@
-# Swarm by Imaginea
+# Swarm
 #### Chrome plugin for Yammer
 
 Swarm was built to increase employee engagement on Yammer by integrating the Yammer experience to the browser in the form of a plugin so they don't have to switch tabs to stay connected to the Enterprise network.
