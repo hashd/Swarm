@@ -58,7 +58,7 @@ Swarm.People.prototype = {
       success : function(data){
         Swarm.utils.hideLoadingIcon();
         data.forEach(function (d, i) {
-          d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","64x64");
+          d.mugshot_url_template = d.mugshot_url_template.replace("{width}x{height}","36x36");
         });
         container.append(Swarm.templates.persons({ 'users': data }));
       },
