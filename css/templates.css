@@ -1,17 +1,30 @@
-.sw-person-fullname {
-    font-size: 12px;
-    word-wrap: normal;
-    word-break: normal;
-    color: #0072C6;
-    padding: 6px;
-    height: 48px;
-    text-align: center;
-    text-overflow: ellipsis;
+.sw-person {
+	margin: 16px 6px;
+	cursor: pointer;
 }
 
-.sw-person {
-	margin: 6px;
-	cursor: pointer;
+.sw-person-mugshot img {
+    padding: 6px;
+}
+
+.sw-person > div {
+    display: inline-block;
+}
+
+.sw-person-fullname {
+    font-size: 0.9em;
+    word-wrap: normal;
+    word-break: normal;
+    text-transform: capitalize;
+    padding: 6px;
+    text-overflow: ellipsis;
+    width: 75%;
+    color: #555;
+}
+
+
+.sw-person-mugshot {
+    width: 20%;
 }
 
 .sw-people-alpha-index {
