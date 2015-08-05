@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
 	font-family: 'Alegreya Sans', 'Helvetica Neue', 'Arial', Sans;
 	font-weight: 300;
@@ -9,9 +13,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
+  margin: 0;
 	display: table;
 	height: 100vh;
-	width: 100vw;
+	width: 100%;
 }
 
 .table-row {
@@ -20,4 +25,9 @@ body {
 
 .table-col {
 	display: table-column;
+}
+
+.user-actions {
+  background: #ddd;
+  vertical-align: middle;
 }
