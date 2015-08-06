@@ -73,7 +73,7 @@ gulp.task('watch:src', function () {
 });
 
 gulp.task('watch:templates', function () {
-  gulp.watch(paths['swarm:templates:src', ['build:templates']]);
+  gulp.watch(paths['swarm:templates:src'], ['build:templates']);
 });
 
 gulp.task('create:dist', ['build:src', 'build:templates', 'move:plugin:src']);
