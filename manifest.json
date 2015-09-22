@@ -22,10 +22,11 @@
     "https://www.yammer.com/oauth2/*",
     "https://www.yammer.com/api/*",
     "storage",
-    "alarms"
+    "alarms",
+    "notifications"
   ],
   "web_accessible_resources" : [
-    "oauth2/oauth2.html"
+    "oauth2/oauth2.html","./img/yammerlogo.png"
   ],
   "background": {
     "scripts": ["libs/js/jquery-2.1.1.js", "background.js"]

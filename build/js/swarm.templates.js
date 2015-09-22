@@ -1,7 +1,7 @@
 this["Swarm"] = this["Swarm"] || {};
 this["Swarm"]["templates"] = this["Swarm"]["templates"] || {};
 this["Swarm"]["templates"]["about"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<div class=\"mui-panel mui-z2\">\n  <div class=\"sw-about-jumbotron\">\n    <div style=\"sw-about-logo\"><img src=\"/img/yammerlogo.png\" title=\"Logo\"/></div>\n    <h3>Yammer plugin for Chrome</h3>\n    <h5>v 0.1.5</h5>\n  </div>\n  <div class=\"sw-about-tabs-container\">\n    <ul class=\"mui-tabs sw-about-tabs\">\n      <li class=\"mui-active\"><a data-mui-toggle=\"tab\" data-mui-controls=\"about-plugin\">About</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-technology\">What's new</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-contributors\">Contributors</a></li>\n    </ul>\n    <div class=\"mui-tab-content\">\n      <div class=\"mui-tab-pane mui-active sw-about-tab\" id=\"about-plugin\">\n        <p>Yammer plugin for Chrome by Imaginea tries to enrich your enterprise Yammer experience by providing an easy to use UI which compliments the web interface of Yammer and lets you stay connected with your peers from within Chrome.</p>\n        <p>For more details, head over to the <a href=\"http://manoj535.github.io/Swarm\" target=\"_blank\">web page</a></p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-contributors\">\n        <p>The current development team comprises of:</p>\n        <ul>\n          <li>Kiran Danduprolu</li>\n          <li>Krishnamraj Goud</li>\n          <li>Manoj Kumar Padala</li>\n          <li>Mohanraj T</li>\n          <li>Rishav Kumar Verma</li>\n        </ul>\n        <p>If you want to contribute to this plugin, you can head over to the <a href=\"https://github.com/manoj535/Swarm\" target=\"_blank\">Github Repository</a> and pick any one of the pending issues.</p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-technology\">\n        <p>Coming Soon</p>\n      </div>\n    </div>\n  </div>\n</div>\n";
+    return "<div class=\"mui-panel mui-z2\">\n  <div class=\"sw-about-jumbotron\">\n    <div class=\"sw-about-logo\"><img src=\"/img/yammerlogo.png\" title=\"Logo\"/></div>\n    <h3>Swarm <h5><pre>v0.2.1</pre></h5></h3>\n    <h5>Yammer plugin for Chrome</h5>\n  </div>\n  <div class=\"sw-about-tabs-container\">\n    <ul class=\"mui-tabs sw-about-tabs\">\n      <li class=\"mui-active\"><a data-mui-toggle=\"tab\" data-mui-controls=\"about-plugin\">About</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-technology\">What's new</a></li>\n      <li><a data-mui-toggle=\"tab\" data-mui-controls=\"about-contributors\">Contributors</a></li>\n    </ul>\n    <div class=\"mui-tab-content\">\n      <div class=\"mui-tab-pane mui-active sw-about-tab\" id=\"about-plugin\">\n        <p>Yammer plugin for Chrome by Imaginea tries to enrich your enterprise Yammer experience by providing an easy to use UI which compliments the web interface of Yammer and lets you stay connected with your peers from within Chrome.</p>\n        <p>For more details, head over to the <a href=\"http://manoj535.github.io/Swarm\" target=\"_blank\">web page</a></p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-contributors\">\n        <p>The current development team in alphabetical order:</p>\n        <ul>\n          <li>Kiran Danduprolu</li>\n          <li>Krishnamraj Goud</li>\n          <li>Manoj Kumar Padala</li>\n          <li>Mohanraj T</li>\n          <li>Rishav Kumar Verma</li>\n        </ul>\n        <p>If you want to contribute to this plugin, you can head over to the <a href=\"https://github.com/manoj535/Swarm\" target=\"_blank\">Github Repository</a> and pick any one of the pending issues.</p>\n      </div>\n      <div class=\"mui-tab-pane sw-about-tab\" id=\"about-technology\">\n        <h5>Features</h5>\n        <ul>\n          <li>Back button for improved navigation</li>\n          <li>Better groups listing and message threads in a group</li>\n          <li>Search people from people section</li>\n          <li>Better share post functionality and representation</li>\n        </ul>\n        <h5>Bug fixes</h5>\n        <ul>\n          <li>Contributors sorted in alphabetical order</li>\n          <li>Reply to sub post fixed</li>\n          <li>No.of replies in conversation view is shown correctly now</li>\n          <li>Fixed error in manifest.json which was preventing users from installing the plugin in older versions of Chrome</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</div>\n";
 },"useData":true});
 this["Swarm"]["templates"]["groups"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
@@ -21,7 +21,7 @@ this["Swarm"]["templates"]["groups"] = Handlebars.template({"1":function(depth0,
     + "</div>\n";
 },"useData":true});
 this["Swarm"]["templates"]["network_feed"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<ul class=\"mui-tabs sw-network-feed-tabs mui-tabs-justified mui-z3\">\n  <li class=\"mui-active\"><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-all\">All</a></li>\n  <li><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-top\">Top</a></li>\n  <li><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-following\">Following</a></li>\n</ul>\n<div class=\"mui-tab-content\">\n  <div class=\"mui-tab-pane mui-active network-feed\" id=\"network-feed-all\"></div>\n  <div class=\"mui-tab-pane network-feed\" id=\"network-feed-top\"></div>\n  <div class=\"mui-tab-pane network-feed\" id=\"network-feed-following\"></div>\n</div>\n<div>\n	<button class=\"mui-z3 mui-btn mui-btn-floating mui-btn-floating-mini post-btn\">\n		<i class=\"material-icons\">add</i>\n	</button>\n</div>\n";
+    return "<ul class=\"mui-tabs sw-network-feed-tabs mui-tabs-justified\">\n  <li class=\"mui-active\"><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-all\">All</a></li>\n  <li><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-top\">Top</a></li>\n  <li><a data-mui-toggle=\"tab\" data-mui-controls=\"network-feed-following\">Following</a></li>\n</ul>\n<div class=\"mui-tab-content\">\n  <div class=\"mui-tab-pane mui-active network-feed\" id=\"network-feed-all\"></div>\n  <div class=\"mui-tab-pane network-feed\" id=\"network-feed-top\"></div>\n  <div class=\"mui-tab-pane network-feed\" id=\"network-feed-following\"></div>\n</div>\n<div>\n	<button class=\"mui-z3 mui-btn mui-btn-floating mui-btn-floating-mini post-btn\">\n		<i class=\"material-icons\">add</i>\n	</button>\n</div>\n";
 },"useData":true});
 this["Swarm"]["templates"]["network_selection"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var stack1;
@@ -79,7 +79,7 @@ this["Swarm"]["templates"]["people"] = Handlebars.template({"compiler":[6,">= 2.
 this["Swarm"]["templates"]["persons"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
-  return "	<div class=\"mui-col-xs-5 sw-person mui-panel\" data-user-id=\""
+  return "	<div class=\"sw-person mui-panel\" data-user-id=\""
     + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">\n		<div class=\"sw-person-mugshot\"><img src=\""
     + alias3(((helper = (helper = helpers.mugshot_url_template || (depth0 != null ? depth0.mugshot_url_template : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"mugshot_url_template","hash":{},"data":data}) : helper)))
@@ -252,11 +252,13 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
 },"9":function(depth0,helpers,partials,data) {
     return " likes this.";
 },"11":function(depth0,helpers,partials,data) {
-    var helper;
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
   return "		<div class=\"msg_extended_actions\">\n			<span class=\"msg_thread_view\" data-thread-id=\""
-    + this.escapeExpression(((helper = (helper = helpers.thread_id || (depth0 != null ? depth0.thread_id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"thread_id","hash":{},"data":data}) : helper)))
-    + "\">Show more messages</span>\n		</div>\n";
+    + alias3(((helper = (helper = helpers.thread_id || (depth0 != null ? depth0.thread_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"thread_id","hash":{},"data":data}) : helper)))
+    + "\">Show "
+    + alias3(((helper = (helper = helpers.remainingMessages || (depth0 != null ? depth0.remainingMessages : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"remainingMessages","hash":{},"data":data}) : helper)))
+    + " more messages</span>\n		</div>\n";
 },"13":function(depth0,helpers,partials,data) {
     var stack1;
 
@@ -296,23 +298,23 @@ this["Swarm"]["templates"]["threads"] = Handlebars.template({"1":function(depth0
     + alias3(((helper = (helper = helpers.like_text || (depth0 != null ? depth0.like_text : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"like_text","hash":{},"data":data}) : helper)))
     + " ("
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1), depth0))
-    + ")</span>\n							<span class=\"msg_reply\">Reply</span>\n						</div>\n						<div class='msg_info'>\n"
+    + ")</span>\n							<span class=\"msg_reply\">Reply</span>\n						</div>\n					</div>\n				</div>\n				<div class='msg_info'>\n"
     + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.liked_by : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(15, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "						</div>\n					</div>\n				</div>\n			</div>\n";
+    + "				</div>\n			</div>\n";
 },"15":function(depth0,helpers,partials,data) {
     var stack1;
 
-  return "							<div class='msg_likes'>\n"
+  return "					<div class='msg_likes'>\n"
     + ((stack1 = helpers.each.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.names : stack1),{"name":"each","hash":{},"fn":this.program(16, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "								"
+    + "						"
     + ((stack1 = helpers['if'].call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"if","hash":{},"fn":this.program(18, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "\n								"
+    + "\n						"
     + ((stack1 = helpers.unless.call(depth0,((stack1 = (depth0 != null ? depth0.likedBy : depth0)) != null ? stack1.count : stack1),{"name":"unless","hash":{},"fn":this.program(9, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "\n							</div>\n";
+    + "\n					</div>\n";
 },"16":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
-  return "									<span class=\"msg_liked_by\" data-user-id=\""
+  return "							<span class=\"msg_liked_by\" data-user-id=\""
     + alias3(((helper = (helper = helpers.user_id || (depth0 != null ? depth0.user_id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"user_id","hash":{},"data":data}) : helper)))
     + "\">"
     + alias3(((helper = (helper = helpers.full_name || (depth0 != null ? depth0.full_name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"full_name","hash":{},"data":data}) : helper)))
